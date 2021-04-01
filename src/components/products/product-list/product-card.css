@@ -1,0 +1,3 @@
+.card:hover .card-title {
+    color: var(--primary) !important;
+}
