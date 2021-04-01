@@ -1,3 +1,18 @@
-.card:hover .card-title {
+.v-card:hover .card-title {
     color: var(--primary) !important;
+}
+
+.btn-wishlist {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0.5rem;
+    right: 0.5rem;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+    color: black;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
 }

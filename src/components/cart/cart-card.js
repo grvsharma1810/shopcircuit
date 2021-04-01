@@ -12,7 +12,7 @@ export const CartCard = ({ product }) => {
     const { name, image, price, fastDelivery, qty } = product;
 
     return (
-        <div className="card card-shadow">
+        <div className="v-card card-shadow">
             <img src={image} alt="card" className="card-img" />
             <div className="card-body bg-white">
                 <h2 className="card-title">

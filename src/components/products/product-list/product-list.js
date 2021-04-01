@@ -33,7 +33,7 @@ const getFilteredProducts = (productsList, showFastDeliveryOnly, includeOutOfSto
     return productsList;
 }
 
-const ProductListing = () => {
+const ProductListing = ({openSidebar}) => {
 
     const { productsState, productsDispatch } = useProducts();
     console.log(productsState);
@@ -49,7 +49,7 @@ const ProductListing = () => {
 
     return (
         <>
-            <p class="form-field mb-1">
+            <p className="form-field mb-1">
                 <label htmlFor="search">Search For Products</label>
                 <input
                     id="search"
@@ -58,8 +58,11 @@ const ProductListing = () => {
                     name="searchInput"
                     onChange={(event) => productsDispatch({ type: SEARCH_INPUT, payload: { value: event.target.value } })} />
             </p>
+            <button
+                    onClick={() => openSidebar()}
+                    className="btn-solid secondary mb-1 sort-filter">Sort/Filter</button>
             <p className="mb-1">Showing {filteredProducts.length} products out of {products.length}</p>
-            <div className="flex flex-row flex-gap-2">
+            <div className="flex flex-row flex-gap-2 h-center">
                 {
                     filteredProducts.map((product) => {
                         return (

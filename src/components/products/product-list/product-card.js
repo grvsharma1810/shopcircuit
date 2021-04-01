@@ -22,8 +22,28 @@ const ProductCard = ({ product }) => {
         <>
             {
                 inStock &&
-                <div className="card card-shadow">
+                <div className="v-card card-shadow">
                     <img src={image} alt="card" className="card-img" />
+                    {
+                        !isProductInWhiteList(dataState.wishlist, product) &&
+                        <div className="btn-wishlist">
+                            <i
+                                onClick={() => dataDispatch({ type: ADD_TO_WISHLIST, payload: { product: product } })}
+                                className="fa fa-heart text-grey-400 ml-sm text-size-2"
+                                aria-hidden="true"></i>
+                        </div>
+                    }
+                    {
+                        isProductInWhiteList(dataState.wishlist, product) &&
+                        <div className="btn-wishlist">
+                            <i
+                                onClick={() => dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })}
+                                className="fa fa-heart text-failure ml-sm text-size-2"
+                                aria-hidden="true"></i>
+                        </div>
+                    }
+
+
                     <div className="card-body bg-white">
                         <h2 className="card-title">
                             {name}
@@ -49,31 +69,17 @@ const ProductCard = ({ product }) => {
                                     </button>
                                 </Link>
                             }
-                            {
-                                !isProductInWhiteList(dataState.wishlist, product) &&
-                                <i
-                                    onClick={() => dataDispatch({ type: ADD_TO_WISHLIST, payload: { product: product } })}
-                                    className="fa fa-heart text-grey-600 ml-sm text-size-2"
-                                    aria-hidden="true"></i>
-                            }
-                            {
-                                isProductInWhiteList(dataState.wishlist, product) &&
-                                <i
-                                    onClick={() => dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })}
-                                    className="fa fa-heart text-failure ml-sm text-size-2"
-                                    aria-hidden="true"></i>
-                            }
                         </div>
                     </div>
                 </div>
             }
             {
                 !inStock &&
-                <div className="card card-shadow">
+                <div className="v-card card-shadow">
                     <div className="card-img-overlay">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/shoes.jpg" alt="card" className="card-img" />
                         <div className="bg-overlay">
-                            <p className="text-size-3">OUT OF STOCK</p>
+                            <p className="text-size-2">OUT OF STOCK</p>
                         </div>
                     </div>
                     <div className="card-body bg-white">
