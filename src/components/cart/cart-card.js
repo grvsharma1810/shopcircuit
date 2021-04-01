@@ -8,7 +8,7 @@ import {
 
 export const CartCard = ({ product }) => {
 
-    const { dataState, dataDispatch } = useData();
+    const { dataDispatch } = useData();
     const { name, image, price, fastDelivery, qty } = product;
 
     return (

@@ -27,7 +27,7 @@ const getFilteredProducts = (productsList, showFastDeliveryOnly, includeOutOfSto
     if (!includeOutOfStock) {
         productsList = productsList.filter((product) => product.inStock === true);
     }
-    if (searchInput != '') {
+    if (searchInput !== '') {
         productsList = productsList.filter((product) => product.name.toLowerCase().includes(searchInput.toLowerCase()))
     }
     return productsList;

@@ -1,6 +1,5 @@
 import './wishlist.css'
 import { useData } from '../../data-context'
-import ProductCard from '../products/product-list/product-card'
 import { WishlistCard } from './wishlist-card';
 
 const Wishlist = () => {
