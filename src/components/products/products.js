@@ -10,11 +10,13 @@ const Products = () => {
 
     const openSidebar = () => {
         console.log(sidebarRef);
-        sidebarRef.current.classList.add('active')
+        sidebarRef.current.style.width = '70%'
+        sidebarRef.current.style.padding = '1rem'        
     }
 
     const closeSidebar = () => {
-        sidebarRef.current.classList.remove('active')
+        sidebarRef.current.style.width = '0'
+        sidebarRef.current.style.padding = '0'        
     }
 
     return (

@@ -21,7 +21,7 @@ const Navbar = () => {
                         </Link>
                     </ul>
                 </div>
-                <div className="toggle"><span className="bars"></span></div>
+                <div className="toggle">+</div>
             </nav>
         </>
     )
