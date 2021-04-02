@@ -7,12 +7,60 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 1rem;
+    right: 1rem;
     min-width: 1.75rem;
     min-height: 1.75rem;
-    color: black;
     font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
+    font-weight: 700;    
+}
+
+.v-card {
+    width: 50% !important;
+    border-radius: 0 !important;
+    padding: 0.5rem !important;
+}
+
+.v-card .badge {
+    font-size: 0.75rem;
+    border-radius: 0 !important;
+    border: 0 !important;
+}
+
+.v-card .card-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.v-card .card-title {
+    font-size: 1rem !important;
+    flex-grow: 1 !important;
+}
+
+.v-card .card-img {
+    border-radius: 0 !important;
+}
+
+.v-card .card-btn {
+    width: 100%;
+}
+
+@media only screen and (min-width : 576px) {
+    .v-card {
+        width: 33% !important;
+    }
+
+    .v-card .card-title {
+        font-size: 1.25rem !important;
+    }
+}
+
+@media only screen and (min-width : 768px) {
+    .v-card {
+        width: 25% !important;
+    }
+
+    .v-card .card-title {
+        font-size: 1.5rem !important;
+    }
 }

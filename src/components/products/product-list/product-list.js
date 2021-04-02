@@ -62,7 +62,7 @@ const ProductListing = ({openSidebar}) => {
                     onClick={() => openSidebar()}
                     className="btn-solid secondary mb-1 sort-filter">Sort/Filter</button>
             <p className="mb-1">Showing {filteredProducts.length} products out of {products.length}</p>
-            <div className="flex flex-row flex-gap-2 h-center">
+            <div className="flex flex-row h-center">
                 {
                     filteredProducts.map((product) => {
                         return (

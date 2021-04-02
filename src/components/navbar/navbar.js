@@ -1,14 +1,23 @@
 import './navbar.css'
 import { Link } from 'react-router-dom'
+import { useRef } from 'react'
 
 const Navbar = () => {
+
+    const navRef = useRef(null);
+
+    const toggleNav = () => {
+        console.log("TOGGGLEE");
+        navRef.current.classList.toggle('active')
+    }
+
     return (
         <>
             <nav className="navbar bg-primary">
                 <div className="brand">
                     <div className="brand-title text-size-2">ShopCircuit</div>
                 </div>
-                <div className="nav-links">
+                <div className="nav-links" ref={navRef}>
                     <ul>
                         <Link to="/">
                             <li><button className="btn-solid primary">Home</button></li>
@@ -21,7 +30,9 @@ const Navbar = () => {
                         </Link>
                     </ul>
                 </div>
-                <div className="toggle">+</div>
+                <div className="toggle"                    
+                    onClick={() => toggleNav()}
+                ><i className="fa fa-bars"></i></div>
             </nav>
         </>
     )

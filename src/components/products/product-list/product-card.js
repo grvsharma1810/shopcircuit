@@ -22,14 +22,14 @@ const ProductCard = ({ product }) => {
         <>
             {
                 inStock &&
-                <div className="v-card card-shadow">
+                <div className="v-card">
                     <img src={image} alt="card" className="card-img" />
                     {
                         !isProductInWhiteList(dataState.wishlist, product) &&
                         <div className="btn-wishlist">
                             <i
                                 onClick={() => dataDispatch({ type: ADD_TO_WISHLIST, payload: { product: product } })}
-                                className="fa fa-heart text-grey-400 ml-sm text-size-2"
+                                className="fa fa-heart text-grey-400 text-size-2"
                                 aria-hidden="true"></i>
                         </div>
                     }
@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
                         <div className="btn-wishlist">
                             <i
                                 onClick={() => dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })}
-                                className="fa fa-heart text-failure ml-sm text-size-2"
+                                className="fa fa-heart text-failure text-size-2"
                                 aria-hidden="true"></i>
                         </div>
                     }
@@ -47,15 +47,17 @@ const ProductCard = ({ product }) => {
                     <div className="card-body bg-white">
                         <h2 className="card-title">
                             {name}
+                            <div className="flex flex-start">
+                                {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
+                            </div>
                         </h2>
-                        <div className="flex flex-row v-center">
+                        <div>
                             <span className="mr-sm">Rs. {price}</span>
-                            {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
                         </div>
                         <div>
                             {
                                 !isProductInCart(dataState.cart, product) && <button
-                                    className="btn-solid primary"
+                                    className="btn-solid primary card-btn"
                                     onClick={() => dataDispatch({ type: ADD_TO_CART, payload: { product: { ...product, qty: 1 } } })}>
                                     Add To Cart
                                 </button>
@@ -64,7 +66,7 @@ const ProductCard = ({ product }) => {
                                 isProductInCart(dataState.cart, product) &&
                                 <Link to='/cart'>
                                     <button
-                                        className="btn-solid bg-green-600">
+                                        className="btn-solid bg-green-600 card-btn">
                                         Go To Cart
                                     </button>
                                 </Link>
@@ -85,12 +87,14 @@ const ProductCard = ({ product }) => {
                     <div className="card-body bg-white">
                         <h2 className="card-title">
                             {name}
+                            <div className="flex flex-start">
+                                {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
+                            </div>
                         </h2>
-                        <div className="flex flex-row v-center">
+                        <div>
                             <span className="mr-sm">Rs. {price}</span>
-                            {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
                         </div>
-                        <button className="btn-solid primary" disabled>Add To Cart</button>
+                        <button className="btn-solid primary card-btn" disabled>Add To Cart</button>
                     </div>
                 </div>
             }
