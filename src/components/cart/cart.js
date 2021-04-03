@@ -13,8 +13,8 @@ const Cart = () => {
                 cart.length > 0 &&
                 <div className="cart-container">
                     <div>
-                        <h4 className="text-size-2 text-heading-medium">MY CART</h4>
-                        <div className="flex flex-row h-center p-2">
+                        <h4 className="text-size-2 text-heading-medium mb-1">MY CART</h4>
+                        <div className="flex flex-row h-center">
                             {
                                 cart.map((product) => {
                                     return (

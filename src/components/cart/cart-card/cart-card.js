@@ -22,21 +22,24 @@ export const CartCard = ({ product }) => {
                     <span className="mr-sm">Rs. {price}</span>
                     {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
                 </div>
-                <div>
-                    <div>
-                        <span>Quantity: </span>
-                        <button
-                            onClick={() => dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
-                            className="btn-ghost primary"
-                            disabled={product.qty === 1}>-</button>
-                        <span> {qty} </span>
-                        <button
-                            onClick={() => dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
-                            className="btn-ghost primary">+</button>
-                    </div>
-                    <button
+                <div className="btn-wishlist">
+                    <i
                         onClick={() => dataDispatch({ type: REMOVE_FROM_CART, payload: { product: product } })}
-                        className="btn-ghost primary card-btn">REMOVE</button>
+                        className="fa fa-trash text-failure text-size-2"
+                        aria-hidden="true"></i>
+                </div>
+                <div>
+
+                    <span>Quantity: </span>
+                    <button
+                        onClick={() => dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                        className="btn-ghost primary p-sm"
+                        disabled={product.qty === 1}>-</button>
+                    <span> {qty} </span>
+                    <button
+                        onClick={() => dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                        className="btn-ghost primary p-sm">+</button>
+
                 </div>
             </div>
         </div>
