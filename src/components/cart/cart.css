@@ -3,8 +3,13 @@
 }
 
 @media only screen and (min-width : 576px) {
-    .cart-container {        
+    .cart-container {
         display: grid;
         grid-template-columns: 70% 30%;
+    }
+
+    .cart {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }

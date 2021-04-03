@@ -1,8 +1,6 @@
 import { createServer, Model, RestSerializer } from "miragejs";
 import faker from "faker";
 
-faker.seed(111);
-
 export default function mockServer() {
     createServer({
         serializers: {
@@ -10,15 +8,22 @@ export default function mockServer() {
         },
 
         models: {
-            productList: Model,
-            wishList: Model,
-            cart: Model
+            productItem: Model,
+            wishListItem: Model,
+            cartItem: Model
         },
 
+        routes() {
+            this.namespace = "api";
+            this.timing = 1000;
+            this.resource("productItem");
+            this.resource("wishListItem");
+            this.resource("cartItem");
+        },
 
         seeds(server) {
             [...Array(50)].forEach((_) => {
-                server.create("productList", {
+                server.create("productItem", {
                     productId: faker.datatype.uuid(),
                     name: faker.commerce.productName(),
                     image: faker.random.image(),
@@ -50,16 +55,6 @@ export default function mockServer() {
                     color: faker.commerce.color()
                 });
             });
-        },
-
-        routes() {
-            this.namespace = "api";
-            this.timing = 5000;
-
-            this.resource("productList");
-            this.resource("wishList");
-            this.resource("cart");
         }
     });
-
 }

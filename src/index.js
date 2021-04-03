@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DataProvider } from './data-context';
+import mockServer from './API/mock.server'
+
+mockServer();
 
 ReactDOM.render(
   <React.StrictMode>

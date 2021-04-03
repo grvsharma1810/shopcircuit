@@ -67,7 +67,8 @@ const ProductCard = ({ product }) => {
                                 <Link to='/cart'>
                                     <button
                                         className="btn-solid bg-green-600 card-btn">
-                                        Go To Cart
+                                        <span>Go To Cart </span>
+                                        <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </Link>
                             }
@@ -77,9 +78,9 @@ const ProductCard = ({ product }) => {
             }
             {
                 !inStock &&
-                <div className="v-card card-shadow">
+                <div className="v-card">
                     <div className="card-img-overlay">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/shoes.jpg" alt="card" className="card-img" />
+                    <img src={image} alt="card" className="card-img" />
                         <div className="bg-overlay">
                             <p className="text-size-2">OUT OF STOCK</p>
                         </div>

@@ -4,10 +4,17 @@ export const REMOVE_FROM_WISHLIST = 'removeFromWishList'
 export const INCREASE_QUANTITY_IN_CART = 'increaseQuantityInCart'
 export const DECREASE_QUANTITY_IN_CART = 'decreaseQuantityInCart'
 export const REMOVE_FROM_CART = 'removeFromCart'
+export const SET_PRODUCTS = 'setProducts'
 
 
 export const dataReducer = (state, { type, payload }) => {
     switch (type) {
+        case SET_PRODUCTS:
+            return {
+                ...state,
+                products : payload.products
+            }
+
         case ADD_TO_CART:
             return {
                 ...state,
