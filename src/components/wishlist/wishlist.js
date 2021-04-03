@@ -1,6 +1,6 @@
 import './wishlist.css'
 import { useData } from '../../data-context'
-import { WishlistCard } from './wishlist-card';
+import { WishlistCard } from './wishlist-card/wishlist-card';
 
 const Wishlist = () => {
     const { dataState } = useData();

@@ -1,11 +1,11 @@
 import './product-card.css'
 import { Link } from 'react-router-dom'
-import { useData } from '../../../data-context'
+import { useData } from '../../../../data-context'
 import {
     ADD_TO_CART,
     ADD_TO_WISHLIST,
     REMOVE_FROM_WISHLIST
-} from '../../../data-reducer'
+} from '../../../../data-reducer'
 
 const isProductInWhiteList = (wishlist, product) => {
     return wishlist.findIndex(item => item.id === product.id) !== -1

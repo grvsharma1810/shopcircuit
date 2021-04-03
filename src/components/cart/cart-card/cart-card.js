@@ -1,9 +1,9 @@
-import { useData } from '../../data-context'
+import { useData } from '../../../data-context'
 import {
     INCREASE_QUANTITY_IN_CART,
     DECREASE_QUANTITY_IN_CART,
     REMOVE_FROM_CART
-} from '../../data-reducer'
+} from '../../../data-reducer'
 
 
 export const CartCard = ({ product }) => {
@@ -12,7 +12,7 @@ export const CartCard = ({ product }) => {
     const { name, image, price, fastDelivery, qty } = product;
 
     return (
-        <div className="v-card card-shadow">
+        <div className="v-card">
             <img src={image} alt="card" className="card-img" />
             <div className="card-body bg-white">
                 <h2 className="card-title">
@@ -23,17 +23,20 @@ export const CartCard = ({ product }) => {
                     {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
                 </div>
                 <div>
-                    <button
-                        onClick={() => dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
-                        className="btn-ghost primary"
-                        disabled={product.qty === 1}>-</button>
-                    <span> {qty} </span>
-                    <button
-                        onClick={() => dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
-                        className="btn-ghost primary">+</button>
+                    <div>
+                        <span>Quantity: </span>
+                        <button
+                            onClick={() => dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                            className="btn-ghost primary"
+                            disabled={product.qty === 1}>-</button>
+                        <span> {qty} </span>
+                        <button
+                            onClick={() => dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                            className="btn-ghost primary">+</button>
+                    </div>
                     <button
                         onClick={() => dataDispatch({ type: REMOVE_FROM_CART, payload: { product: product } })}
-                        className="btn-ghost primary">REMOVE</button>
+                        className="btn-ghost primary card-btn">REMOVE</button>
                 </div>
             </div>
         </div>

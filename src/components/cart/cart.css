@@ -1,5 +1,10 @@
 .cart-container {
     padding: 1rem;
-    display: grid;
-    grid-template-columns: 70% 30%;
+}
+
+@media only screen and (min-width : 576px) {
+    .cart-container {        
+        display: grid;
+        grid-template-columns: 70% 30%;
+    }
 }

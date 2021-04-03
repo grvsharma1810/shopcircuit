@@ -20,13 +20,13 @@ const Navbar = () => {
                 <div className="nav-links" ref={navRef}>
                     <ul>
                         <Link to="/">
-                            <li><button className="btn-solid primary">Home</button></li>
+                            <li onClick={() => toggleNav()}><button className="btn-solid primary">Home</button></li>
                         </Link>
                         <Link to="/cart">
-                            <li><button className="btn-solid primary"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart</button></li>
+                            <li onClick={() => toggleNav()}><button className="btn-solid primary"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart</button></li>
                         </Link>
                         <Link to="/wishlist">
-                            <li><button className="btn-solid primary"><i className="fa fa-heart" aria-hidden="true"></i> Wishlist</button></li>
+                            <li onClick={() => toggleNav()}><button className="btn-solid primary"><i className="fa fa-heart" aria-hidden="true"></i> Wishlist</button></li>
                         </Link>
                     </ul>
                 </div>

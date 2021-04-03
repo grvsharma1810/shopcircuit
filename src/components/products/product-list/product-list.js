@@ -1,4 +1,4 @@
-import ProductCard from './product-card'
+import ProductCard from './product-card/product-card'
 import { useData } from '../../../data-context'
 import { useProducts } from '../products-context'
 import {
