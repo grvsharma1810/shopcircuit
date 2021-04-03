@@ -18,7 +18,7 @@
 .v-card {
     width: 50% !important;
     border-radius: 0 !important;
-    padding: 0.5rem !important;
+    padding: 0.1rem !important;
 }
 
 .v-card .badge {
