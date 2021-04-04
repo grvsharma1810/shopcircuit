@@ -1,3 +1,4 @@
+import './cart-card.css';
 import { useData } from '../../../data-context'
 import {
     INCREASE_QUANTITY_IN_CART,

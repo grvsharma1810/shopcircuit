@@ -1,5 +1,7 @@
 import './product-card.css'
 import { Link } from 'react-router-dom'
+import { useAxios } from '../../../../useAxios'
+import { useToast } from '../../../shared-components/Toast/toast-context'
 import { useData } from '../../../../data-context'
 import {
     ADD_TO_CART,
@@ -16,8 +18,19 @@ const isProductInCart = (cart, product) => {
 }
 
 const ProductCard = ({ product }) => {
+
+    const { postData: postDataToCart, isLoading: isAddingToCart } = useAxios('/api/cart')
     const { dataState, dataDispatch } = useData();
     const { name, image, price, fastDelivery, inStock } = product;
+    const { showSuccessToast } = useToast();
+
+    const handleAddToCart = async () => {
+        await postDataToCart({ ...product, qty: 1 });
+        dataDispatch({ type: ADD_TO_CART, payload: { product: { ...product, qty: 1 } } })
+        showSuccessToast({ title: "ADDED TO CART" });
+    }
+
+
     return (
         <>
             {
@@ -56,11 +69,26 @@ const ProductCard = ({ product }) => {
                         </div>
                         <div>
                             {
-                                !isProductInCart(dataState.cart, product) && <button
-                                    className="btn-solid primary card-btn"
-                                    onClick={() => dataDispatch({ type: ADD_TO_CART, payload: { product: { ...product, qty: 1 } } })}>
-                                    Add To Cart
-                                </button>
+                                !isProductInCart(dataState.cart, product) &&
+                                <div>
+                                    {
+                                        isAddingToCart &&
+                                        <button
+                                            className="btn-solid primary card-btn"
+                                            onClick={() => handleAddToCart()}
+                                            disabled>
+                                            <span className="small-spinner" style={{ display: 'inline-block' }}> </span>
+                                        </button>
+                                    }
+                                    {
+                                        !isAddingToCart &&
+                                        <button
+                                            className="btn-solid primary card-btn"
+                                            onClick={() => handleAddToCart()}>
+                                            Add To Cart
+                                    </button>
+                                    }
+                                </div>
                             }
                             {
                                 isProductInCart(dataState.cart, product) &&
@@ -68,7 +96,7 @@ const ProductCard = ({ product }) => {
                                     <button
                                         className="btn-solid bg-green-600 card-btn">
                                         <span>Go To Cart </span>
-                                        <i class="fa fa-arrow-circle-right"></i>
+                                        <i className="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </Link>
                             }
@@ -80,7 +108,7 @@ const ProductCard = ({ product }) => {
                 !inStock &&
                 <div className="v-card">
                     <div className="card-img-overlay">
-                    <img src={image} alt="card" className="card-img" />
+                        <img src={image} alt="card" className="card-img" />
                         <div className="bg-overlay">
                             <p className="text-size-2">OUT OF STOCK</p>
                         </div>

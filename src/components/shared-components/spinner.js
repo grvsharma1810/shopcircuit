@@ -1,7 +1,7 @@
 const Spinner = () => {
     return (
         <div className="flex h-center">
-            <div class="spinner mt-3"></div>
+            <div className="spinner mt-3"></div>
         </div>
     )
 }

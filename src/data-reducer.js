@@ -1,10 +1,12 @@
 export const ADD_TO_CART = 'addToCart';
-export const ADD_TO_WISHLIST = 'addToWishList';
-export const REMOVE_FROM_WISHLIST = 'removeFromWishList'
+export const ADD_TO_WISHLIST = 'addToWishlist';
+export const REMOVE_FROM_WISHLIST = 'removeFromWishlist'
 export const INCREASE_QUANTITY_IN_CART = 'increaseQuantityInCart'
 export const DECREASE_QUANTITY_IN_CART = 'decreaseQuantityInCart'
 export const REMOVE_FROM_CART = 'removeFromCart'
 export const SET_PRODUCTS = 'setProducts'
+export const SET_CART = 'setCart'
+export const SET_WISHLIST = 'setWishlist'
 
 
 export const dataReducer = (state, { type, payload }) => {
@@ -12,7 +14,19 @@ export const dataReducer = (state, { type, payload }) => {
         case SET_PRODUCTS:
             return {
                 ...state,
-                products : payload.products
+                products: payload.products
+            }
+
+        case SET_CART:
+            return {
+                ...state,
+                cart: payload.cart
+            }
+
+        case SET_WISHLIST:
+            return {
+                ...state,
+                wishlist: payload.wishlist
             }
 
         case ADD_TO_CART:

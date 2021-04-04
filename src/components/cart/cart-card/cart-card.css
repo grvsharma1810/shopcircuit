@@ -1,0 +1,16 @@
+/* NOT GETTING APPLIED DUE TO OVERRIDING OF PRODUCT CARD CSS */
+/* .v-card {
+    width: 50% !important;
+}
+
+@media only screen and (min-width : 576px) {
+    .v-card {
+        width: 50% !important;
+    }
+}
+
+@media only screen and (min-width : 768px) {
+    .v-card {
+        width: 33% !important;
+    }
+} */

@@ -9,16 +9,43 @@ export default function mockServer() {
 
         models: {
             productItem: Model,
-            wishListItem: Model,
+            wishlistItem: Model,
             cartItem: Model
         },
 
         routes() {
             this.namespace = "api";
             this.timing = 1000;
-            this.resource("productItem");
-            this.resource("wishListItem");
-            this.resource("cartItem");
+            this.get("/wishlist", (schema) => {
+                return schema.wishlistItems.all();
+            });
+            this.post("/wishlist", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody);
+
+                return schema.wishlistItems.create({
+                    ...attrs,
+                });
+            });
+            this.delete("/wishlist/:id", (schema, request) => {
+                let id = request.params.id;
+                return schema.wishlistItems.find(id).destroy();
+            });
+
+            this.get("/cart", (schema) => {
+                return schema.cartItems.all();
+            });
+            this.post("/cart", (schema, request) => {
+                console.log({request});
+                let attrs = JSON.parse(request.requestBody);
+                return schema.cartItems.create(attrs);
+            });
+            this.delete("/cart/:id", (schema, request) => {
+                let id = request.params.id;
+                return schema.cartItems.find(id).destroy();
+            });
+            this.get("/product", (schema) => {
+                return schema.productItems.all();
+            });
         },
 
         seeds(server) {

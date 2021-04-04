@@ -2,7 +2,7 @@
     padding: 1rem;
 }
 
-@media only screen and (min-width : 576px) {
+@media only screen and (min-width : 768px) {
     .cart-container {
         display: grid;
         grid-template-columns: 70% 30%;

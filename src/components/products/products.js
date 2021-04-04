@@ -5,19 +5,21 @@ import { ProductsProvider } from './products-context';
 import { useEffect, useRef } from 'react';
 import { useData } from '../../data-context'
 import { SET_PRODUCTS } from '../../data-reducer'
-import { useProductAxios } from './useProductAxios'
 import Spinner from '../shared-components/spinner';
+import { useAxios } from '../../useAxios'
 
 const Products = () => {
 
-    const { dataDispatch } = useData();
-    const { getData, isLoading } = useProductAxios();
+    const { dataState, dataDispatch } = useData();
+    const { getData: getProductsData, isLoading } = useAxios('/api/product');
 
     useEffect(() => {
-        (async function () {
-            const products = await getData();;
-            dataDispatch({ type: SET_PRODUCTS, payload: { products } })
-        })()
+        if (dataState.products.length === 0) {
+            (async function () {
+                const products = await getProductsData();
+                dataDispatch({ type: SET_PRODUCTS, payload: { products } })
+            })()
+        }
     }, [])
 
     const sidebarRef = useRef(null)
