@@ -12,9 +12,14 @@ export const CartPrice = () => {
     const cart = dataState.cart;
 
     return (
-        <div className="text-size-2 mt-1 flex space-btw">
-            <span>Grand Total</span>
-            <span>Rs. {calculateCartTotal(cart)}</span>
+        <div className="flex flex-column">
+            <div className="text-size-2 mt-1 flex space-btw">
+                <span>Grand Total</span>
+                <span>Rs. {calculateCartTotal(cart)}</span>
+            </div>
+            <button className="btn-solid primary mt-1">
+                Proceed To Checkout <span className='text-size-sm'>(Coming Soon)</span>
+            </button>
         </div>
     )
 }

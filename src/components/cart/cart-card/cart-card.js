@@ -26,10 +26,12 @@ export const CartCard = ({ product }) => {
             <div className="card-body bg-white">
                 <h2 className="card-title">
                     {name}
+                    <div className="flex flex-start">
+                        {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
+                    </div>
                 </h2>
-                <div className="flex flex-row v-center">
+                <div>
                     <span className="mr-sm">Rs. {price}</span>
-                    {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
                 </div>
                 <button className="btn-wishlist"
                     onClick={() => handleRemoveFromCart()}
@@ -44,14 +46,22 @@ export const CartCard = ({ product }) => {
 
                     <span>Quantity: </span>
                     <button
-                        onClick={() => dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                        onClick={() => {
+                            dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                        }
                         className="btn-ghost primary p-sm"
                         disabled={product.qty === 1}>-</button>
                     <span> {qty} </span>
                     <button
-                        onClick={() => dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                        onClick={() => {
+                            if(qty === 5){
+                                alert("Sorry, Quantity more than 5 is not allowed.")
+                            }
+                            else{
+                                dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                            }                            
+                        }
                         className="btn-ghost primary p-sm">+</button>
-
                 </div>
             </div>
         </div>
