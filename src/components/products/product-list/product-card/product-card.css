@@ -11,9 +11,13 @@
     right: 1rem;
     min-width: 1.75rem;
     min-height: 1.75rem;
-    font-size: 1rem;
-    font-weight: 700;
+    background: white !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    border: 0;
 }
+
+
 
 .v-card {
     width: 50% !important;
@@ -42,7 +46,7 @@
 }
 
 .v-card .card-btn {
-    width: 100%;    
+    width: 100%;
 }
 
 @media only screen and (min-width : 576px) {

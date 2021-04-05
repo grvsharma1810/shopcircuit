@@ -1,7 +1,6 @@
 import './product-card.css'
 import { Link } from 'react-router-dom'
 import { useAxios } from '../../../../useAxios'
-import { useToast } from '../../../shared-components/Toast/toast-context'
 import { useData } from '../../../../data-context'
 import {
     ADD_TO_CART,
@@ -20,16 +19,25 @@ const isProductInCart = (cart, product) => {
 const ProductCard = ({ product }) => {
 
     const { postData: postDataToCart, isLoading: isAddingToCart } = useAxios('/api/cart')
+    const { postData: postDataToWishlist, isLoading: isAddingToWishlist } = useAxios('/api/wishlist')
+    const { deleteData: removeDataFromWishlist, isLoading: isRemovingFromWishlist } = useAxios('/api/wishlist')
     const { dataState, dataDispatch } = useData();
     const { name, image, price, fastDelivery, inStock } = product;
-    const { showSuccessToast } = useToast();
 
     const handleAddToCart = async () => {
         await postDataToCart({ ...product, qty: 1 });
         dataDispatch({ type: ADD_TO_CART, payload: { product: { ...product, qty: 1 } } })
-        showSuccessToast({ title: "ADDED TO CART" });
     }
 
+    const handleAddToWishlist = async () => {
+        await postDataToWishlist({ ...product });
+        dataDispatch({ type: ADD_TO_WISHLIST, payload: { product: product } })
+    }
+
+    const handleRemoveFromWishlist = async () => {
+        await removeDataFromWishlist({ ...product });
+        dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })
+    }
 
     return (
         <>
@@ -39,21 +47,28 @@ const ProductCard = ({ product }) => {
                     <img src={image} alt="card" className="card-img" />
                     {
                         !isProductInWhiteList(dataState.wishlist, product) &&
-                        <div className="btn-wishlist">
-                            <i
-                                onClick={() => dataDispatch({ type: ADD_TO_WISHLIST, payload: { product: product } })}
-                                className="fa fa-heart text-grey-400 text-size-2"
-                                aria-hidden="true"></i>
-                        </div>
+                        <button className="btn-wishlist"
+                            onClick={() => handleAddToWishlist()}
+                            disabled={isAddingToWishlist}>
+                            {!isAddingToWishlist && <i
+                                className="fa fa-heart text-grey-400"
+                                aria-hidden="true"></i>}
+                            {isAddingToWishlist && <span
+                                className="small-spinner"></span>}
+                        </button>
+
                     }
                     {
                         isProductInWhiteList(dataState.wishlist, product) &&
-                        <div className="btn-wishlist">
-                            <i
-                                onClick={() => dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })}
-                                className="fa fa-heart text-failure text-size-2"
-                                aria-hidden="true"></i>
-                        </div>
+                        <button className="btn-wishlist"
+                            onClick={() => handleRemoveFromWishlist()}
+                            disabled={isRemovingFromWishlist}>
+                            {!isRemovingFromWishlist && <i
+                                className="fa fa-heart text-failure text-grey-400"
+                                aria-hidden="true"></i>}
+                            {isRemovingFromWishlist && <span
+                                className="small-spinner"></span>}
+                        </button>
                     }
 
 
@@ -104,6 +119,13 @@ const ProductCard = ({ product }) => {
                     </div>
                 </div>
             }
+
+
+
+
+
+
+
             {
                 !inStock &&
                 <div className="v-card">

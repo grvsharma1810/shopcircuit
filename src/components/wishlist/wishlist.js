@@ -12,8 +12,8 @@ const Wishlist = () => {
                 {
                     wishlist.length !== 0 &&
                     <div>
-                        <h4 className="text-size-2 text-heading-medium">WISHLIST</h4>
-                        <div className="flex flex-row p-1">
+                        <h4 className="text-size-2 text-heading-medium mb-1">WISHLIST</h4>
+                        <div className="flex flex-row">
                             {
                                 wishlist.map((product) => {
                                     return (

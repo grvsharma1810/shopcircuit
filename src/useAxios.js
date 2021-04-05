@@ -14,7 +14,7 @@ export const useAxios = (url) => {
       const data = await callback();
       return data;
     } catch (err) {
-      showErrorToast("Reqest Falied! Server Error");
+      showErrorToast({ title: "Error", description: "Reqest Falied! Server Error" });
     } finally {
       setIsLoading(false);
       if (successMessage) {
@@ -34,7 +34,7 @@ export const useAxios = (url) => {
     return genericRequest(async () => {
       const response = await axios.post(url, newItem);
       return response.data[`${getMainURL(url)}Item`];
-    }, `${newItem.name} added to your ${getMainURL(url)}`);
+    }, { title: "SUCCESS", description: `${newItem.name} added to your ${getMainURL(url)}` });
   }
 
   async function deleteData(id) {
@@ -43,7 +43,7 @@ export const useAxios = (url) => {
       if (response.status === 204) {
         return "success";
       }
-    }, `Removed from your ${getMainURL(url)}`);
+    }, { title: "DELETED", description: `Removed from your ${getMainURL(url)}` });
   }
 
   return { isLoading, getData, postData, deleteData };

@@ -1,4 +1,5 @@
 import './cart-card.css';
+import { useAxios } from "../../../useAxios"
 import { useData } from '../../../data-context'
 import {
     INCREASE_QUANTITY_IN_CART,
@@ -11,6 +12,13 @@ export const CartCard = ({ product }) => {
 
     const { dataDispatch } = useData();
     const { name, image, price, fastDelivery, qty } = product;
+    const { deleteData: deleteDataFromCart, isLoading: isDeletingFromCart } = useAxios("/api/cart");
+
+    const handleRemoveFromCart = async () => {
+        await deleteDataFromCart({ ...product });
+        dataDispatch({ type: REMOVE_FROM_CART, payload: { product: product } })
+    }
+
 
     return (
         <div className="v-card">
@@ -23,12 +31,15 @@ export const CartCard = ({ product }) => {
                     <span className="mr-sm">Rs. {price}</span>
                     {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
                 </div>
-                <div className="btn-wishlist">
-                    <i
-                        onClick={() => dataDispatch({ type: REMOVE_FROM_CART, payload: { product: product } })}
-                        className="fa fa-trash text-failure text-size-2"
-                        aria-hidden="true"></i>
-                </div>
+                <button className="btn-wishlist"
+                    onClick={() => handleRemoveFromCart()}
+                    disabled={isDeletingFromCart}>
+                    {!isDeletingFromCart && <i
+                        className="fa fa-trash text-failure text-size-1"
+                        aria-hidden="true"></i>}
+                    {isDeletingFromCart && <span
+                        className="small-spinner"></span>}
+                </button>
                 <div>
 
                     <span>Quantity: </span>
