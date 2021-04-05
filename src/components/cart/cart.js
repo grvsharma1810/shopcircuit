@@ -6,7 +6,7 @@ import { CartPrice } from './cart-price/cart-price';
 const Cart = () => {
     const { dataState } = useData();
     const cart = dataState.cart;
-    console.log({ cart });
+
     return (
         <div>
             {

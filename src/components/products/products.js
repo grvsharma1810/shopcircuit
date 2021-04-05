@@ -17,6 +17,7 @@ const Products = () => {
         if (dataState.products.length === 0) {
             (async function () {
                 const products = await getProductsData();
+                console.log({ products });
                 dataDispatch({ type: SET_PRODUCTS, payload: { products } })
             })()
         }
@@ -40,7 +41,7 @@ const Products = () => {
             { isLoading && <Spinner />}
             {
                 !isLoading &&
-                <>
+                <div>
                     <Sidebar
                         closeSidebar={closeSidebar}
                         ref={sidebarRef} />
@@ -48,7 +49,7 @@ const Products = () => {
                         <ProductListing
                             openSidebar={openSidebar} />
                     </div>
-                </>
+                </div>
             }
         </ProductsProvider>
     )

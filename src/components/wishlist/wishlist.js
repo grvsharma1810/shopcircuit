@@ -4,8 +4,7 @@ import { WishlistCard } from './wishlist-card/wishlist-card';
 
 const Wishlist = () => {
     const { dataState } = useData();
-    const wishlist = dataState.wishlist;
-    console.log({ wishlist });
+    const wishlist = dataState.wishlist;    
     return (
         <>
             <div className="wishlist-container">

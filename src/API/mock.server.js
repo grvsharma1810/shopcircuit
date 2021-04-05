@@ -1,4 +1,5 @@
 import { createServer, Model, RestSerializer } from "miragejs";
+import { dummyData } from './data'
 import faker from "faker";
 
 export default function mockServer() {
@@ -35,7 +36,7 @@ export default function mockServer() {
                 return schema.cartItems.all();
             });
             this.post("/cart", (schema, request) => {
-                console.log({request});
+                console.log({ request });
                 let attrs = JSON.parse(request.requestBody);
                 return schema.cartItems.create(attrs);
             });
@@ -49,15 +50,15 @@ export default function mockServer() {
         },
 
         seeds(server) {
-            [...Array(50)].forEach((_) => {
+            dummyData.forEach(({ name, image }) => {
                 server.create("productItem", {
                     productId: faker.datatype.uuid(),
-                    name: faker.commerce.productName(),
-                    image: faker.random.image(),
+                    name: name,
+                    image: image,
                     price: faker.commerce.price(),
                     material: faker.commerce.productMaterial(),
                     brand: faker.lorem.word(),
-                    inStock: faker.datatype.boolean(),
+                    inStock: true,
                     fastDelivery: faker.datatype.boolean(),
                     ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
                     offer: faker.random.arrayElement([

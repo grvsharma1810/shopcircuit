@@ -22,7 +22,9 @@ export const CartCard = ({ product }) => {
 
     return (
         <div className="v-card">
-            <img src={image} alt="card" className="card-img" />
+            <div className="card-img">
+                <img src={image} alt="card" />
+            </div>
             <div className="card-body bg-white">
                 <h2 className="card-title">
                     {name}

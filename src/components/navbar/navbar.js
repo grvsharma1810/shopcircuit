@@ -6,8 +6,7 @@ const Navbar = () => {
 
     const navRef = useRef(null);
 
-    const toggleNav = () => {
-        console.log("TOGGGLEE");
+    const toggleNav = () => {        
         navRef.current.classList.toggle('active')
     }
 

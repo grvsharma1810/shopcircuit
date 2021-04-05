@@ -4,46 +4,49 @@ import { useToast } from "./components/shared-components/Toast/toast-context"
 
 const getMainURL = (url) => url.split("/")[2];
 
-export const useAxios = (url) => {
+export const useAxios = (url, showToast = true) => {
   const [isLoading, setIsLoading] = useState(false);
   const { showSuccessToast, showErrorToast } = useToast();
 
-  async function genericRequest(callback, successMessage) {
+  async function commonRequest(apiCall, successMessage) {
     try {
       setIsLoading(true);
-      const data = await callback();
+      const data = await apiCall();
       return data;
     } catch (err) {
-      showErrorToast({ title: "Error", description: "Reqest Falied! Server Error" });
+      setIsLoading(false);
+      if(showToast){
+        showErrorToast({ title: "Error", description: "Reqest Falied! Server Error" });
+      }            
     } finally {
       setIsLoading(false);
-      if (successMessage) {
+      if (successMessage && showToast) {
         showSuccessToast(successMessage);
       }
     }
   }
 
   async function getData() {
-    return genericRequest(async () => {
+    return commonRequest(async () => {
       const response = await axios.get(url);
       return response.data[`${getMainURL(url)}Items`];
     });
   }
 
-  async function postData(newItem) {
-    return genericRequest(async () => {
-      const response = await axios.post(url, newItem);
+  async function postData(item) {
+    return commonRequest(async () => {
+      const response = await axios.post(url, item);
       return response.data[`${getMainURL(url)}Item`];
-    }, { title: "SUCCESS", description: `${newItem.name} added to your ${getMainURL(url)}` });
+    }, { title: "SUCCESS", description: "Action Saved Successfully"});
   }
 
-  async function deleteData(id) {
-    return genericRequest(async () => {
-      const response = await axios.delete(`${url}/${id}`);
+  async function deleteData(item) {
+    return commonRequest(async () => {
+      const response = await axios.delete(`${url}/${item.id}`);
       if (response.status === 204) {
         return "success";
       }
-    }, { title: "DELETED", description: `Removed from your ${getMainURL(url)}` });
+    }, { title: "DELETED", description: "Action Saved Successfully" });
   }
 
   return { isLoading, getData, postData, deleteData };

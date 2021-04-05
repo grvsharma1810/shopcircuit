@@ -35,8 +35,7 @@ const getFilteredProducts = (productsList, showFastDeliveryOnly, includeOutOfSto
 
 const ProductListing = ({openSidebar}) => {
 
-    const { productsState, productsDispatch } = useProducts();
-    console.log(productsState);
+    const { productsState, productsDispatch } = useProducts();    
     const { dataState } = useData();
     const products = dataState.products;
     const sortedProducts = getProductsSortedByPrice(products, productsState[SORT_BY_PRICE]);
@@ -48,7 +47,7 @@ const ProductListing = ({openSidebar}) => {
     )
 
     return (
-        <>
+        <div>
             <p className="form-field mb-1">
                 <label htmlFor="search">Search For Products</label>
                 <input
@@ -71,7 +70,7 @@ const ProductListing = ({openSidebar}) => {
                     })
                 }
             </div>
-        </>
+        </div>
     )
 }
 

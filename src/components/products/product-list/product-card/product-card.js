@@ -44,7 +44,9 @@ const ProductCard = ({ product }) => {
             {
                 inStock &&
                 <div className="v-card">
-                    <img src={image} alt="card" className="card-img" />
+                    <div className="card-img">
+                        <img src={image} alt="card" />
+                    </div>                    
                     {
                         !isProductInWhiteList(dataState.wishlist, product) &&
                         <button className="btn-wishlist"
@@ -129,8 +131,8 @@ const ProductCard = ({ product }) => {
             {
                 !inStock &&
                 <div className="v-card">
-                    <div className="card-img-overlay">
-                        <img src={image} alt="card" className="card-img" />
+                    <div className="card-img">
+                        <img src={image} alt="card"/>
                         <div className="bg-overlay">
                             <p className="text-size-2">OUT OF STOCK</p>
                         </div>

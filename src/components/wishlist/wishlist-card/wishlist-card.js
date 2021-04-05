@@ -10,12 +10,14 @@ export const WishlistCard = ({ product }) => {
 
     const handleRemoveFromWishlist = async () => {
         await removeDataFromWishlist({ ...product });
-        dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })        
+        dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })
     }
 
     return (
         <div className="v-card">
-            <img src={image} alt="card" className="card-img" />
+            <div className="card-img">
+                <img src={image} alt="card" />
+            </div>            
             <button className="btn-wishlist"
                 onClick={() => handleRemoveFromWishlist()}
                 disabled={isRemovingFromWishlist}>
