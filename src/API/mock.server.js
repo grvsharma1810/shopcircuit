@@ -50,7 +50,7 @@ export default function mockServer() {
         },
 
         seeds(server) {
-            dummyData.forEach(({ name, image }) => {
+            dummyData.forEach(({ name, image, inStock }) => {
                 server.create("productItem", {
                     productId: faker.datatype.uuid(),
                     name: name,
@@ -58,7 +58,7 @@ export default function mockServer() {
                     price: faker.commerce.price(),
                     material: faker.commerce.productMaterial(),
                     brand: faker.lorem.word(),
-                    inStock: true,
+                    inStock: inStock,
                     fastDelivery: faker.datatype.boolean(),
                     ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
                     offer: faker.random.arrayElement([

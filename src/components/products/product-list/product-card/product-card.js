@@ -121,13 +121,7 @@ const ProductCard = ({ product }) => {
                     </div>
                 </div>
             }
-
-
-
-
-
-
-
+            
             {
                 !inStock &&
                 <div className="v-card">

@@ -1,16 +1,33 @@
+import { useEffect } from 'react'
 import { useData } from '../../data-context'
+import { useAxios } from '../../useAxios'
 import './cart.css'
 import { CartCard } from './cart-card/cart-card';
 import { CartPrice } from './cart-price/cart-price';
+import { SET_CART } from '../../data-reducer'
+import Spinner from '../shared-components/spinner';
 
 const Cart = () => {
-    const { dataState } = useData();
+
+    const { dataState, dataDispatch } = useData();
+    const { getData: getCartData, isLoading } = useAxios('/api/cart');
+
+    useEffect(() => {
+        if (dataState.cart.length === 0) {
+            (async function () {
+                const cart = await getCartData();                
+                dataDispatch({ type: SET_CART, payload: { cart } })
+            })()
+        }
+    }, [])
+
     const cart = dataState.cart;
 
     return (
         <div>
+            {   isLoading && <Spinner />}
             {
-                cart.length > 0 &&
+                !isLoading && cart.length > 0 &&
                 <div className="cart-container">
                     <div>
                         <h4 className="text-size-2 text-heading-medium mb-1">MY CART</h4>
@@ -31,7 +48,7 @@ const Cart = () => {
                 </div>
             }
             {
-                cart.length === 0 &&
+                !isLoading && cart.length === 0 &&
                 <div className="flex h-center p-1">
                     <p className="text-heading-medium text-size-3">
                         Your Cart Is Empty. Please Add Something In Cart.
