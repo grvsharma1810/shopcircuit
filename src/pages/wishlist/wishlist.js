@@ -12,7 +12,7 @@ const Wishlist = () => {
     const { getData: getWishlistData, isLoading } = useAxios('/api/wishlist');
 
     useEffect(() => {
-        if (dataState.wishlist === null) {
+        if (dataState.wishlist.length === 0) {
             (async function () {
                 const wishlist = await getWishlistData();
                 dataDispatch({ type: SET_WISHLIST, payload: { wishlist } })
@@ -21,7 +21,7 @@ const Wishlist = () => {
     }, [])
 
     const wishlist = dataState.wishlist ? dataState.wishlist : [];
-    
+
     return (
         <>
             {isLoading && <Spinner />}

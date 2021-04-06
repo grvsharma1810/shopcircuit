@@ -13,9 +13,9 @@ const Cart = () => {
     const { getData: getCartData, isLoading } = useAxios('/api/cart');
 
     useEffect(() => {
-        if (dataState.cart === null) {
+        if (dataState.cart.length === 0) {
             (async function () {
-                const cart = await getCartData();                
+                const cart = await getCartData();
                 dataDispatch({ type: SET_CART, payload: { cart } })
             })()
         }

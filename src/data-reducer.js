@@ -10,8 +10,6 @@ export const SET_WISHLIST = 'setWishlist'
 
 
 export const dataReducer = (state, { type, payload }) => {
-    console.log({ payload });
-
     switch (type) {
         case SET_PRODUCTS:
             return {
@@ -34,13 +32,13 @@ export const dataReducer = (state, { type, payload }) => {
         case ADD_TO_CART:
             return {
                 ...state,
-                cart: state.cart !== null ? state.cart.concat(payload.product) : [{...payload.product}]
+                cart: state.cart.concat(payload.product)
             }
 
         case ADD_TO_WISHLIST:
             return {
                 ...state,
-                wishlist: state.wishlist !== null ? state.wishlist.concat(payload.product) : [{...payload.product}]
+                wishlist: state.wishlist.concat(payload.product)
             }
 
         case REMOVE_FROM_WISHLIST:

@@ -14,7 +14,7 @@ const Products = () => {
     const { getData: getProductsData, isLoading } = useAxios('/api/product');
 
     useEffect(() => {
-        if (dataState.products === null) {
+        if (dataState.products.length === 0) {
             (async function () {
                 const products = await getProductsData();
                 console.log({ products });
