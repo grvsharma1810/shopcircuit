@@ -1,6 +1,6 @@
 import React from 'react';
 import './sidebar.css'
-import { useProducts } from '../products-context'
+import { useProducts } from '../../products-context'
 import {
     SORT_BY_PRICE,
     INCLUDE_OUT_OF_STOCK,
@@ -8,7 +8,7 @@ import {
     HIGH_TO_LOW,
     LOW_TO_HIGH,
     CLEAR_FILTERS
-} from '../product-reducer'
+} from '../../product-reducer'
 
 const Sidebar = ({ closeSidebar }, ref) => {
 

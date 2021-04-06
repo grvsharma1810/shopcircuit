@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useToast } from "./components/shared-components/Toast/toast-context"
+import { useToast } from "./pages/shared-components/Toast/toast-context"
 
 const getMainURL = (url) => url.split("/")[2];
 

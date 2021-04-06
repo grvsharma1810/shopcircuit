@@ -2,9 +2,9 @@ import './wishlist.css'
 import { useEffect } from 'react'
 import { useAxios } from '../../useAxios'
 import { useData } from '../../data-context'
-import { WishlistCard } from './wishlist-card/wishlist-card';
+import { WishlistCard } from './components/wishlist-card/wishlist-card';
 import { SET_WISHLIST } from '../../data-reducer';
-import Spinner from '../shared-components/spinner';
+import Spinner from '../shared-components/spinner/spinner';
 
 const Wishlist = () => {
 
@@ -12,7 +12,7 @@ const Wishlist = () => {
     const { getData: getWishlistData, isLoading } = useAxios('/api/wishlist');
 
     useEffect(() => {
-        if (dataState.wishlist.length === 0) {
+        if (dataState.wishlist === null) {
             (async function () {
                 const wishlist = await getWishlistData();
                 dataDispatch({ type: SET_WISHLIST, payload: { wishlist } })
@@ -20,7 +20,8 @@ const Wishlist = () => {
         }
     }, [])
 
-    const wishlist = dataState.wishlist;
+    const wishlist = dataState.wishlist ? dataState.wishlist : [];
+    
     return (
         <>
             {isLoading && <Spinner />}

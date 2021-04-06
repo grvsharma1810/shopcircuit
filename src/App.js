@@ -1,9 +1,9 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
-import Cart from './components/cart/cart';
-import Navbar from './components/navbar/navbar';
-import Products from './components/products/products';
-import Wishlist from './components/wishlist/wishlist';
+import Cart from './pages/cart/cart';
+import Navbar from './pages/navbar/navbar';
+import Products from './pages/products/products';
+import Wishlist from './pages/wishlist/wishlist';
 
 function App() {
   return (

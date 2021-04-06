@@ -1,6 +1,6 @@
-import ProductCard from './product-card/product-card'
-import { useData } from '../../../data-context'
-import { useProducts } from '../products-context'
+import ProductCard from '../product-card/product-card'
+import { useData } from '../../../../data-context'
+import { useProducts } from '../../products-context'
 import {
     SORT_BY_PRICE,
     ONLY_FAST_DELIVERY,
@@ -8,7 +8,7 @@ import {
     HIGH_TO_LOW,
     LOW_TO_HIGH,
     SEARCH_INPUT
-} from '../product-reducer'
+} from '../../product-reducer'
 
 const getProductsSortedByPrice = (productsList, type) => {
     if (type && type === HIGH_TO_LOW) {
@@ -33,11 +33,11 @@ const getFilteredProducts = (productsList, showFastDeliveryOnly, includeOutOfSto
     return productsList;
 }
 
-const ProductListing = ({openSidebar}) => {
+const ProductListing = ({ openSidebar }) => {
 
-    const { productsState, productsDispatch } = useProducts();    
+    const { productsState, productsDispatch } = useProducts();
     const { dataState } = useData();
-    const products = dataState.products;
+    const products = dataState.products ? dataState.products : [];
     const sortedProducts = getProductsSortedByPrice(products, productsState[SORT_BY_PRICE]);
     const filteredProducts = getFilteredProducts(
         sortedProducts,
@@ -58,8 +58,8 @@ const ProductListing = ({openSidebar}) => {
                     onChange={(event) => productsDispatch({ type: SEARCH_INPUT, payload: { value: event.target.value } })} />
             </p>
             <button
-                    onClick={() => openSidebar()}
-                    className="btn-solid secondary mb-1 sort-filter">Sort/Filter</button>
+                onClick={() => openSidebar()}
+                className="btn-solid secondary mb-1 sort-filter">Sort/Filter</button>
             <p className="mb-1">Showing {filteredProducts.length} products out of {products.length}</p>
             <div className="flex flex-row">
                 {

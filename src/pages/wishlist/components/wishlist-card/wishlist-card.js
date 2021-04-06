@@ -1,6 +1,6 @@
-import { REMOVE_FROM_WISHLIST } from '../../../data-reducer'
-import { useData } from '../../../data-context'
-import { useAxios } from '../../../useAxios'
+import { REMOVE_FROM_WISHLIST } from '../../../../data-reducer'
+import { useData } from '../../../../data-context'
+import { useAxios } from '../../../../useAxios'
 
 export const WishlistCard = ({ product }) => {
 

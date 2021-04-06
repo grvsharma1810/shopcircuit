@@ -6,9 +6,9 @@ const DataContext = createContext({})
 
 export const DataProvider = ({ children }) => {
     const [state, dispatch] = useReducer(dataReducer, {
-        products: [],
-        cart: [],
-        wishlist: []
+        products: null,
+        cart: null,
+        wishlist: null
     })
     return (
         <DataContext.Provider value={{ dataState: state, dataDispatch: dispatch }}>

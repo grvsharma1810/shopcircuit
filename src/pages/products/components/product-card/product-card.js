@@ -21,7 +21,10 @@ const ProductCard = ({ product }) => {
     const { postData: postDataToCart, isLoading: isAddingToCart } = useAxios('/api/cart')
     const { postData: postDataToWishlist, isLoading: isAddingToWishlist } = useAxios('/api/wishlist')
     const { deleteData: removeDataFromWishlist, isLoading: isRemovingFromWishlist } = useAxios('/api/wishlist')
+
     const { dataState, dataDispatch } = useData();
+    const wishlist = dataState.wishlist ? dataState.wishlist : [];
+    const cart = dataState.cart ? dataState.cart : [];    
     const { name, image, price, fastDelivery, inStock } = product;
 
     const handleAddToCart = async () => {
@@ -48,7 +51,7 @@ const ProductCard = ({ product }) => {
                         <img src={image} alt="card" />
                     </div>                    
                     {
-                        !isProductInWhiteList(dataState.wishlist, product) &&
+                        !isProductInWhiteList(wishlist, product) &&
                         <button className="btn-wishlist"
                             onClick={() => handleAddToWishlist()}
                             disabled={isAddingToWishlist}>
@@ -61,7 +64,7 @@ const ProductCard = ({ product }) => {
 
                     }
                     {
-                        isProductInWhiteList(dataState.wishlist, product) &&
+                        isProductInWhiteList(wishlist, product) &&
                         <button className="btn-wishlist"
                             onClick={() => handleRemoveFromWishlist()}
                             disabled={isRemovingFromWishlist}>
@@ -86,7 +89,7 @@ const ProductCard = ({ product }) => {
                         </div>
                         <div>
                             {
-                                !isProductInCart(dataState.cart, product) &&
+                                !isProductInCart(cart, product) &&
                                 <div>
                                     {
                                         isAddingToCart &&
@@ -108,7 +111,7 @@ const ProductCard = ({ product }) => {
                                 </div>
                             }
                             {
-                                isProductInCart(dataState.cart, product) &&
+                                isProductInCart(cart, product) &&
                                 <Link to='/cart'>
                                     <button
                                         className="btn-solid bg-green-600 card-btn">

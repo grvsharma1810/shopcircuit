@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DataProvider } from './data-context';
 import mockServer from './API/mock.server'
-import { ToastProvider } from './components/shared-components/Toast/toast-context';
+import { ToastProvider } from './pages/shared-components/Toast/toast-context';
 
 mockServer();
 

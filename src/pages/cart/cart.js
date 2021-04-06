@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { useData } from '../../data-context'
 import { useAxios } from '../../useAxios'
 import './cart.css'
-import { CartCard } from './cart-card/cart-card';
-import { CartPrice } from './cart-price/cart-price';
+import { CartCard } from './components/cart-card/cart-card'
+import { CartPrice } from './components/cart-price/cart-price';
 import { SET_CART } from '../../data-reducer'
-import Spinner from '../shared-components/spinner';
+import Spinner from '../shared-components/spinner/spinner';
 
 const Cart = () => {
 
@@ -13,7 +13,7 @@ const Cart = () => {
     const { getData: getCartData, isLoading } = useAxios('/api/cart');
 
     useEffect(() => {
-        if (dataState.cart.length === 0) {
+        if (dataState.cart === null) {
             (async function () {
                 const cart = await getCartData();                
                 dataDispatch({ type: SET_CART, payload: { cart } })
@@ -21,7 +21,7 @@ const Cart = () => {
         }
     }, [])
 
-    const cart = dataState.cart;
+    const cart = dataState.cart ? dataState.cart : [];
 
     return (
         <div>

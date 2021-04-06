@@ -1,11 +1,11 @@
 import './products.css'
-import ProductListing from "./product-list/product-list"
-import Sidebar from "./sidebar/sidebar";
+import ProductListing from "./components/product-list/product-list"
+import Sidebar from "./components/sidebar/sidebar";
 import { ProductsProvider } from './products-context';
 import { useEffect, useRef } from 'react';
 import { useData } from '../../data-context'
 import { SET_PRODUCTS } from '../../data-reducer'
-import Spinner from '../shared-components/spinner';
+import Spinner from '../shared-components/spinner/spinner';
 import { useAxios } from '../../useAxios'
 
 const Products = () => {
@@ -14,7 +14,7 @@ const Products = () => {
     const { getData: getProductsData, isLoading } = useAxios('/api/product');
 
     useEffect(() => {
-        if (dataState.products.length === 0) {
+        if (dataState.products === null) {
             (async function () {
                 const products = await getProductsData();
                 console.log({ products });
