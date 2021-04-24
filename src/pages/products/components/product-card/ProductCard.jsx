@@ -1,19 +1,19 @@
 import './product-card.css'
 import { Link } from 'react-router-dom'
-import { useAxios } from '../../../../Providers/AxiosProvider'
-import { useData } from '../../../../Providers/DataProvider'
+import { useAxios } from '../../../../providers/AxiosProvider'
+import { useData } from '../../../../providers/DataProvider'
 import {
     ADD_TO_CART,
     ADD_TO_WISHLIST,
     REMOVE_FROM_WISHLIST
-} from '../../../../Providers/data-reducer'
+} from '../../../../providers/data-reducer'
 
 const isProductInWhiteList = (wishlist, product) => {
-    return wishlist.findIndex(item => item.id === product.id) !== -1
+    return wishlist.findIndex(item => item._id === product._id) !== -1
 }
 
 const isProductInCart = (cart, product) => {
-    return cart.findIndex(item => item.id === product.id) !== -1
+    return cart.findIndex(item => item._id === product._id) !== -1
 }
 
 const ProductCard = ({ product }) => {

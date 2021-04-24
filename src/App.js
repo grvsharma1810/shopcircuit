@@ -1,22 +1,37 @@
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Cart from './pages/cart/Cart';
-import Navbar from './pages/navbar/Navbar';
+import Navbar from './pages/shared-components/navbar/Navbar';
 import Products from './pages/products/Products';
 import Wishlist from './pages/wishlist/Wishlist';
+import Signup from './pages/sign-up/SignUp'
+import Login from './pages/login/Login'
+import PrivateRoute from './pages/shared-components/PrivateRoute'
+import Spinner from './pages/shared-components/spinner/Spinner';
+
+import { useData } from './providers/DataProvider'
 
 function App() {
+
+  const { isInitialAppDataLoading } = useData();
+
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Products} />
-          <Route path="/cart" exact component={Cart} />
-          <Route path="/wishlist" exact component={Wishlist} />
-        </Switch>
-      </div>
-    </Router>
+    <>
+      {isInitialAppDataLoading && <Spinner description="Loading Products.." />}
+      {
+        !isInitialAppDataLoading &&
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/" component={<Products />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <PrivateRoute path="/cart" component={<Cart />} />
+            <PrivateRoute path="/wishlist" component={<Wishlist />} />
+          </Routes>
+        </div>
+      }
+    </>
   );
 }
 

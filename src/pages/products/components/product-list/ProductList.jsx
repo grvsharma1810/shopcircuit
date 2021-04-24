@@ -1,5 +1,5 @@
 import ProductCard from '../product-card/ProductCard'
-import { useData } from '../../../../Providers/DataProvider'
+import { useData } from '../../../../providers/DataProvider'
 import { useProducts } from '../../ProductsProvider'
 import {
     SORT_BY_PRICE,
@@ -65,7 +65,7 @@ const ProductListing = ({ openSidebar }) => {
                 {
                     filteredProducts.map((product) => {
                         return (
-                            <ProductCard product={product} key={product.id} />
+                            <ProductCard product={product} key={product._id} />
                         )
                     })
                 }

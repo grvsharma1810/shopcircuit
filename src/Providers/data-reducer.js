@@ -44,25 +44,25 @@ export const dataReducer = (state, { type, payload }) => {
         case REMOVE_FROM_WISHLIST:
             return {
                 ...state,
-                wishlist: state.wishlist.filter(item => item.id !== payload.product.id)
+                wishlist: state.wishlist.filter(item => item._id !== payload.product._id)
             }
 
         case REMOVE_FROM_CART:
             return {
                 ...state,
-                cart: state.cart.filter(item => item.id !== payload.product.id)
+                cart: state.cart.filter(item => item._id !== payload.product._id)
             }
 
         case INCREASE_QUANTITY_IN_CART:
             return {
                 ...state,
-                cart: state.cart.map(item => item.id === payload.product.id ? { ...item, qty: item.qty + 1 } : item)
+                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, qty: item.qty + 1 } : item)
             }
 
         case DECREASE_QUANTITY_IN_CART:
             return {
                 ...state,
-                cart: state.cart.map(item => item.id === payload.product.id ? { ...item, qty: item.qty - 1 } : item)
+                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, qty: item.qty - 1 } : item)
             }
 
         default:

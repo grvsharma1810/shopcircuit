@@ -16,7 +16,7 @@ export const ToastProvider = ({ children }) => {
     useEffect(() => {
         if (list.length > 0) {
             const interval = setInterval(() => {
-                deleteToast(list[0].id);
+                deleteToast(list[0]._id);
             }, dismissTime);
             return () => {
                 clearInterval(interval);
@@ -26,7 +26,7 @@ export const ToastProvider = ({ children }) => {
 
 
     const deleteToast = id => {
-        const listItemIndex = list.findIndex(e => e.id === id);
+        const listItemIndex = list.findIndex(e => e._id === id);
         list.splice(listItemIndex, 1);
         setList([...list]);
     }
@@ -60,7 +60,7 @@ export const ToastProvider = ({ children }) => {
                                     </p>
                                 }
                             </div>
-                            <button className="btn-toast-close" onClick={() => deleteToast(toast.id)}>
+                            <button className="btn-toast-close" onClick={() => deleteToast(toast._id)}>
                                 <i className="fa fa-times-circle text-size-2 text-white"></i>
                             </button>
                         </div>

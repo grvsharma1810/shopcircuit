@@ -3,18 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { DataProvider } from './Providers/DataProvider';
-import mockServer from './API/mock.server'
+import { BrowserRouter as Router } from 'react-router-dom';
+import { DataProvider } from './providers/DataProvider';
+// import mockServer from './API/mock.server'
 import { ToastProvider } from './pages/shared-components/Toast/ToastProvider';
+import { AuthProvider } from './providers/AuthProvider'
 
-mockServer();
+// mockServer();
 
 ReactDOM.render(
-  <ToastProvider>
-    <DataProvider>
-      <App />
-    </DataProvider>
-  </ToastProvider>,
+  <DataProvider>
+    <ToastProvider>
+      <Router>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </Router>
+    </ToastProvider>
+  </DataProvider>,
   document.getElementById('root')
 );
 

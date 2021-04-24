@@ -1,11 +1,11 @@
 import './cart-card.css';
-import { useAxios } from "../../../../Providers/AxiosProvider"
-import { useData } from '../../../../Providers/DataProvider'
+import { useAxios } from "../../../../providers/AxiosProvider"
+import { useData } from '../../../../providers/DataProvider'
 import {
     INCREASE_QUANTITY_IN_CART,
     DECREASE_QUANTITY_IN_CART,
     REMOVE_FROM_CART
-} from '../../../../Providers/data-reducer'
+} from '../../../../providers/data-reducer'
 
 
 export const CartCard = ({ product }) => {

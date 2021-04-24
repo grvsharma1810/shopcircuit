@@ -1,53 +1,80 @@
 import axios from "axios";
-import { useState } from "react";
-import { useToast } from "../pages/shared-components/Toast/ToastProvider"
 
-const getMainURL = (url) => url.split("/")[2];
+const domainUrl = "https://shop-circuit.gauravkumarkum4.repl.co";
 
-export const useAxios = (url, showToast = true) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { showSuccessToast, showErrorToast } = useToast();
+export const useAxios = () => {
 
-  async function commonRequest(apiCall, successMessage) {
+  async function getData(url) {
+    console.log("get");
     try {
-      setIsLoading(true);
-      const data = await apiCall();
-      return data;
-    } catch (err) {
-      setIsLoading(false);
-      if (showToast) {
-        showErrorToast({ title: "Error", description: "Reqest Falied! Server Error" });
-      }
-    } finally {
-      setIsLoading(false);
-      if (successMessage && showToast) {
-        showSuccessToast(successMessage);
+      const response = await axios.get(`${domainUrl}${url}`);
+      console.log(response)
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        switch (error.response.status) {
+          case 404: alert(`Error 404! ${error.response.message}`);
+            return null;
+          case 500: alert(`Internal Server Error! ${error.response.message}`);
+            return null;
+          default: return error.response;
+        }
+      } else if (error.request) {
+        alert("Please Check Your Internet Connection");
+        return null;
+      } else {
+        alert("Something went wrong");
       }
     }
   }
 
-  async function getData() {
-    return commonRequest(async () => {
-      const response = await axios.get(url);
-      return response.data[`${getMainURL(url)}Items`];
-    });
-  }
-
-  async function postData(item) {
-    return commonRequest(async () => {
-      const response = await axios.post(url, item);
-      return response.data[`${getMainURL(url)}Item`];
-    }, { title: "SUCCESS", description: "Action Saved Successfully" });
-  }
-
-  async function deleteData(item) {
-    return commonRequest(async () => {
-      const response = await axios.delete(`${url}/${item.id}`);
-      if (response.status === 204) {
-        return "success";
+  async function postData(url, item) {
+    console.log("post");
+    try {
+      const response = await axios.post(`${domainUrl}${url}`, item);
+      console.log(response)
+      return response.data.data;
+    } catch (error) {
+      if (error.response) {
+        switch (error.response.status) {
+          case 404: alert(`Error 404! ${error.response.message}`);
+            return null;
+          case 500: alert(`Internal Server Error! ${error.response.message}`);
+            return null;
+          default: return error.response;
+        }
+      } else if (error.request) {
+        alert("Please Check Your Internet Connection");
+        return null;
+      } else {
+        alert("Something went wrong");
       }
-    }, { title: "DELETED", description: "Action Saved Successfully" });
+    }
   }
 
-  return { isLoading, getData, postData, deleteData };
+  async function deleteData(url) {
+    console.log("delete");
+    try {
+      const response = await axios.delete(`${domainUrl}${url}`);
+      console.log(response)
+      return response.data.data;
+    } catch (error) {
+      if (error.response) {
+        switch (error.response.status) {
+          case 404: alert(`Error 404! ${error.response.message}`);
+            return null;
+          case 500: alert(`Internal Server Error! ${error.response.message}`);
+            return null;
+          default: return error.response;
+        }
+      } else if (error.request) {
+        alert("Please Check Your Internet Connection");
+        return null;
+      } else {
+        alert("Something went wrong");
+      }
+    }
+  }
+
+  return { getData, postData, deleteData };
 };
