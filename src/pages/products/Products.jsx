@@ -1,12 +1,12 @@
 import './products.css'
-import ProductListing from "./components/product-list/product-list"
-import Sidebar from "./components/sidebar/sidebar";
-import { ProductsProvider } from './products-context';
+import ProductListing from "./components/product-list/ProductList"
+import Sidebar from "./components/sidebar/Sidebar";
+import { ProductsProvider } from './ProductsProvider';
 import { useEffect, useRef } from 'react';
-import { useData } from '../../data-context'
-import { SET_PRODUCTS } from '../../data-reducer'
-import Spinner from '../shared-components/spinner/spinner';
-import { useAxios } from '../../useAxios'
+import { useData } from '../../Providers/DataProvider'
+import { SET_PRODUCTS } from '../../Providers/data-reducer'
+import Spinner from '../shared-components/spinner/Spinner';
+import { useAxios } from '../../Providers/AxiosProvider'
 
 const Products = () => {
 

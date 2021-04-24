@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useToast } from "./pages/shared-components/Toast/toast-context"
+import { useToast } from "../pages/shared-components/Toast/ToastProvider"
 
 const getMainURL = (url) => url.split("/")[2];
 
@@ -15,9 +15,9 @@ export const useAxios = (url, showToast = true) => {
       return data;
     } catch (err) {
       setIsLoading(false);
-      if(showToast){
+      if (showToast) {
         showErrorToast({ title: "Error", description: "Reqest Falied! Server Error" });
-      }            
+      }
     } finally {
       setIsLoading(false);
       if (successMessage && showToast) {
@@ -37,7 +37,7 @@ export const useAxios = (url, showToast = true) => {
     return commonRequest(async () => {
       const response = await axios.post(url, item);
       return response.data[`${getMainURL(url)}Item`];
-    }, { title: "SUCCESS", description: "Action Saved Successfully"});
+    }, { title: "SUCCESS", description: "Action Saved Successfully" });
   }
 
   async function deleteData(item) {

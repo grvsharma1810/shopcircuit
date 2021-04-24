@@ -1,4 +1,4 @@
-import { useData } from '../../../../data-context'
+import { useData } from '../../../../Providers/DataProvider'
 
 const calculateCartTotal = (cart) => {
     return cart.reduce((acc, curr) => {

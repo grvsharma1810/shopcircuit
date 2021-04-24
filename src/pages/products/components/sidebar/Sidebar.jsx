@@ -1,6 +1,6 @@
 import React from 'react';
 import './sidebar.css'
-import { useProducts } from '../../products-context'
+import { useProducts } from '../../ProductsProvider'
 import {
     SORT_BY_PRICE,
     INCLUDE_OUT_OF_STOCK,

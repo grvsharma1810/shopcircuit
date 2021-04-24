@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { DataProvider } from './data-context';
+import { DataProvider } from './Providers/DataProvider';
 import mockServer from './API/mock.server'
-import { ToastProvider } from './pages/shared-components/Toast/toast-context';
+import { ToastProvider } from './pages/shared-components/Toast/ToastProvider';
 
 mockServer();
 
@@ -13,7 +13,6 @@ ReactDOM.render(
   <ToastProvider>
     <DataProvider>
       <App />
-
     </DataProvider>
   </ToastProvider>,
   document.getElementById('root')

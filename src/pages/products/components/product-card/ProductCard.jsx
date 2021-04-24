@@ -1,12 +1,12 @@
 import './product-card.css'
 import { Link } from 'react-router-dom'
-import { useAxios } from '../../../../useAxios'
-import { useData } from '../../../../data-context'
+import { useAxios } from '../../../../Providers/AxiosProvider'
+import { useData } from '../../../../Providers/DataProvider'
 import {
     ADD_TO_CART,
     ADD_TO_WISHLIST,
     REMOVE_FROM_WISHLIST
-} from '../../../../data-reducer'
+} from '../../../../Providers/data-reducer'
 
 const isProductInWhiteList = (wishlist, product) => {
     return wishlist.findIndex(item => item.id === product.id) !== -1
@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
 
     const { dataState, dataDispatch } = useData();
     const wishlist = dataState.wishlist ? dataState.wishlist : [];
-    const cart = dataState.cart ? dataState.cart : [];    
+    const cart = dataState.cart ? dataState.cart : [];
     const { name, image, price, fastDelivery, inStock } = product;
 
     const handleAddToCart = async () => {
@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
                 <div className="v-card">
                     <div className="card-img">
                         <img src={image} alt="card" />
-                    </div>                    
+                    </div>
                     {
                         !isProductInWhiteList(wishlist, product) &&
                         <button className="btn-wishlist"
@@ -124,12 +124,12 @@ const ProductCard = ({ product }) => {
                     </div>
                 </div>
             }
-            
+
             {
                 !inStock &&
                 <div className="v-card">
                     <div className="card-img">
-                        <img src={image} alt="card"/>
+                        <img src={image} alt="card" />
                         <div className="bg-overlay">
                             <p className="text-size-2">OUT OF STOCK</p>
                         </div>

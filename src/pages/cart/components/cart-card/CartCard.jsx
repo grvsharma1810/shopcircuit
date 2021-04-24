@@ -1,11 +1,11 @@
 import './cart-card.css';
-import { useAxios } from "../../../../useAxios"
-import { useData } from '../../../../data-context'
+import { useAxios } from "../../../../Providers/AxiosProvider"
+import { useData } from '../../../../Providers/DataProvider'
 import {
     INCREASE_QUANTITY_IN_CART,
     DECREASE_QUANTITY_IN_CART,
     REMOVE_FROM_CART
-} from '../../../../data-reducer'
+} from '../../../../Providers/data-reducer'
 
 
 export const CartCard = ({ product }) => {
@@ -49,19 +49,21 @@ export const CartCard = ({ product }) => {
                     <span>Quantity: </span>
                     <button
                         onClick={() => {
-                            dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })}
+                            dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })
+                        }
                         }
                         className="btn-ghost primary p-sm"
                         disabled={product.qty === 1}>-</button>
                     <span> {qty} </span>
                     <button
                         onClick={() => {
-                            if(qty === 5){
+                            if (qty === 5) {
                                 alert("Sorry, Quantity more than 5 is not allowed.")
                             }
-                            else{
-                                dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })}
-                            }                            
+                            else {
+                                dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })
+                            }
+                        }
                         }
                         className="btn-ghost primary p-sm">+</button>
                 </div>

@@ -1,6 +1,6 @@
-import ProductCard from '../product-card/product-card'
-import { useData } from '../../../../data-context'
-import { useProducts } from '../../products-context'
+import ProductCard from '../product-card/ProductCard'
+import { useData } from '../../../../Providers/DataProvider'
+import { useProducts } from '../../ProductsProvider'
 import {
     SORT_BY_PRICE,
     ONLY_FAST_DELIVERY,

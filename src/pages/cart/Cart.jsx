@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { useData } from '../../data-context'
-import { useAxios } from '../../useAxios'
+import { useData } from '../../Providers/DataProvider'
+import { useAxios } from '../../Providers/AxiosProvider'
 import './cart.css'
-import { CartCard } from './components/cart-card/cart-card'
-import { CartPrice } from './components/cart-price/cart-price';
-import { SET_CART } from '../../data-reducer'
-import Spinner from '../shared-components/spinner/spinner';
+import { CartCard } from './components/cart-card/CartCard'
+import { CartPrice } from './components/cart-price/CartPrice';
+import { SET_CART } from '../../Providers/data-reducer'
+import Spinner from '../shared-components/spinner/Spinner';
 
 const Cart = () => {
 

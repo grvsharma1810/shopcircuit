@@ -1,6 +1,6 @@
-import { REMOVE_FROM_WISHLIST } from '../../../../data-reducer'
-import { useData } from '../../../../data-context'
-import { useAxios } from '../../../../useAxios'
+import { REMOVE_FROM_WISHLIST } from '../../../../Providers/data-reducer'
+import { useData } from '../../../../Providers/DataProvider'
+import { useAxios } from '../../../../Providers/AxiosProvider'
 
 export const WishlistCard = ({ product }) => {
 
@@ -17,7 +17,7 @@ export const WishlistCard = ({ product }) => {
         <div className="v-card">
             <div className="card-img">
                 <img src={image} alt="card" />
-            </div>            
+            </div>
             <button className="btn-wishlist"
                 onClick={() => handleRemoveFromWishlist()}
                 disabled={isRemovingFromWishlist}>

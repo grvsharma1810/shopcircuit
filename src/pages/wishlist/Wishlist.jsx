@@ -1,10 +1,10 @@
 import './wishlist.css'
 import { useEffect } from 'react'
-import { useAxios } from '../../useAxios'
-import { useData } from '../../data-context'
-import { WishlistCard } from './components/wishlist-card/wishlist-card';
-import { SET_WISHLIST } from '../../data-reducer';
-import Spinner from '../shared-components/spinner/spinner';
+import { useAxios } from '../../Providers/AxiosProvider'
+import { useData } from '../../Providers/DataProvider'
+import { WishlistCard } from './components/wishlist-card/WishlistCard';
+import { SET_WISHLIST } from '../../Providers/data-reducer';
+import Spinner from '../shared-components/spinner/Spinner';
 
 const Wishlist = () => {
 
