@@ -33,7 +33,7 @@ const getFilteredProducts = (productsList, showFastDeliveryOnly, includeOutOfSto
     return productsList;
 }
 
-const ProductListing = ({ openSidebar }) => {
+const ProductListing = () => {
 
     const { productsState, productsDispatch } = useProducts();
     const { dataState } = useData();
@@ -56,10 +56,7 @@ const ProductListing = ({ openSidebar }) => {
                     placeholder="Search Products"
                     name="searchInput"
                     onChange={(event) => productsDispatch({ type: SEARCH_INPUT, payload: { value: event.target.value } })} />
-            </p>
-            <button
-                onClick={() => openSidebar()}
-                className="btn-solid secondary mb-1 sort-filter">Sort/Filter</button>
+            </p>            
             <p className="mb-1">Showing {filteredProducts.length} products out of {products.length}</p>
             <div className="flex flex-row">
                 {

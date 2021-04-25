@@ -2,16 +2,42 @@ import './wishlist.css'
 import { useEffect } from 'react'
 import { useAxios } from '../../providers/AxiosProvider'
 import { useData } from '../../providers/DataProvider'
-import { WishlistCard } from './components/wishlist-card/WishlistCard';
+import {WishlistCard } from './components/wishlist-card/WishlistCard';
 import { SET_WISHLIST } from '../../providers/data-reducer';
 import Spinner from '../shared-components/spinner/Spinner';
 
 const Wishlist = () => {    
 
+    const { dataState } = useData();    
+
+    const wishlist = dataState.wishlist ? dataState.wishlist : [];
+
     return (
-        <>
-            Wishlist
-        </>
+        <div>                      
+            {
+                wishlist.length > 0 &&
+                <div className="wishlist-container">                    
+                        <h4 className="text-size-2 text-heading-medium mb-1">MY wishlist</h4>
+                        <div className="flex wishlist">
+                            {
+                                wishlist.map((wishlistItem) => {
+                                    return (
+                                        <WishlistCard wishlistItem={wishlistItem} key={wishlistItem._id} />
+                                    )
+                                })
+                            }
+                        </div>                    
+                </div>
+            }
+            {
+                wishlist.length === 0 &&
+                <div className="flex h-center p-1">
+                    <p className="text-heading-medium text-size-3">
+                        Your wishlist Is Empty. Please Add Something In wishlist.
+                    </p>
+                </div>
+            }
+        </div>
     )
 }
 

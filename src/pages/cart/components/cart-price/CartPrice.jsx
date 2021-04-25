@@ -2,7 +2,7 @@ import { useData } from '../../../../providers/DataProvider'
 
 const calculateCartTotal = (cart) => {
     return cart.reduce((acc, curr) => {
-        return acc + parseInt(curr.price) * parseInt(curr.qty)
+        return acc + parseInt(curr.product.price) * parseInt(curr.quantity)
     }, 0)
 }
 

@@ -13,7 +13,8 @@ import { useData } from './providers/DataProvider'
 
 function App() {
 
-  const { isInitialAppDataLoading } = useData();
+  const { isInitialAppDataLoading, dataState } = useData();
+  console.log({ dataState });
 
   return (
     <>
@@ -23,11 +24,11 @@ function App() {
         <div className="App">
           <Navbar />
           <Routes>
-            <Route path="/" component={<Products />} />
+            <Route path="/" element={<Products />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <PrivateRoute path="/cart" component={<Cart />} />
-            <PrivateRoute path="/wishlist" component={<Wishlist />} />
+            <PrivateRoute path="/cart" element={<Cart />} />
+            <PrivateRoute path="/wishlist" element={<Wishlist />} />
           </Routes>
         </div>
       }

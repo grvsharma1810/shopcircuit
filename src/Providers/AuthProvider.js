@@ -2,6 +2,7 @@ import { createContext, useState, useContext } from 'react';
 import { useData } from './DataProvider'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAxios } from './AxiosProvider'
+import { SET_CART, SET_WISHLIST } from './data-reducer';
 
 const AuthContext = createContext(null);
 
@@ -21,7 +22,11 @@ export const AuthProvider = ({ children }) => {
         if (response.status === 400) {
             alert(response.data.errorMessage)
         } else {
-            const user = response.user;            
+            const user = response.user;
+            const { cart } = await getData(`/users/${user._id}/cart`);
+            const { wishlist } = await getData(`/users/${user._id}/wishlist`);
+            dataDispatch({ type: SET_CART, payload: { cart } })
+            dataDispatch({ type: SET_WISHLIST, payload: { wishlist } })
             setLoggedInUser(user);
             navigate(state?.from ? state.from : "/");
         }
@@ -33,7 +38,11 @@ export const AuthProvider = ({ children }) => {
         console.log({ email, password });
         setIsLoading(true);
         try {
-            const { user } = await postData("/login", { email, password });            
+            const { user } = await postData("/login", { email, password });
+            const { cart } = await getData(`/users/${user._id}/cart`);
+            const { wishlist } = await getData(`/users/${user._id}/wishlist`);            
+            dataDispatch({ type: SET_CART, payload: { cart } })
+            dataDispatch({ type: SET_WISHLIST, payload: { wishlist } })
             setLoggedInUser(user);
             navigate(state?.from ? state.from : "/");
         } catch (error) {

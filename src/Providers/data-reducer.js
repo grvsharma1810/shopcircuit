@@ -56,13 +56,13 @@ export const dataReducer = (state, { type, payload }) => {
         case INCREASE_QUANTITY_IN_CART:
             return {
                 ...state,
-                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, qty: item.qty + 1 } : item)
+                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, quantity: item.quantity + 1 } : item)
             }
 
         case DECREASE_QUANTITY_IN_CART:
             return {
                 ...state,
-                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, qty: item.qty - 1 } : item)
+                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, quantity: item.quantity - 1 } : item)
             }
 
         default:

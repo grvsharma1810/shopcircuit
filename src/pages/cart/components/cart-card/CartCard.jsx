@@ -1,6 +1,8 @@
 import './cart-card.css';
+import {useState} from 'react'
 import { useAxios } from "../../../../providers/AxiosProvider"
 import { useData } from '../../../../providers/DataProvider'
+import {useAuth} from '../../../../providers/AuthProvider'
 import {
     INCREASE_QUANTITY_IN_CART,
     DECREASE_QUANTITY_IN_CART,
@@ -8,15 +10,42 @@ import {
 } from '../../../../providers/data-reducer'
 
 
-export const CartCard = ({ product }) => {
+export const CartCard = ({ cartItem }) => {
 
     const { dataDispatch } = useData();
-    const { name, image, price, fastDelivery, qty } = product;
-    const { deleteData: deleteDataFromCart, isLoading: isDeletingFromCart } = useAxios("/api/cart");
+    const {loggedInUser} = useAuth();
+    const [isDeletingCartItem, setisDeletingCartItem] = useState(false);
+    const [isIncreasingCartItemQuantity, setIncreasingCartItemQuantity] = useState(false);
+    const [isDecreasingCartItemQuantity, setDecreasingCartItemQuantity] = useState(false);
+    const product = cartItem.product;
+    const quantity = cartItem.quantity;
+    const { name, image, price, fastDelivery } = product;
+    const { deleteData, postData } = useAxios();
 
     const handleRemoveFromCart = async () => {
-        await deleteDataFromCart({ ...product });
-        dataDispatch({ type: REMOVE_FROM_CART, payload: { product: product } })
+        setisDeletingCartItem(true);
+        await deleteData(`/users/${loggedInUser._id}/cart/${cartItem._id}`);
+        setisDeletingCartItem(false);
+        dataDispatch({ type: REMOVE_FROM_CART, payload: { product: cartItem } })        
+    }
+
+    const handleIncreasingCartItemQuantity = async () => {        
+        if (quantity === 5) {
+            alert("Sorry, Quantity more than 5 is not allowed.")
+        }
+        else {
+            setIncreasingCartItemQuantity(true);
+            await postData(`/users/${loggedInUser._id}/cart/${cartItem._id}`,{quantity : quantity + 1})
+            setIncreasingCartItemQuantity(false);
+            dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: cartItem } })
+        }
+    }
+
+    const handleDecreasingCartItemQuantity = async () => {
+        setDecreasingCartItemQuantity(true);
+        await postData(`/users/${loggedInUser._id}/cart/${cartItem._id}`,{quantity : quantity - 1})
+        setDecreasingCartItemQuantity(false);
+        dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: cartItem } })
     }
 
 
@@ -37,35 +66,30 @@ export const CartCard = ({ product }) => {
                 </div>
                 <button className="btn-wishlist"
                     onClick={() => handleRemoveFromCart()}
-                    disabled={isDeletingFromCart}>
-                    {!isDeletingFromCart && <i
-                        className="fa fa-trash text-failure text-size-1"
-                        aria-hidden="true"></i>}
-                    {isDeletingFromCart && <span
-                        className="small-spinner"></span>}
+                    disabled={isDeletingCartItem}>
+                    {!isDeletingCartItem && 
+                        <i className="fa fa-trash text-failure text-size-1"></i>}
+                    {isDeletingCartItem && 
+                        <div className="small-spinner"></div>}
                 </button>
                 <div>
 
                     <span>Quantity: </span>
                     <button
-                        onClick={() => {
-                            dataDispatch({ type: DECREASE_QUANTITY_IN_CART, payload: { product: product } })
-                        }
-                        }
+                        onClick={() => handleDecreasingCartItemQuantity()}
                         className="btn-ghost primary p-sm"
-                        disabled={product.qty === 1}>-</button>
-                    <span> {qty} </span>
+                        disabled={quantity === 1 || isDecreasingCartItemQuantity}>
+                            {!isDecreasingCartItemQuantity && <span>-</span>}
+                            {isDecreasingCartItemQuantity && <div className="small-spinner"></div>}
+                    </button>
+                    <span> {quantity} </span>
                     <button
-                        onClick={() => {
-                            if (qty === 5) {
-                                alert("Sorry, Quantity more than 5 is not allowed.")
-                            }
-                            else {
-                                dataDispatch({ type: INCREASE_QUANTITY_IN_CART, payload: { product: product } })
-                            }
-                        }
-                        }
-                        className="btn-ghost primary p-sm">+</button>
+                        onClick={() => handleIncreasingCartItemQuantity()}
+                        className="btn-ghost primary p-sm"
+                        disabled={isIncreasingCartItemQuantity}>
+                        {!isIncreasingCartItemQuantity && <span>+</span>}
+                        {isIncreasingCartItemQuantity && <div className="small-spinner"></div>}
+                    </button>
                 </div>
             </div>
         </div>

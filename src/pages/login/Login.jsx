@@ -45,7 +45,7 @@ const Login = () => {
                     <button       
                         type="button"
                         onClick={() => navigate('/signup')}      
-                        className="btn-link primary">New to rapify ? Create an account. </button> 
+                        className="btn-link primary">New to ShopCircuit ? Create an account. </button> 
                 </div>                                 
             </form>            
         </div>

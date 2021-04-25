@@ -1,32 +1,31 @@
+import {useState} from 'react';
 import { REMOVE_FROM_WISHLIST } from '../../../../providers/data-reducer'
 import { useData } from '../../../../providers/DataProvider'
 import { useAxios } from '../../../../providers/AxiosProvider'
+import {useAuth} from '../../../../providers/AuthProvider'
 
-export const WishlistCard = ({ product }) => {
+export const WishlistCard = ({ wishlistItem }) => {
 
     const { dataDispatch } = useData();
+    const {loggedInUser} = useAuth();
+    const [isDeletingWishlistItem, setisDeletingWishlistItem] = useState(false);    
+    const product = wishlistItem.product;    
     const { name, image, price, fastDelivery } = product;
-    const { deleteData: removeDataFromWishlist, isLoading: isRemovingFromWishlist } = useAxios('/api/wishlist')
+    const { deleteData, } = useAxios();
 
     const handleRemoveFromWishlist = async () => {
-        await removeDataFromWishlist({ ...product });
-        dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: product } })
-    }
+        setisDeletingWishlistItem(true);
+        await deleteData(`/users/${loggedInUser._id}/wishlist/${wishlistItem._id}`);
+        setisDeletingWishlistItem(false);
+        dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: wishlistItem } }) 
+    }   
+
 
     return (
         <div className="v-card">
             <div className="card-img">
                 <img src={image} alt="card" />
             </div>
-            <button className="btn-wishlist"
-                onClick={() => handleRemoveFromWishlist()}
-                disabled={isRemovingFromWishlist}>
-                {!isRemovingFromWishlist && <i
-                    className="fa fa-trash text-failure text-size-1"
-                    aria-hidden="true"></i>}
-                {isRemovingFromWishlist && <span
-                    className="small-spinner"></span>}
-            </button>
             <div className="card-body bg-white">
                 <h2 className="card-title">
                     {name}
@@ -37,6 +36,14 @@ export const WishlistCard = ({ product }) => {
                 <div>
                     <span className="mr-sm">Rs. {price}</span>
                 </div>
+                <button className="btn-wishlist"
+                    onClick={() => handleRemoveFromWishlist()}
+                    disabled={isDeletingWishlistItem}>
+                    {!isDeletingWishlistItem && 
+                        <i className="fa fa-trash text-failure text-size-1"></i>}
+                    {isDeletingWishlistItem && 
+                        <div className="small-spinner"></div>}
+                </button>                
             </div>
         </div>
     )

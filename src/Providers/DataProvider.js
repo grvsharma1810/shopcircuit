@@ -13,7 +13,7 @@ export const DataProvider = ({ children }) => {
         products: [],
         cart: [],
         wishlist: []
-    })
+    })    
 
     useEffect(() => {
         (async function () {

@@ -2,17 +2,35 @@ import './products.css'
 import ProductListing from "./components/product-list/ProductList"
 import Sidebar from "./components/sidebar/Sidebar";
 import { ProductsProvider } from './ProductsProvider';
-import { useEffect, useRef } from 'react';
-import { useData } from '../../providers/DataProvider'
-import { SET_PRODUCTS } from '../../providers/data-reducer'
-import Spinner from '../shared-components/spinner/Spinner';
-import { useAxios } from '../../providers/AxiosProvider'
+import { useRef } from 'react';
 
 const Products = () => {        
 
-    return (
-        <ProductsProvider>
-            Products
+    const sidebarRef = useRef(null)    
+
+    const openSidebar = () => {        
+        sidebarRef.current.style.left = '0'
+        sidebarRef.current.style.padding = '1rem'
+    }
+
+    const closeSidebar = () => {
+        sidebarRef.current.style.left = '-100%'
+        sidebarRef.current.style.padding = '0'
+    }
+
+    return (                
+        <ProductsProvider>         
+                <Sidebar
+                    closeSidebar={closeSidebar}
+                    ref={sidebarRef} />
+                <div className="products">
+                    <ProductListing />
+                </div>                            
+                <button 
+                    onClick={() => openSidebar()}
+                className="btn-floating-action primary sort-filter">
+                    <i className="fa fa-filter"></i>
+                </button>                
         </ProductsProvider>
     )
 }

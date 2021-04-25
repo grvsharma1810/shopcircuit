@@ -33,7 +33,7 @@ export const useAxios = () => {
     try {
       const response = await axios.post(`${domainUrl}${url}`, item);
       console.log(response)
-      return response.data.data;
+      return response.data;
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {
@@ -57,7 +57,7 @@ export const useAxios = () => {
     try {
       const response = await axios.delete(`${domainUrl}${url}`);
       console.log(response)
-      return response.data.data;
+      return response.data;
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {

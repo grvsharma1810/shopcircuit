@@ -4,3 +4,8 @@
   width: 100%;
   height: 100%;
 }
+
+/* Because 223px height is given in component library  */
+.v-card .card-img {
+  height: auto !important;
+}

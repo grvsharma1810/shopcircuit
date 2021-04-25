@@ -4,14 +4,44 @@ import { useAxios } from '../../providers/AxiosProvider'
 import './cart.css'
 import { CartCard } from './components/cart-card/CartCard'
 import { CartPrice } from './components/cart-price/CartPrice';
-import { SET_CART } from '../../providers/data-reducer'
-import Spinner from '../shared-components/spinner/Spinner';
 
 const Cart = () => {            
 
+    const { dataState } = useData();    
+
+    const cart = dataState.cart ? dataState.cart : [];
+
     return (
-        <div>
-            Cart
+        <div>                      
+            {
+                cart.length > 0 &&
+                <div className="cart-container">
+                    <div>
+                        <h4 className="text-size-2 text-heading-medium mb-1">MY CART</h4>
+                        <div className="flex cart">
+                            {
+                                cart.map((cartItem) => {
+                                    return (
+                                        <CartCard cartItem={cartItem} key={cartItem._id} />
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="text-size-2 text-heading-medium">PRICE DETAILS</h4>
+                        <CartPrice />
+                    </div>
+                </div>
+            }
+            {
+                cart.length === 0 &&
+                <div className="flex h-center p-1">
+                    <p className="text-heading-medium text-size-3">
+                        Your Cart Is Empty. Please Add Something In Cart.
+                    </p>
+                </div>
+            }
         </div>
     )
 }
