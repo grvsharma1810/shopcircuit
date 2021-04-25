@@ -1,7 +1,7 @@
 import './navbar.css'
 import { NavLink } from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
-import {useAuth} from '../../../providerss/AuthProvider'
+import {useAuth} from '../../../providers/AuthProvider'
 
 const Navbar = () => {     
 

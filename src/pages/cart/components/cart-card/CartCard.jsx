@@ -1,13 +1,13 @@
 import './cart-card.css';
 import {useState} from 'react'
-import { useAxios } from "../../../../providerss/AxiosProvider"
-import { useData } from '../../../../providerss/DataProvider'
-import {useAuth} from '../../../../providerss/AuthProvider'
+import { useAxios } from "../../../../providers/AxiosProvider"
+import { useData } from '../../../../providers/DataProvider'
+import {useAuth} from '../../../../providers/AuthProvider'
 import {
     INCREASE_QUANTITY_IN_CART,
     DECREASE_QUANTITY_IN_CART,
     REMOVE_FROM_CART
-} from '../../../../providerss/data-reducer'
+} from '../../../../providers/data-reducer'
 
 
 export const CartCard = ({ cartItem }) => {

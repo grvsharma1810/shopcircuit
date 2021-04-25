@@ -1,5 +1,5 @@
 import './cart.css'
-import { useData } from '../../providerss/DataProvider'
+import { useData } from '../../providers/DataProvider'
 import { CartCard } from './components/cart-card/CartCard'
 import { CartPrice } from './components/cart-price/CartPrice';
 

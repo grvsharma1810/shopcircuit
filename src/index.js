@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { DataProvider } from './providerss/DataProvider';
+import { DataProvider } from './providers/DataProvider';
 import { ToastProvider } from './pages/shared-components/Toast/ToastProvider';
-import { AuthProvider } from './providerss/AuthProvider'
+import { AuthProvider } from './providers/AuthProvider'
 
 ReactDOM.render(
   <DataProvider>

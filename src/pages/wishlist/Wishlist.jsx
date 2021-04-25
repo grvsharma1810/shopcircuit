@@ -1,5 +1,5 @@
 import './wishlist.css'
-import { useData } from '../../providerss/DataProvider'
+import { useData } from '../../providers/DataProvider'
 import { WishlistCard } from './components/wishlist-card/WishlistCard';
 
 const Wishlist = () => {    

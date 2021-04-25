@@ -10,7 +10,7 @@ import Login from './pages/login/Login'
 import PrivateRoute from './pages/shared-components/PrivateRoute'
 import Spinner from './pages/shared-components/spinner/Spinner';
 
-import { useData } from './providerss/DataProvider'
+import { useData } from './providers/DataProvider'
 
 function App() {
 
