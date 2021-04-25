@@ -65,7 +65,7 @@ const ProductCard = ({ product }) => {
         }
         const wishlistItem = getWishlistItem(product,wishlist);
         setIsModifyingWishlist(true);
-        const {deleted} = await deleteData(`/users/${loggedInUser._id}/wishlist/${wishlistItem._id}`) 
+        await deleteData(`/users/${loggedInUser._id}/wishlist/${wishlistItem._id}`) 
         dataDispatch({ type: REMOVE_FROM_WISHLIST, payload: { product: wishlistItem } })
         setIsModifyingWishlist(false);
     }

@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
-import { useData } from '../../providers/DataProvider'
-import { useAxios } from '../../providers/AxiosProvider'
 import './cart.css'
+import { useData } from '../../providers/DataProvider'
 import { CartCard } from './components/cart-card/CartCard'
 import { CartPrice } from './components/cart-price/CartPrice';
 
