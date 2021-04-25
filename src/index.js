@@ -5,11 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { DataProvider } from './providers/DataProvider';
-// import mockServer from './API/mock.server'
 import { ToastProvider } from './pages/shared-components/Toast/ToastProvider';
 import { AuthProvider } from './providers/AuthProvider'
-
-// mockServer();
 
 ReactDOM.render(
   <DataProvider>
