@@ -1,14 +1,14 @@
 import './product-card.css'
 import {useState} from 'react'
 import { Link } from 'react-router-dom'
-import { useAxios } from '../../../../providers/AxiosProvider'
-import { useData } from '../../../../providers/DataProvider'
-import { useAuth } from '../../../../providers/AuthProvider'
+import { useAxios } from '../../../../providerss/AxiosProvider'
+import { useData } from '../../../../providerss/DataProvider'
+import { useAuth } from '../../../../providerss/AuthProvider'
 import {
     ADD_TO_CART,
     ADD_TO_WISHLIST,
     REMOVE_FROM_WISHLIST
-} from '../../../../providers/data-reducer'
+} from '../../../../providerss/data-reducer'
 
 const isProductInWishlist = (wishlist, product) => {
     return wishlist.findIndex(item => item.product._id === product._id) !== -1

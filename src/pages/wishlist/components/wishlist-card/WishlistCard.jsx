@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import { REMOVE_FROM_WISHLIST } from '../../../../providers/data-reducer'
-import { useData } from '../../../../providers/DataProvider'
-import { useAxios } from '../../../../providers/AxiosProvider'
-import {useAuth} from '../../../../providers/AuthProvider'
+import { REMOVE_FROM_WISHLIST } from '../../../../providerss/data-reducer'
+import { useData } from '../../../../providerss/DataProvider'
+import { useAxios } from '../../../../providerss/AxiosProvider'
+import {useAuth} from '../../../../providerss/AuthProvider'
 
 export const WishlistCard = ({ wishlistItem }) => {
 

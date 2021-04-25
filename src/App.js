@@ -1,5 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
 import './App.css';
+
+import { Routes, Route } from 'react-router-dom';
 import Cart from './pages/cart/Cart';
 import Navbar from './pages/shared-components/navbar/Navbar';
 import Products from './pages/products/Products';
@@ -9,7 +10,7 @@ import Login from './pages/login/Login'
 import PrivateRoute from './pages/shared-components/PrivateRoute'
 import Spinner from './pages/shared-components/spinner/Spinner';
 
-import { useData } from './providers/DataProvider'
+import { useData } from './providerss/DataProvider'
 
 function App() {
 

@@ -1,5 +1,5 @@
 import ProductCard from '../product-card/ProductCard'
-import { useData } from '../../../../providers/DataProvider'
+import { useData } from '../../../../providerss/DataProvider'
 import { useProducts } from '../../ProductsProvider'
 import {
     SORT_BY_PRICE,

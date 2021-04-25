@@ -1,5 +1,5 @@
 import './login.css'
-import {useAuth} from '../../providers/AuthProvider'
+import {useAuth} from '../../providerss/AuthProvider'
 import {useNavigate} from 'react-router-dom'
 
 const Login = () => {
