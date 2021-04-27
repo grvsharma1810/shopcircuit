@@ -5,7 +5,67 @@
   height: 100%;
 }
 
-/* Because 223px height is given in component library  */
-/* .v-card .card-img {
-  height: auto !important;
-} */
+.h-card .card-body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.v-card:hover .card-title {
+  color: var(--primary) !important;
+}
+
+.v-card {
+  width: 50% !important;
+  border-radius: 0 !important;
+  padding: 0.1rem !important;
+}
+
+.v-card .card-body {
+  padding: 0 !important;
+  margin-top: 0.5rem;
+}
+
+.card-title {
+  font-size: 1rem !important;
+  flex-grow: 1 !important;
+}
+
+.v-card .card-img {
+  border-radius: 0 !important;
+}
+
+.v-card .card-btn {
+  width: 100%;
+}
+
+.v-card .card-img {
+  height: 150px;
+}
+
+@media only screen and (min-width : 576px) {
+  .v-card {
+    width: 33% !important;
+  }
+
+  .v-card .card-img {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .v-card {
+    width: 25% !important;
+  }
+
+  .v-card .card-img {
+    height: 223px;
+  }
+
+  .card-title {
+    font-size: 1.2rem !important;
+  }
+}

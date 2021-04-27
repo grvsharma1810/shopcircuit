@@ -16,7 +16,7 @@ const Cart = () => {
                 <div className="cart-container">
                     <div>
                         <h4 className="text-size-2 text-heading-medium mb-1">MY CART</h4>
-                        <div className="flex cart">
+                        <div className="flex flex-column flex-gap-1">
                             {
                                 cart.map((cartItem) => {
                                     return (
