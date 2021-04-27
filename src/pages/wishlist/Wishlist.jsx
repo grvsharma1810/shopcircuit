@@ -14,7 +14,7 @@ const Wishlist = () => {
                 wishlist.length > 0 &&
                 <div className="wishlist-container">                    
                         <h4 className="text-size-2 text-heading-medium mb-1">MY wishlist</h4>
-                        <div className="flex wishlist">
+                        <div className="flex flex-gap-1">
                             {
                                 wishlist.map((wishlistItem) => {
                                     return (

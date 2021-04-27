@@ -7,6 +7,8 @@ import Products from './pages/products/Products';
 import Wishlist from './pages/wishlist/Wishlist';
 import Signup from './pages/sign-up/SignUp'
 import Login from './pages/login/Login'
+import Home from './pages/home/Home'
+import PageNotFound from './pages/page-not-found/PageNotFound'
 import PrivateRoute from './pages/shared-components/PrivateRoute'
 import Spinner from './pages/shared-components/spinner/Spinner';
 
@@ -25,11 +27,13 @@ function App() {
         <div className="App">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Products />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <PrivateRoute path="/cart" element={<Cart />} />
             <PrivateRoute path="/wishlist" element={<Wishlist />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
       }
