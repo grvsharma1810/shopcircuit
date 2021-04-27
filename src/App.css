@@ -5,11 +5,6 @@
   height: 100%;
 }
 
-.h-card .card-body {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
 .v-card:hover .card-title {
   color: var(--primary) !important;
 }
@@ -25,8 +20,11 @@
   margin-top: 0.5rem;
 }
 
-.card-title {
+.card-title { 
   font-size: 1rem !important;
+}
+
+.v-card .card-title{
   flex-grow: 1 !important;
 }
 
