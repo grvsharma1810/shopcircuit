@@ -50,28 +50,28 @@ export const CartCard = ({ cartItem }) => {
 
 
     return (
-        <div className="v-card">
+        <div className="h-card">
             <div className="card-img">
                 <img src={image} alt="card" />
             </div>
+            <button className="btn-dismiss"
+                onClick={() => handleRemoveFromCart()}
+                disabled={isDeletingCartItem}>
+                {!isDeletingCartItem && 
+                    <i className="fa fa-trash text-failure text-size-1"></i>}
+                {isDeletingCartItem && 
+                    <div className="small-spinner"></div>}
+            </button>
             <div className="card-body bg-white">
                 <h2 className="card-title">
                     {name}
                     <div className="flex flex-start">
-                        {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
+                        {fastDelivery && <span className="badge-pill bg-green-100">Fast Delivery</span>}
                     </div>
                 </h2>
                 <div>
                     <span className="mr-sm">Rs. {price}</span>
-                </div>
-                <button className="btn-wishlist"
-                    onClick={() => handleRemoveFromCart()}
-                    disabled={isDeletingCartItem}>
-                    {!isDeletingCartItem && 
-                        <i className="fa fa-trash text-failure text-size-1"></i>}
-                    {isDeletingCartItem && 
-                        <div className="small-spinner"></div>}
-                </button>
+                </div>                
                 <div>
 
                     <span>Quantity: </span>

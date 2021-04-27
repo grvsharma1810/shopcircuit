@@ -26,6 +26,14 @@ export const WishlistCard = ({ wishlistItem }) => {
             <div className="card-img">
                 <img src={image} alt="card" />
             </div>
+            <button className="btn-dismiss"
+                onClick={() => handleRemoveFromWishlist()}
+                disabled={isDeletingWishlistItem}>
+                {!isDeletingWishlistItem && 
+                    <i className="fa fa-trash text-failure text-size-1"></i>}
+                {isDeletingWishlistItem && 
+                    <div className="small-spinner"></div>}
+            </button>  
             <div className="card-body bg-white">
                 <h2 className="card-title">
                     {name}
@@ -35,15 +43,7 @@ export const WishlistCard = ({ wishlistItem }) => {
                 </h2>
                 <div>
                     <span className="mr-sm">Rs. {price}</span>
-                </div>
-                <button className="btn-wishlist"
-                    onClick={() => handleRemoveFromWishlist()}
-                    disabled={isDeletingWishlistItem}>
-                    {!isDeletingWishlistItem && 
-                        <i className="fa fa-trash text-failure text-size-1"></i>}
-                    {isDeletingWishlistItem && 
-                        <div className="small-spinner"></div>}
-                </button>                
+                </div>                              
             </div>
         </div>
     )

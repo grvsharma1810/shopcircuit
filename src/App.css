@@ -6,6 +6,6 @@
 }
 
 /* Because 223px height is given in component library  */
-.v-card .card-img {
+/* .v-card .card-img {
   height: auto !important;
-}
+} */

@@ -80,7 +80,7 @@ const ProductCard = ({ product }) => {
                     </div>
                     {
                         !isProductInWishlist(wishlist, product) &&
-                        <button className="btn-wishlist"
+                        <button className="btn-dismiss"
                             onClick={() => handleAddToWishlist(product)}
                             disabled={isModifyingWishlist}>
                             {!isModifyingWishlist && <i
@@ -93,7 +93,7 @@ const ProductCard = ({ product }) => {
                     }
                     {
                         isProductInWishlist(wishlist, product) &&
-                        <button className="btn-wishlist"
+                        <button className="btn-dismiss"
                             onClick={() => handleRemoveFromWishlist(product)}
                             disabled={isModifyingWishlist}>
                             {!isModifyingWishlist && <i
@@ -109,16 +109,16 @@ const ProductCard = ({ product }) => {
                         <h2 className="card-title">
                             {name}
                             <div className="flex flex-start">
-                                {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
+                                {fastDelivery && <span className="badge-pill bg-green-100">Fast Delivery</span>}
                             </div>
                         </h2>
                         <div>
                             <span className="mr-sm">Rs. {price}</span>
                         </div>
-                        <div>
+                        <>
                             {
                                 !isProductInCart(cart, product) &&
-                                <div>
+                                <>
                                     {
                                         isModifyingCart &&
                                         <button
@@ -136,7 +136,7 @@ const ProductCard = ({ product }) => {
                                             Add To Cart
                                     </button>
                                     }
-                                </div>
+                                </>
                             }
                             {
                                 isProductInCart(cart, product) &&                                
@@ -149,14 +149,14 @@ const ProductCard = ({ product }) => {
                                 </Link>
                                 
                             }
-                        </div>
+                        </>
                     </div>
                 </div>
             }
 
             {
                 !inStock &&
-                <div className="v-card">
+                <div className="v-card mb-1">
                     <div className="card-img">
                         <img src={image} alt="card" />
                         <div className="bg-overlay">
@@ -167,7 +167,7 @@ const ProductCard = ({ product }) => {
                         <h2 className="card-title">
                             {name}
                             <div className="flex flex-start">
-                                {fastDelivery && <span className="badge bg-green-100 border-1 border-green-800">Fast Delivery</span>}
+                                {fastDelivery && <span className="badge-pill bg-green-100">Fast Delivery</span>}
                             </div>
                         </h2>
                         <div>
