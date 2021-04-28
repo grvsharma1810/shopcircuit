@@ -8,19 +8,23 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="home">
+        <>
             <Categories />
             <Carousel />
-            <div className="text-center m-1">
+            <div className="text-center">
+                <p className="text-size-3 bg-secondary p-1">
+                    Get all your music related products here at one place to
+                    create beautiful beats.
+                </p>
                 <button
                     onClick={() => navigate("/products")}
-                    className="btn-solid bg-red-800 large"
+                    className="btn-solid bg-red-800 large m-1"
                 >
                     Shop Now
                 </button>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 
