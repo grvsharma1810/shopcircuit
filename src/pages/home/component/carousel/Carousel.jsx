@@ -32,6 +32,7 @@ const Carousel = () => {
         return () => {
             clearInterval(interval);
         };
+        // eslint-disable-next-line
     }, [currentImageIndex]);
 
     return (
