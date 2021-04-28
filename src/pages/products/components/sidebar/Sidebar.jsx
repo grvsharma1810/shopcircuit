@@ -1,21 +1,38 @@
-import React from 'react';
-import './sidebar.css'
-import { useProducts } from '../../ProductsProvider'
+import React from "react";
+import "./sidebar.css";
+import { useProducts } from "../../ProductsProvider";
 import {
     SORT_BY_PRICE,
     INCLUDE_OUT_OF_STOCK,
     ONLY_FAST_DELIVERY,
     HIGH_TO_LOW,
     LOW_TO_HIGH,
-    CLEAR_FILTERS
-} from '../../product-reducer'
+    CLEAR_FILTERS,
+} from "../../product-reducer";
+import { useLocation } from "react-router-dom";
+
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+};
 
 const Sidebar = ({ closeSidebar }, ref) => {
-
     const { productsState, productsDispatch } = useProducts();
+    const query = useQuery();
+    const categoryName = query.get("category");
 
     return (
         <div className="sidebar" ref={ref}>
+            {categoryName && (
+                <div className="mb-1">
+                    <h5
+                        className="text-size-2"
+                        style={{ marginBottom: "0.5rem" }}
+                    >
+                        Category
+                    </h5>
+                    <p>{categoryName}</p>
+                </div>
+            )}
             <h5 className="text-size-2 mb-1">Sort By</h5>
             <div className="form-row">
                 <p className="form-check mb-1">
@@ -24,8 +41,16 @@ const Sidebar = ({ closeSidebar }, ref) => {
                         id="highToLow"
                         name="sort"
                         value={HIGH_TO_LOW}
-                        checked={productsState[SORT_BY_PRICE] && productsState[SORT_BY_PRICE] === HIGH_TO_LOW}
-                        onChange={() => productsDispatch({ type: SORT_BY_PRICE, payload: { value: HIGH_TO_LOW } })}
+                        checked={
+                            productsState[SORT_BY_PRICE] &&
+                            productsState[SORT_BY_PRICE] === HIGH_TO_LOW
+                        }
+                        onChange={() =>
+                            productsDispatch({
+                                type: SORT_BY_PRICE,
+                                payload: { value: HIGH_TO_LOW },
+                            })
+                        }
                     />
                     <label htmlFor="highToLow"> Price - High to Low</label>
                 </p>
@@ -35,8 +60,16 @@ const Sidebar = ({ closeSidebar }, ref) => {
                         id="lowToHigh"
                         name="sort"
                         value={LOW_TO_HIGH}
-                        checked={productsState[SORT_BY_PRICE] && productsState[SORT_BY_PRICE] === LOW_TO_HIGH}
-                        onChange={() => productsDispatch({ type: SORT_BY_PRICE, payload: { value: LOW_TO_HIGH } })}
+                        checked={
+                            productsState[SORT_BY_PRICE] &&
+                            productsState[SORT_BY_PRICE] === LOW_TO_HIGH
+                        }
+                        onChange={() =>
+                            productsDispatch({
+                                type: SORT_BY_PRICE,
+                                payload: { value: LOW_TO_HIGH },
+                            })
+                        }
                     />
                     <label htmlFor="lowToHigh"> Price - Low to High</label>
                 </p>
@@ -50,7 +83,12 @@ const Sidebar = ({ closeSidebar }, ref) => {
                         name="filter"
                         value="filterByOutOfStock"
                         checked={productsState[INCLUDE_OUT_OF_STOCK]}
-                        onChange={() => productsDispatch({ type: INCLUDE_OUT_OF_STOCK, payload: { value: {} } })}
+                        onChange={() =>
+                            productsDispatch({
+                                type: INCLUDE_OUT_OF_STOCK,
+                                payload: { value: {} },
+                            })
+                        }
                     />
                     <label htmlFor="outofstock"> Include Out Of Stock</label>
                 </p>
@@ -61,21 +99,39 @@ const Sidebar = ({ closeSidebar }, ref) => {
                         name="filter"
                         value="filterByFastDeliveryOnly"
                         checked={productsState[ONLY_FAST_DELIVERY]}
-                        onChange={() => productsDispatch({ type: ONLY_FAST_DELIVERY, payload: { value: {} } })}
+                        onChange={() =>
+                            productsDispatch({
+                                type: ONLY_FAST_DELIVERY,
+                                payload: { value: {} },
+                            })
+                        }
                     />
-                    <label htmlFor="fastdeliveryonly"> Fast Delivery Only</label>
+                    <label htmlFor="fastdeliveryonly">
+                        {" "}
+                        Fast Delivery Only
+                    </label>
                 </p>
             </div>
             <button
                 className="btn-solid secondary"
-                onClick={() => productsDispatch({ type: CLEAR_FILTERS, payload: { value: {} } })}
-            >Clear Filters</button>
+                onClick={() =>
+                    productsDispatch({
+                        type: CLEAR_FILTERS,
+                        payload: { value: {} },
+                    })
+                }
+            >
+                Clear Filters
+            </button>
             <button
                 onClick={() => closeSidebar()}
-                className="btn-solid secondary sidebar-close">X</button>
+                className="btn-solid secondary sidebar-close"
+            >
+                X
+            </button>
         </div>
-    )
-}
+    );
+};
 
 const forwardedRefSidebar = React.forwardRef(Sidebar);
 

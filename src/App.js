@@ -34,7 +34,7 @@ function App() {
             <PrivateRoute path="/cart" element={<Cart />} />
             <PrivateRoute path="/wishlist" element={<Wishlist />} />
             <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          </Routes>          
         </div>
       }
     </>
