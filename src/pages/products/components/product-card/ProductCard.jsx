@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAxios } from "../../../../providers/AxiosProvider";
 import { useData } from "../../../../providers/DataProvider";
 import { useAuth } from "../../../../providers/AuthProvider";
+import { getDiscountedPrice } from "../../../../utils";
 import {
     ADD_TO_CART,
     ADD_TO_WISHLIST,
@@ -36,7 +37,7 @@ const ProductCard = ({ product }) => {
     const { dataState, dataDispatch } = useData();
     const wishlist = dataState.wishlist ? dataState.wishlist : [];
     const cart = dataState.cart ? dataState.cart : [];
-    const { name, image, price, fastDelivery, inStock } = product;
+    const { name, image, price, fastDelivery, inStock, discount } = product;
 
     const handleAddToCart = async (product) => {
         if (!loggedInUser) {
@@ -135,15 +136,40 @@ const ProductCard = ({ product }) => {
                         <h2 className="card-title">
                             {name}
                             <div className="flex flex-start">
-                                {fastDelivery && (                                    
+                                {fastDelivery && (
                                     <span className="badge-pill bg-green-100">
                                         Fast Delivery
-                                    </span>                                    
-                                )}                                
+                                    </span>
+                                )}
                             </div>
                         </h2>
                         <div>
-                            <span className="mr-sm">Rs. {price}</span>
+                            <span className="text-heading-bold mr-sm">
+                                ₹ {getDiscountedPrice(price, discount)}
+                            </span>
+                            {discount != 0 && (
+                                <>
+                                    <span
+                                        className="mr-sm"
+                                        style={{
+                                            textDecoration: "line-through",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        ₹ {price}
+                                    </span>
+
+                                    <span
+                                        className="text-success text-heading-bold"
+                                        style={{
+                                            textDecoration: "line-through",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        {discount}% OFF
+                                    </span>
+                                </>
+                            )}
                         </div>
                         <>
                             {!isProductInCart(cart, product) && (
@@ -161,9 +187,7 @@ const ProductCard = ({ product }) => {
                                                 style={{
                                                     display: "inline-block",
                                                 }}
-                                            >
-                                                {" "}
-                                            </span>
+                                            ></span>
                                         </button>
                                     )}
                                     {!isModifyingCart && (
@@ -211,7 +235,32 @@ const ProductCard = ({ product }) => {
                             </div>
                         </h2>
                         <div>
-                            <span className="mr-sm">Rs. {price}</span>
+                            <span className="text-heading-bold mr-sm">
+                                ₹ {getDiscountedPrice(price, discount)}
+                            </span>
+                            {discount != 0 && (
+                                <>
+                                    <span
+                                        className="mr-sm"
+                                        style={{
+                                            textDecoration: "line-through",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        ₹ {price}
+                                    </span>
+
+                                    <span
+                                        className="text-success text-heading-bold"
+                                        style={{
+                                            textDecoration: "line-through",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        {discount}% OFF
+                                    </span>
+                                </>
+                            )}
                         </div>
                         <button className="btn-solid primary card-btn" disabled>
                             Add To Cart
