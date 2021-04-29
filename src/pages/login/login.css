@@ -1,3 +1,11 @@
-.form {
-    width: 80% !important;
+.login-box {
+    width: 90% !important;
+    max-width: 450px;
+    margin: 1rem auto;
+}
+
+.login-form {
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    padding: 1rem
 }

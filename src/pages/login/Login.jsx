@@ -1,55 +1,91 @@
-import './login.css'
-import {useAuth} from '../../providers/AuthProvider'
-import {useNavigate} from 'react-router-dom'
+import "./login.css";
+import { useAuth } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    
-    const {login,isLoading} = useAuth();        
+    const { login, isLoading } = useAuth();
     const navigate = useNavigate();
-    
-    const formSubmit = async(event) => {         
-        event.preventDefault()
-        event.stopPropagation()
-        if(!event.target.checkValidity()){                
-            event.target.classList.add('was-validated')
-        }
-        else{
+
+    const formSubmit = async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!event.target.checkValidity()) {
+            event.target.classList.add("was-validated");
+        } else {
             const email = event.target[0].value;
             const password = event.target[1].value;
-            login(email, password);            
-        }        
-    }
+            login(email, password);
+        }
+    };
 
     return (
-        <div className="flex h-center">
-            <form className="form needs-validation" noValidate onSubmit={(event) => formSubmit(event)}>                
-                <div className="form-row">
-                    <p className="form-field">
-                        <label htmlFor="email">Email</label>
-                        <input id="email" type="email" placeholder="Email" name="email" required/>  
-                        <span className="error-msg">Please enter valid email</span>
-                        <span className="success-msg">Looks Good</span>
-                    </p>                     
-                </div>   
-                <div className="form-row">              
-                    <p className="form-field">
-                        <label htmlFor="password">Password</label>
-                        <input id="password" type="password" placeholder="Password" autoComplete="true" required/>
-                        <span className="error-msg">Please enter valid password</span>
-                        <span className="success-msg">Looks Good</span>
-                    </p>
-                </div>                           
-                <div>
-                    {!isLoading && <button className="btn-solid primary">Login</button>}
-                    {isLoading && <button className="btn-solid secondary">Validating Inputs...</button>}
-                    <button       
-                        type="button"
-                        onClick={() => navigate('/signup')}      
-                        className="btn-link primary">New to ShopCircuit ? Create an account. </button> 
-                </div>                                 
-            </form>            
-        </div>
-    )
-}
+        <>
+            <div className="login-box login-form">
+                <form
+                    className="form needs-validation"
+                    noValidate
+                    onSubmit={(event) => formSubmit(event)}
+                >
+                    <div className="form-row">
+                        <p className="form-field">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                required
+                            />
+                            <span className="error-msg">
+                                Please enter valid email
+                            </span>
+                            <span className="success-msg">Looks Good</span>
+                        </p>
+                    </div>
+                    <div className="form-row">
+                        <p className="form-field">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Password"
+                                autoComplete="true"
+                                required
+                            />
+                            <span className="error-msg">
+                                Please enter valid password
+                            </span>
+                            <span className="success-msg">Looks Good</span>
+                        </p>
+                    </div>
+                    <div>
+                        {!isLoading && (
+                            <button className="btn-solid primary">Login</button>
+                        )}
+                        {isLoading && (
+                            <button className="btn-solid secondary">
+                                Validating Inputs...
+                            </button>
+                        )}
+                        <p className="mt-1" style={{ fontSize: "0.75rem" }}>
+                            By continuing, you agree to ShopCircuit's Conditions
+                            of Use and Privacy Notice.
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div className="login-box text-center">
+                <p className="mb-1">New to ShopCircuit ?</p>
+                <button
+                    type="button"
+                    onClick={() => navigate("/signup")}
+                    className="btn-solid secondary w-100"
+                >
+                    Create account
+                </button>
+            </div>
+        </>
+    );
+};
 
-export default Login
+export default Login;

@@ -22,7 +22,7 @@ export const WishlistCard = ({ wishlistItem }) => {
 
 
     return (
-        <div className="v-card">
+        <div className="v-card mb-1">
             <div className="card-img">
                 <img src={image} alt="card" />
             </div>

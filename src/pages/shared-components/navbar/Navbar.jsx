@@ -27,8 +27,8 @@ const Navbar = () => {
                     <ul>                   
                         {
                             !loggedInUser &&
-                            <button className="btn-solid bg-yellow-600"
-                            onClick={() => navigate('/login')}>Log In</button> 
+                            <button className="btn-solid"
+                            onClick={() => navigate('/login')}>Login</button> 
                         }     
                         {
                             loggedInUser &&

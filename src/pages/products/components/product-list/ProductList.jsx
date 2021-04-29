@@ -1,5 +1,4 @@
 import ProductCard from "../product-card/ProductCard";
-import { useData } from "../../../../providers/DataProvider";
 import { useProducts } from "../../ProductsProvider";
 import {
     SORT_BY_PRICE,
@@ -45,9 +44,7 @@ const getFilteredProducts = (
 };
 
 const ProductListing = ({ products }) => {
-    const { productsState, productsDispatch } = useProducts();
-    // const { dataState } = useData();
-    // const products = dataState.products ? dataState.products : [];
+    const { productsState, productsDispatch } = useProducts();    
     const sortedProducts = getProductsSortedByPrice(
         products,
         productsState[SORT_BY_PRICE]
