@@ -28,7 +28,12 @@ const ViewProduct = () => {
                     <img class="img" src={`${product.image}`} alt="" />
                     <div>
                         <div className="text-size-2">{product.name}</div>
-                        <div style={{ marginBottom: "0.5rem" }}>
+                        <div
+                            style={{
+                                marginBottom: "0.5rem",
+                                marginTop: "0.5rem",
+                            }}
+                        >
                             <span className="rating bg-green-600 mr-1">
                                 <span>4.7 </span>
                                 <i class="fa fa-star" aria-hidden="true"></i>
