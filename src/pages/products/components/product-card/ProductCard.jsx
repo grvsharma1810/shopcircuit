@@ -1,6 +1,6 @@
 import "./product-card.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAxios } from "../../../../providers/AxiosProvider";
 import { useData } from "../../../../providers/DataProvider";
 import { useAuth } from "../../../../providers/AuthProvider";
@@ -28,6 +28,7 @@ const getWishlistItem = (product, wishlist) => {
 };
 
 const ProductCard = ({ product }) => {
+    const navigate = useNavigate();
     const { loggedInUser } = useAuth();
     const [isModifyingCart, setIsModifyingCart] = useState(false);
     const [isModifyingWishlist, setIsModifyingWishlist] = useState(false);
@@ -93,7 +94,10 @@ const ProductCard = ({ product }) => {
     return (
         <>
             {inStock && (
-                <div className="v-card mb-1">
+                <div
+                    onClick={() => navigate(`${product._id}`)}
+                    className="v-card mb-1"
+                >
                     <div className="card-img">
                         <img src={image} alt="card" />
                     </div>
@@ -159,13 +163,7 @@ const ProductCard = ({ product }) => {
                                         ₹ {price}
                                     </span>
 
-                                    <span
-                                        className="text-success text-heading-bold"
-                                        style={{
-                                            textDecoration: "line-through",
-                                            fontSize: "0.8rem",
-                                        }}
-                                    >
+                                    <span className="text-success text-heading-bold">
                                         {discount}% OFF
                                     </span>
                                 </>
@@ -250,13 +248,7 @@ const ProductCard = ({ product }) => {
                                         ₹ {price}
                                     </span>
 
-                                    <span
-                                        className="text-success text-heading-bold"
-                                        style={{
-                                            textDecoration: "line-through",
-                                            fontSize: "0.8rem",
-                                        }}
-                                    >
+                                    <span className="text-success text-heading-bold">
                                         {discount}% OFF
                                     </span>
                                 </>

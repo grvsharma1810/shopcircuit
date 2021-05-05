@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import { useData } from './DataProvider'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAxios } from './AxiosProvider'
@@ -15,6 +15,10 @@ export const AuthProvider = ({ children }) => {
     const { state } = useLocation();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        setLoggedInUser(user);
+    }, [])
 
     async function signup(userCredentials) {
         setIsLoading(true)
@@ -28,6 +32,7 @@ export const AuthProvider = ({ children }) => {
             dataDispatch({ type: SET_CART, payload: { cart } })
             dataDispatch({ type: SET_WISHLIST, payload: { wishlist } })
             setLoggedInUser(user);
+            localStorage.setItem("user", JSON.stringify({ _id: user._id, email: user.email, name: user.name }))
             navigate(state?.from ? state.from : "/");
         }
         setIsLoading(false);
@@ -40,10 +45,11 @@ export const AuthProvider = ({ children }) => {
         try {
             const { user } = await postData("/login", { email, password });
             const { cart } = await getData(`/users/${user._id}/cart`);
-            const { wishlist } = await getData(`/users/${user._id}/wishlist`);            
+            const { wishlist } = await getData(`/users/${user._id}/wishlist`);
             dataDispatch({ type: SET_CART, payload: { cart } })
             dataDispatch({ type: SET_WISHLIST, payload: { wishlist } })
             setLoggedInUser(user);
+            localStorage.setItem("user", JSON.stringify({ userId: user._id, email: user.email, name: user.name }))
             navigate(state?.from ? state.from : "/");
         } catch (error) {
             alert("Please enter a valid email and password");
@@ -51,8 +57,9 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
     }
 
-    const logout = () => {
+    const signOut = () => {
         setLoggedInUser(null);
+        localStorage.removeItem("user")
         // dataDispatch({
         //     type: SET_USER_PLAYLIST_DATA,
         //     payload: { playlists: [] }
@@ -60,21 +67,8 @@ export const AuthProvider = ({ children }) => {
         navigate("/");
     }
 
-    const addToLoggedInUserVideos = (videoId) => {
-        // setLoggedInUser(loggedInUser => {
-        //     return {
-        //         ...loggedInUser,
-        //         videos: loggedInUser.videos.concat(videoId)
-        //     }
-        // })
-    }
-
-    const updateUserData = (updatedUser) => {
-        setLoggedInUser(updatedUser);
-    }
-
     return (
-        <AuthContext.Provider value={{ loggedInUser, login, logout, signup, isLoading, addToLoggedInUserVideos, updateUserData }}>
+        <AuthContext.Provider value={{ loggedInUser, login, signOut, signup, isLoading }}>
             {children}
         </AuthContext.Provider>
     )

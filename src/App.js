@@ -8,6 +8,8 @@ import Wishlist from './pages/wishlist/Wishlist';
 import Signup from './pages/sign-up/SignUp'
 import Login from './pages/login/Login'
 import Home from './pages/home/Home'
+import ViewProduct from './pages/view-product/ViewProduct'
+import MyAccount from './pages/my-account/MyAccount'
 import PageNotFound from './pages/page-not-found/PageNotFound'
 import PrivateRoute from './pages/shared-components/PrivateRoute'
 import Spinner from './pages/shared-components/spinner/Spinner';
@@ -29,12 +31,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/:productId" element={<ViewProduct />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <PrivateRoute path="/cart" element={<Cart />} />
             <PrivateRoute path="/wishlist" element={<Wishlist />} />
+            <PrivateRoute path="/account" element={<MyAccount />} />
             <Route path="*" element={<PageNotFound />} />
-          </Routes>          
+          </Routes>
         </div>
       }
     </>

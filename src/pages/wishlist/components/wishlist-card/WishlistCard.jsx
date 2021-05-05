@@ -69,13 +69,7 @@ export const WishlistCard = ({ wishlistItem }) => {
                                 ₹ {price}
                             </span>
 
-                            <span
-                                className="text-success text-heading-bold"
-                                style={{
-                                    textDecoration: "line-through",
-                                    fontSize: "0.8rem",
-                                }}
-                            >
+                            <span className="text-success text-heading-bold">
                                 {discount}% OFF
                             </span>
                         </>

@@ -73,7 +73,7 @@ const ProductListing = ({ products }) => {
                     }
                 />
             </p>
-            <p className="mb-1">
+            <p>
                 Showing {filteredProducts.length} products out of{" "}
                 {products.length}
             </p>
