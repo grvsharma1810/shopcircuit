@@ -17,10 +17,6 @@ const isProductInWishlist = (wishlist, product) => {
     );
 };
 
-const isProductInCart = (cart, product) => {
-    return cart.findIndex((item) => item.product._id === product._id) !== -1;
-};
-
 const getWishlistItem = (product, wishlist) => {
     return wishlist.find(
         (wishlistItem) => wishlistItem.product._id === product._id
@@ -30,30 +26,13 @@ const getWishlistItem = (product, wishlist) => {
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const { loggedInUser } = useAuth();
-    const [isModifyingCart, setIsModifyingCart] = useState(false);
     const [isModifyingWishlist, setIsModifyingWishlist] = useState(false);
 
     const { postData, deleteData } = useAxios();
 
     const { dataState, dataDispatch } = useData();
     const wishlist = dataState.wishlist ? dataState.wishlist : [];
-    const cart = dataState.cart ? dataState.cart : [];
     const { name, image, price, fastDelivery, inStock, discount } = product;
-
-    const handleAddToCart = async (product) => {
-        if (!loggedInUser) {
-            alert("Please Login");
-            return;
-        }
-        setIsModifyingCart(true);
-        const { cartItem } = await postData(`/users/${loggedInUser._id}/cart`, {
-            productId: product._id,
-            quantity: 1,
-        });
-        console.log({ cartItem });
-        dataDispatch({ type: ADD_TO_CART, payload: { product: cartItem } });
-        setIsModifyingCart(false);
-    };
 
     const handleAddToWishlist = async (product) => {
         if (!loggedInUser) {
@@ -169,52 +148,15 @@ const ProductCard = ({ product }) => {
                                 </>
                             )}
                         </div>
-                        <>
-                            {!isProductInCart(cart, product) && (
-                                <>
-                                    {isModifyingCart && (
-                                        <button
-                                            className="btn-solid primary card-btn"
-                                            onClick={() =>
-                                                handleAddToCart(product)
-                                            }
-                                            disabled
-                                        >
-                                            <span
-                                                className="small-spinner"
-                                                style={{
-                                                    display: "inline-block",
-                                                }}
-                                            ></span>
-                                        </button>
-                                    )}
-                                    {!isModifyingCart && (
-                                        <button
-                                            className="btn-solid primary card-btn"
-                                            onClick={() =>
-                                                handleAddToCart(product)
-                                            }
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    )}
-                                </>
-                            )}
-                            {isProductInCart(cart, product) && (
-                                <Link to="/cart">
-                                    <button className="btn-solid bg-green-600 card-btn">
-                                        <span>Go To Cart </span>
-                                        <i className="fa fa-arrow-circle-right"></i>
-                                    </button>
-                                </Link>
-                            )}
-                        </>
                     </div>
                 </div>
             )}
 
             {!inStock && (
-                <div className="v-card mb-1">
+                <div
+                    onClick={() => navigate(`${product._id}`)}
+                    className="v-card mb-1"
+                >
                     <div className="card-img">
                         <img src={image} alt="card" />
                         <div className="bg-overlay">
@@ -253,10 +195,7 @@ const ProductCard = ({ product }) => {
                                     </span>
                                 </>
                             )}
-                        </div>
-                        <button className="btn-solid primary card-btn" disabled>
-                            Add To Cart
-                        </button>
+                        </div>                       
                     </div>
                 </div>
             )}

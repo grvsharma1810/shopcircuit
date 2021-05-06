@@ -1,15 +1,42 @@
 import "./view-product.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useAxios } from "../../providers/AxiosProvider";
+import { useAuth } from "../../providers/AuthProvider";
+import { useData } from "../../providers/DataProvider";
+import { ADD_TO_CART } from "../../providers/data-reducer";
 import { getDiscountedPrice } from "../../utils";
 import Spinner from "../shared-components/spinner/Spinner";
 
+const isProductInCart = (cart, product) => {
+    console.log(cart, product);
+    return cart.findIndex((item) => item.product._id === product._id) !== -1;
+};
+
 const ViewProduct = () => {
     const { productId } = useParams();
-    const { getData } = useAxios();
+    const { loggedInUser } = useAuth();
+    const { dataState, dataDispatch } = useData();
+    const cart = dataState.cart ? dataState.cart : [];
+    const { getData, postData } = useAxios();
     const [product, setProduct] = useState(null);
     const [isProductLoading, setIsProductLoading] = useState(true);
+    const [isModifyingCart, setIsModifyingCart] = useState(false);
+
+    const handleAddToCart = async (product) => {
+        if (!loggedInUser) {
+            alert("Please Login");
+            return;
+        }
+        setIsModifyingCart(true);
+        const { cartItem } = await postData(`/users/${loggedInUser._id}/cart`, {
+            productId: product._id,
+            quantity: 1,
+        });
+        console.log({ cartItem });
+        dataDispatch({ type: ADD_TO_CART, payload: { product: cartItem } });
+        setIsModifyingCart(false);
+    };
 
     useEffect(() => {
         (async function () {
@@ -79,9 +106,51 @@ const ViewProduct = () => {
                             ut illo doloribus aspernatur laborum. Ad cumque
                             totam nulla.
                         </div>
-                        <button className="btn-solid primary w-100">
+                        {/* <button className="btn-solid primary w-100">
                             ADD TO CART
-                        </button>
+                        </button> */}
+                        <>
+                            {!product.inStock && (
+                                <button
+                                    className="btn-solid secondary w-100"
+                                    disabled
+                                >
+                                    OUT OF STOCK
+                                </button>
+                            )}
+                        </>
+                        <>
+                            {product.inStock && !isProductInCart(cart, product) && (
+                                <>
+                                    {isModifyingCart && (
+                                        <button
+                                            className="btn-solid primary card-btn w-100"
+                                            disabled
+                                        >
+                                            <div className="small-spinner"></div>
+                                        </button>
+                                    )}
+                                    {!isModifyingCart && (
+                                        <button
+                                            className="btn-solid primary card-btn w-100"
+                                            onClick={() =>
+                                                handleAddToCart(product)
+                                            }
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    )}
+                                </>
+                            )}
+                            {isProductInCart(cart, product) && (
+                                <Link to="/cart">
+                                    <button className="btn-solid bg-green-600 w-100">
+                                        <span>Go To Cart </span>
+                                        <i className="fa fa-arrow-circle-right"></i>
+                                    </button>
+                                </Link>
+                            )}
+                        </>
                     </div>
                 </div>
             )}
