@@ -1,4 +1,4 @@
-import ProductCard from "../product-card/ProductCard";
+import ProductCard from "../../../shared-components/product-card/ProductCard";
 import { useProducts } from "../../ProductsProvider";
 import {
     SORT_BY_PRICE,

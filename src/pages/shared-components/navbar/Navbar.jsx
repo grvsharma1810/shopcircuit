@@ -1,5 +1,6 @@
 import "./navbar.css";
 import logo from "./logo.png";
+import userLogo from "./user.png";
 import { NavLink } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../providers/AuthProvider";
@@ -50,7 +51,7 @@ const Navbar = () => {
                 )}
                 <div className="nav-links">
                     <ul>
-                        {loggedInUser && (
+                        {loggedInUser ? (
                             <>
                                 <NavLink to="/cart" end style={linkStyle}>
                                     <button className="btn-solid">
@@ -75,16 +76,15 @@ const Navbar = () => {
                                     </button>
                                 </NavLink>
                                 <NavLink to="/account" style={linkStyle}>
-                                    <button className="btn-solid">
-                                        <i
-                                            class="fa fa-user-circle"
-                                            aria-hidden="true"
-                                        ></i>
-                                    </button>
+                                    <div className="ml-sm avatar-wrapper">
+                                        <img
+                                            src={userLogo}
+                                            className="avatar"
+                                        />
+                                    </div>
                                 </NavLink>
                             </>
-                        )}
-                        {!loggedInUser && (
+                        ) : (
                             <button
                                 className="btn-solid"
                                 onClick={() => navigate("/login")}

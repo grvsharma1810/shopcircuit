@@ -106,9 +106,6 @@ const ViewProduct = () => {
                             ut illo doloribus aspernatur laborum. Ad cumque
                             totam nulla.
                         </div>
-                        {/* <button className="btn-solid primary w-100">
-                            ADD TO CART
-                        </button> */}
                         <>
                             {!product.inStock && (
                                 <button

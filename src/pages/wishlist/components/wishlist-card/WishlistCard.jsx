@@ -3,15 +3,31 @@ import { REMOVE_FROM_WISHLIST } from "../../../../providers/data-reducer";
 import { useData } from "../../../../providers/DataProvider";
 import { useAxios } from "../../../../providers/AxiosProvider";
 import { useAuth } from "../../../../providers/AuthProvider";
-import { getDiscountedPrice } from "../../../../utils";
+import { Title } from "../../../shared-components/product-card/Title";
+import { Price } from "../../../shared-components/product-card/Price";
+import { CardImage } from "../../../shared-components/product-card/CardImage";
 
 export const WishlistCard = ({ wishlistItem }) => {
+    const product = wishlistItem.product;
+    const { name, image, price, fastDelivery, discount, inStock } = product;
+
+    return (
+        <div className="v-card mb-1">
+            <CardImage image={image} inStock={inStock} _id={product._id} />
+            <RemoveFromWishlistButton wishlistItem={wishlistItem} />
+            <div className="card-body bg-white">
+                <Title name={name} fastDelivery={fastDelivery} />
+                <Price price={price} discount={discount} />
+            </div>
+        </div>
+    );
+};
+
+const RemoveFromWishlistButton = ({ wishlistItem }) => {
     const { dataDispatch } = useData();
     const { loggedInUser } = useAuth();
-    const [isDeletingWishlistItem, setisDeletingWishlistItem] = useState(false);
-    const product = wishlistItem.product;
-    const { name, image, price, fastDelivery, discount } = product;
     const { deleteData } = useAxios();
+    const [isDeletingWishlistItem, setisDeletingWishlistItem] = useState(false);
 
     const handleRemoveFromWishlist = async () => {
         setisDeletingWishlistItem(true);
@@ -26,56 +42,15 @@ export const WishlistCard = ({ wishlistItem }) => {
     };
 
     return (
-        <div className="v-card mb-1">
-            <div className="card-img">
-                <img src={image} alt="card" />
-            </div>
-            <button
-                className="btn-dismiss"
-                onClick={() => handleRemoveFromWishlist()}
-                disabled={isDeletingWishlistItem}
-            >
-                {!isDeletingWishlistItem && (
-                    <i className="fa fa-trash text-failure text-size-1"></i>
-                )}
-                {isDeletingWishlistItem && (
-                    <div className="small-spinner"></div>
-                )}
-            </button>
-            <div className="card-body bg-white">
-                <h2 className="card-title">
-                    {name}
-                    <div className="flex flex-start">
-                        {fastDelivery && (
-                            <span className="badge-pill bg-green-100">
-                                Fast Delivery
-                            </span>
-                        )}
-                    </div>
-                </h2>
-                <div>
-                    <span className="text-heading-bold mr-sm">
-                        ₹ {getDiscountedPrice(price, discount)}
-                    </span>
-                    {discount != 0 && (
-                        <>
-                            <span
-                                className="mr-sm"
-                                style={{
-                                    textDecoration: "line-through",
-                                    fontSize: "0.8rem",
-                                }}
-                            >
-                                ₹ {price}
-                            </span>
-
-                            <span className="text-success text-heading-bold">
-                                {discount}% OFF
-                            </span>
-                        </>
-                    )}
-                </div>
-            </div>
-        </div>
+        <button
+            className="btn-dismiss"
+            onClick={() => handleRemoveFromWishlist()}
+            disabled={isDeletingWishlistItem}
+        >
+            {!isDeletingWishlistItem && (
+                <i className="fa fa-trash text-failure text-size-1"></i>
+            )}
+            {isDeletingWishlistItem && <div className="small-spinner"></div>}
+        </button>
     );
 };
