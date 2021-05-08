@@ -2,10 +2,15 @@ import "./cart.css";
 import { useData } from "../../providers/DataProvider";
 import { CartCard } from "./components/cart-card/CartCard";
 import { CartPrice } from "./components/cart-price/CartPrice";
+import { useLocalisation } from "../../providers/LocalisationProvider";
+import { getLanguageLabel } from "../../utils/getLanguageLabel";
 
 const Cart = () => {
     const { dataState } = useData();
-
+    const {
+        localisationState: { language },
+    } = useLocalisation();
+    console.log({ language });
     const cart = dataState.cart ? dataState.cart : [];
 
     return (
@@ -14,7 +19,9 @@ const Cart = () => {
                 <div className="cart-container">
                     <div>
                         <h4 className="text-size-2 text-heading-medium mb-1">
-                            <span>MY CART </span>
+                            <span>
+                                {getLanguageLabel("my_cart", language)}{" "}
+                            </span>
                             <span>({cart.length})</span>
                         </h4>
                         <div className="flex flex-column flex-gap-1">

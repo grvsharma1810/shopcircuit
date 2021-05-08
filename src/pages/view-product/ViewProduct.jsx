@@ -5,7 +5,7 @@ import { useAxios } from "../../providers/AxiosProvider";
 import { useAuth } from "../../providers/AuthProvider";
 import { useData } from "../../providers/DataProvider";
 import { ADD_TO_CART } from "../../reducers/data-reducer";
-import { getDiscountedPrice } from "../../utils";
+import { getDiscountedPrice } from "../../utils/getDiscountedPrice";
 import Spinner from "../shared-components/spinner/Spinner";
 import StarIcon from '@material-ui/icons/Star';
 

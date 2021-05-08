@@ -4,20 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { LocalisationProvider } from "./providers/LocalisationProvider"
 import { DataProvider } from './providers/DataProvider';
 import { ToastProvider } from './pages/shared-components/Toast/ToastProvider';
 import { AuthProvider } from './providers/AuthProvider'
 
 ReactDOM.render(
-  <DataProvider>
-    <ToastProvider>
-      <Router>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </Router>
-    </ToastProvider>
-  </DataProvider>,
+  <LocalisationProvider>
+    <DataProvider>
+      <ToastProvider>
+        <Router>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </Router>
+      </ToastProvider>
+    </DataProvider>
+  </LocalisationProvider>,
   document.getElementById('root')
 );
 

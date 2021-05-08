@@ -7,7 +7,6 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 const Carousel = () => {
     const carouselRef = useRef(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    console.log(currentImageIndex);
 
     const styles = {
         backgroundImage: `url(${CarouselData[currentImageIndex]})`,

@@ -1,5 +1,5 @@
 import { useData } from "../../../../providers/DataProvider";
-import { getDiscountedPrice } from "../../../../utils";
+import { getDiscountedPrice } from "../../../../utils/getDiscountedPrice";
 
 const calculateCartTotal = (cart) => {
     return cart.reduce((acc, curr) => {

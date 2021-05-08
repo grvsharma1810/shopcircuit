@@ -1,4 +1,4 @@
-import { getDiscountedPrice } from "../../../utils";
+import { getDiscountedPrice } from "../../../utils/getDiscountedPrice";
 
 export const Price = ({ price, discount }) => {
     return (

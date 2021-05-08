@@ -5,6 +5,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { useLocalisation } from "../../../providers/LocalisationProvider";
+import { SET_LANGUAGE } from "../../../reducers/localisation-reducer";
 
 const ListItem = ({ icon, title, children, active = false, ...rest }) => {
     const [subItemActive, setSubItemActive] = useState(active);
@@ -38,6 +40,8 @@ const SubListItem = ({ children, ...rest }) => {
 
 const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
     const navigate = useNavigate();
+    const { localisationState, localisationDispatch } = useLocalisation();
+    console.log(localisationState);
 
     return (
         <>
@@ -47,7 +51,7 @@ const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
                 ref={backdropRef}
             >
                 <div
-                    onClick={(event) => {                        
+                    onClick={(event) => {
                         event.stopPropagation();
                     }}
                     className="sidebar"
@@ -66,8 +70,28 @@ const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
                         title="Chose Language"
                         active={true}
                     >
-                        <SubListItem>English</SubListItem>
-                        <SubListItem>Hindi</SubListItem>
+                        <SubListItem
+                            onClick={(event) => {
+                                localisationDispatch({
+                                    type: SET_LANGUAGE,
+                                    payload: { language: "English" },
+                                });
+                                closeSidebar(event);
+                            }}
+                        >
+                            English
+                        </SubListItem>
+                        <SubListItem
+                            onClick={(event) => {
+                                localisationDispatch({
+                                    type: SET_LANGUAGE,
+                                    payload: { language: "Hindi" },
+                                });
+                                closeSidebar(event);
+                            }}
+                        >
+                            Hindi
+                        </SubListItem>
                     </ListItem>
                     <ListItem
                         onClick={(event) => {
