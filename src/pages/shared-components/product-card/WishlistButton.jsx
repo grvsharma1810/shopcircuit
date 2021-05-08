@@ -5,7 +5,7 @@ import { useAuth } from "../../../providers/AuthProvider";
 import {
     ADD_TO_WISHLIST,
     REMOVE_FROM_WISHLIST,
-} from "../../../providers/data-reducer";
+} from "../../../reducers/data-reducer";
 import { getWishlistItem, isProductInWishlist } from "./ProductCard";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 

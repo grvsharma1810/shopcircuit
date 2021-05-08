@@ -2,7 +2,7 @@ import { createContext, useState, useContext, useEffect } from 'react';
 import { useData } from './DataProvider'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAxios } from './AxiosProvider'
-import { SET_CART, SET_WISHLIST } from './data-reducer';
+import { SET_CART, SET_WISHLIST } from '../reducers/data-reducer';
 
 const AuthContext = createContext(null);
 

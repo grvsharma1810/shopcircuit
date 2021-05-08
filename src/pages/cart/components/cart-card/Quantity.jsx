@@ -5,7 +5,7 @@ import { useAuth } from "../../../../providers/AuthProvider";
 import {
     INCREASE_QUANTITY_IN_CART,
     DECREASE_QUANTITY_IN_CART
-} from "../../../../providers/data-reducer";
+} from "../../../../reducers/data-reducer";
 
 export const Quantity = ({ quantity, cartItem }) => {
     const { postData } = useAxios();

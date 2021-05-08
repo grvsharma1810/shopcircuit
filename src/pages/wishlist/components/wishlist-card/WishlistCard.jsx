@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { REMOVE_FROM_WISHLIST } from "../../../../providers/data-reducer";
+import { REMOVE_FROM_WISHLIST } from "../../../../reducers/data-reducer";
 import { useData } from "../../../../providers/DataProvider";
 import { useAxios } from "../../../../providers/AxiosProvider";
 import { useAuth } from "../../../../providers/AuthProvider";

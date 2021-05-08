@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAxios } from "../../../../providers/AxiosProvider";
 import { useData } from "../../../../providers/DataProvider";
 import { useAuth } from "../../../../providers/AuthProvider";
-import { REMOVE_FROM_CART } from "../../../../providers/data-reducer";
+import { REMOVE_FROM_CART } from "../../../../reducers/data-reducer";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 export const RemoveFromCartButton = ({ cartItem }) => {

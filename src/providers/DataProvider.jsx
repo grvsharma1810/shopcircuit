@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useEffect, useState } from 'react'
 import { useAxios } from './AxiosProvider';
-import { dataReducer, SET_PRODUCTS } from './data-reducer'
+import { dataReducer, SET_PRODUCTS } from '../reducers/data-reducer'
 
 const DataContext = createContext({})
 

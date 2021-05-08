@@ -29,7 +29,7 @@ const Navbar = ({ openSidebar }) => {
                 {!productPath.test(pathName) && (
                     <div className="brand">
                         <button
-                            onClick={() => openSidebar()}
+                            onClick={openSidebar}
                             className="btn-solid"
                         >
                             <MenuIcon />

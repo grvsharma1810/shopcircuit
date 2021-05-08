@@ -30,6 +30,7 @@ function App() {
   };
 
   const openSidebar = (event) => {
+    event.stopPropagation();
     backdropRef.current.style.visibility = "visible";
     sidebarRef.current.style.left = "0";
   };

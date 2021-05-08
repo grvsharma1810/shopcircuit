@@ -1,23 +1,44 @@
 import "./sidebar.css";
-import { forwardRef, useEffect, useRef } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-const ListItem = ({ icon, title }) => {
+const ListItem = ({ icon, title, children, active = false, ...rest }) => {
+    const [subItemActive, setSubItemActive] = useState(active);
     return (
-        <li
-            style={{ display: "flex", alignItems: "center" }}
-            class="list-item list-item-action p-1 flex-gap-1"
-        >
-            {icon}
-            <div class="text-heading-medium">{title}</div>
-        </li>
+        <>
+            <div
+                onClick={() => setSubItemActive((value) => !value)}
+                style={{ display: "flex", alignItems: "center" }}
+                class="list-item-action p-1 flex-gap-1"
+                {...rest}
+            >
+                {icon}
+                <div class="text-heading-medium">{title}</div>
+            </div>
+            {children && subItemActive && <div>{children}</div>}
+        </>
     );
 };
 
-const Sidebar = ({ closeSidebar, openSidebar, backdropRef, sidebarRef }) => {
+const SubListItem = ({ children, ...rest }) => {
+    return (
+        <div
+            style={{ padding: "0.25rem 0.25rem 0.25rem 5rem" }}
+            class="list-item-action"
+            {...rest}
+        >
+            {children}
+        </div>
+    );
+};
+
+const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
+    const navigate = useNavigate();
+
     return (
         <>
             <div
@@ -26,24 +47,44 @@ const Sidebar = ({ closeSidebar, openSidebar, backdropRef, sidebarRef }) => {
                 ref={backdropRef}
             >
                 <div
-                    onClick={(event) => {
+                    onClick={(event) => {                        
                         event.stopPropagation();
                     }}
                     className="sidebar"
                     ref={sidebarRef}
                 >
-                    <ul class="list-group">
-                        <ListItem
-                            icon={<AccountCircleIcon />}
-                            title="My Account"
-                        />
-                        <ListItem
-                            icon={<LanguageIcon />}
-                            title="Chose Language"
-                        />
-                        <ListItem icon={<ShoppingCartIcon />} title="My Cart" />
-                        <ListItem icon={<FavoriteIcon />} title="My Wishlist" />
-                    </ul>
+                    <ListItem
+                        onClick={(event) => {
+                            navigate("/account");
+                            closeSidebar(event);
+                        }}
+                        icon={<AccountCircleIcon />}
+                        title="My Account"
+                    />
+                    <ListItem
+                        icon={<LanguageIcon />}
+                        title="Chose Language"
+                        active={true}
+                    >
+                        <SubListItem>English</SubListItem>
+                        <SubListItem>Hindi</SubListItem>
+                    </ListItem>
+                    <ListItem
+                        onClick={(event) => {
+                            navigate("/cart");
+                            closeSidebar(event);
+                        }}
+                        icon={<ShoppingCartIcon />}
+                        title="My Cart"
+                    />
+                    <ListItem
+                        onClick={(event) => {
+                            navigate("/wishlist");
+                            closeSidebar(event);
+                        }}
+                        icon={<FavoriteIcon />}
+                        title="My Wishlist"
+                    />
                 </div>
             </div>
         </>
