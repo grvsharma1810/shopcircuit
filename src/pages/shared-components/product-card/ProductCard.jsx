@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
             <CardImage image={image} inStock={inStock} _id={product._id} />
             <WishlistButton product={product} />
             <div
-                onClick={() => navigate(`${product._id}`)}
+                onClick={() => navigate(`/products/${product._id}`)}
                 className="card-body bg-white"
             >
                 <Title name={name} fastDelivery={fastDelivery} />

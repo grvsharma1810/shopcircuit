@@ -1,6 +1,6 @@
 import "./products.css";
-import ProductListing from "./components/product-list/ProductList";
-import Sidebar from "./components/sidebar/Sidebar";
+import ProductListing from "./components/products-list/ProductList";
+import Sidebar from "./components/products-sidebar/ProductsSidebar";
 import { useData } from "../../providers/DataProvider";
 import { ProductsProvider } from "./ProductsProvider";
 import { useRef } from "react";

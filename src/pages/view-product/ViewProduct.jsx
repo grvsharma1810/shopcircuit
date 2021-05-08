@@ -52,7 +52,15 @@ const ViewProduct = () => {
                 <Spinner />
             ) : (
                 <div className="product-view">
-                    <img class="img" src={`${product.image}`} alt="" />
+                    <div
+                        className="p-1"
+                        style={{
+                            borderRadius: "1rem",
+                            border: "1px solid #D1D5DB",
+                        }}
+                    >
+                        <img className="img" src={`${product.image}`} alt="" />
+                    </div>
                     <div>
                         <div className="text-size-2">{product.name}</div>
                         <div
@@ -117,28 +125,29 @@ const ViewProduct = () => {
                             )}
                         </>
                         <>
-                            {product.inStock && !isProductInCart(cart, product) && (
-                                <>
-                                    {isModifyingCart && (
-                                        <button
-                                            className="btn-solid primary card-btn w-100"
-                                            disabled
-                                        >
-                                            <div className="small-spinner"></div>
-                                        </button>
-                                    )}
-                                    {!isModifyingCart && (
-                                        <button
-                                            className="btn-solid primary card-btn w-100"
-                                            onClick={() =>
-                                                handleAddToCart(product)
-                                            }
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    )}
-                                </>
-                            )}
+                            {product.inStock &&
+                                !isProductInCart(cart, product) && (
+                                    <>
+                                        {isModifyingCart && (
+                                            <button
+                                                className="btn-solid primary card-btn w-100"
+                                                disabled
+                                            >
+                                                <div className="small-spinner"></div>
+                                            </button>
+                                        )}
+                                        {!isModifyingCart && (
+                                            <button
+                                                className="btn-solid primary card-btn w-100"
+                                                onClick={() =>
+                                                    handleAddToCart(product)
+                                                }
+                                            >
+                                                Add To Cart
+                                            </button>
+                                        )}
+                                    </>
+                                )}
                             {isProductInCart(cart, product) && (
                                 <Link to="/cart">
                                     <button className="btn-solid bg-green-600 w-100">

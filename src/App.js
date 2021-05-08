@@ -15,6 +15,7 @@ import PrivateRoute from './pages/shared-components/PrivateRoute'
 import Spinner from './pages/shared-components/spinner/Spinner';
 
 import { useData } from './providers/DataProvider'
+import Sidebar from './pages/shared-components/sidebar/Sidebar';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           </Routes>
         </div>
       }
+      <Sidebar />
     </>
   );
 }

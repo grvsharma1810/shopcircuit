@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { REMOVE_FROM_WISHLIST } from "../../../../providers/data-reducer";
 import { useData } from "../../../../providers/DataProvider";
 import { useAxios } from "../../../../providers/AxiosProvider";
@@ -8,6 +9,7 @@ import { Price } from "../../../shared-components/product-card/Price";
 import { CardImage } from "../../../shared-components/product-card/CardImage";
 
 export const WishlistCard = ({ wishlistItem }) => {
+    const navigate = useNavigate();
     const product = wishlistItem.product;
     const { name, image, price, fastDelivery, discount, inStock } = product;
 
@@ -15,7 +17,10 @@ export const WishlistCard = ({ wishlistItem }) => {
         <div className="v-card mb-1">
             <CardImage image={image} inStock={inStock} _id={product._id} />
             <RemoveFromWishlistButton wishlistItem={wishlistItem} />
-            <div className="card-body bg-white">
+            <div
+                onClick={() => navigate(`/products/${product._id}`)}
+                className="card-body bg-white"
+            >
                 <Title name={name} fastDelivery={fastDelivery} />
                 <Price price={price} discount={discount} />
             </div>

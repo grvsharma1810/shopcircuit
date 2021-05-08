@@ -1,5 +1,5 @@
 import React from "react";
-import "./sidebar.css";
+import "./products-sidebar.css";
 import { useProducts } from "../../ProductsProvider";
 import {
     SORT_BY_PRICE,
@@ -15,13 +15,13 @@ const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
-const Sidebar = ({ closeSidebar }, ref) => {
+const ProductsSidebar = ({ closeSidebar }, ref) => {
     const { productsState, productsDispatch } = useProducts();
     const query = useQuery();
     const categoryName = query.get("category");
 
     return (
-        <div className="sidebar" ref={ref}>
+        <div className="products-sidebar" ref={ref}>
             {categoryName && (
                 <div className="mb-1">
                     <h5
@@ -125,7 +125,7 @@ const Sidebar = ({ closeSidebar }, ref) => {
             </button>
             <button
                 onClick={() => closeSidebar()}
-                className="btn-solid secondary sidebar-close"
+                className="btn-solid secondary products-sidebar-close"
             >
                 X
             </button>
@@ -133,6 +133,6 @@ const Sidebar = ({ closeSidebar }, ref) => {
     );
 };
 
-const forwardedRefSidebar = React.forwardRef(Sidebar);
+const forwardedRefSidebar = React.forwardRef(ProductsSidebar);
 
 export default forwardedRefSidebar;

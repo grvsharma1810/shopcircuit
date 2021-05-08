@@ -25,10 +25,14 @@ const Navbar = () => {
             <nav className="navbar bg-primary">
                 {!productPath.test(pathName) && (
                     <div onClick={() => navigate("/")} className="brand">
+                        <button className="btn-solid">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
                         <img
                             className="brand-img mr-sm"
                             src={logo}
                             alt="SHOPCIRCUIT"
+                            style={{width:"3rem",height:"3rem"}}
                         />
                         <div
                             className="brand-title"
@@ -74,15 +78,7 @@ const Navbar = () => {
                                             {dataState.wishlist.length}
                                         </span>
                                     </button>
-                                </NavLink>
-                                <NavLink to="/account" style={linkStyle}>
-                                    <div className="ml-sm avatar-wrapper">
-                                        <img
-                                            src={userLogo}
-                                            className="avatar"
-                                        />
-                                    </div>
-                                </NavLink>
+                                </NavLink>                                
                             </>
                         ) : (
                             <button

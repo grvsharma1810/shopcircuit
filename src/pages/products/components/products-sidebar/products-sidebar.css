@@ -1,4 +1,4 @@
-.sidebar {
+.products-sidebar {
     position: fixed;
     width: 70%;
     left: -100%;
@@ -9,7 +9,7 @@
     transition: 0.5s ease;
 }
 
-.sidebar-close {
+.products-sidebar-close {
     position: absolute;
     top: 0;
     right: 0px;
@@ -17,14 +17,14 @@
 
 
 @media only screen and (min-width : 576px) {
-    .sidebar {
+    .products-sidebar {
         display: block;
         width: 20%;
         left: 0;
         padding: 1rem;
     }
 
-    .sidebar-close {
+    .products-sidebar-close {
         display: none;
     }
 }
