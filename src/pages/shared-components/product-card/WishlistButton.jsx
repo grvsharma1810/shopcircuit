@@ -4,9 +4,10 @@ import { useData } from "../../../providers/DataProvider";
 import { useAuth } from "../../../providers/AuthProvider";
 import {
     ADD_TO_WISHLIST,
-    REMOVE_FROM_WISHLIST
+    REMOVE_FROM_WISHLIST,
 } from "../../../providers/data-reducer";
 import { getWishlistItem, isProductInWishlist } from "./ProductCard";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 export const WishlistButton = ({ product }) => {
     const [isModifyingWishlist, setIsModifyingWishlist] = useState(false);
@@ -60,10 +61,7 @@ export const WishlistButton = ({ product }) => {
                     disabled={isModifyingWishlist}
                 >
                     {!isModifyingWishlist && (
-                        <i
-                            className="fa fa-heart text-failure text-grey-400"
-                            aria-hidden="true"
-                        ></i>
+                        <FavoriteIcon className="text-failure" />
                     )}
                     {isModifyingWishlist && (
                         <span className="small-spinner"></span>
@@ -76,10 +74,7 @@ export const WishlistButton = ({ product }) => {
                     disabled={isModifyingWishlist}
                 >
                     {!isModifyingWishlist && (
-                        <i
-                            className="fa fa-heart text-grey-400"
-                            aria-hidden="true"
-                        ></i>
+                        <FavoriteIcon className="text-grey-400" />
                     )}
                     {isModifyingWishlist && (
                         <span className="small-spinner"></span>

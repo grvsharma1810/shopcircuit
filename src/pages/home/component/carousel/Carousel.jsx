@@ -1,7 +1,8 @@
 import "./carousel.css";
 import { CarouselData } from "./carousel-data";
-
 import { useEffect, useState, useRef } from "react";
+import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const Carousel = () => {
     const carouselRef = useRef(null);
@@ -38,10 +39,10 @@ const Carousel = () => {
     return (
         <div className="carousel" style={styles} ref={carouselRef}>
             <div className={`carousel-arrow left`} onClick={previousSlide}>
-                <i className={`fa fa-caret-left`}></i>
+                <ArrowLeftIcon style={{ fontSize: "3rem" }} />
             </div>
             <div className={`carousel-arrow right`} onClick={nextSlide}>
-                <i className={`fa fa-caret-right`}></i>
+                <ArrowRightIcon style={{ fontSize: "3rem" }}/>
             </div>
         </div>
     );

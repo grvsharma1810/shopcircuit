@@ -7,6 +7,7 @@ import { useData } from "../../providers/DataProvider";
 import { ADD_TO_CART } from "../../providers/data-reducer";
 import { getDiscountedPrice } from "../../utils";
 import Spinner from "../shared-components/spinner/Spinner";
+import StarIcon from '@material-ui/icons/Star';
 
 const isProductInCart = (cart, product) => {
     console.log(cart, product);
@@ -71,7 +72,7 @@ const ViewProduct = () => {
                         >
                             <span className="rating bg-green-600 mr-1">
                                 <span>4.7 </span>
-                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <StarIcon/>
                             </span>
                             {product.fastDelivery && (
                                 <span
@@ -152,7 +153,6 @@ const ViewProduct = () => {
                                 <Link to="/cart">
                                     <button className="btn-solid bg-green-600 w-100">
                                         <span>Go To Cart </span>
-                                        <i className="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </Link>
                             )}

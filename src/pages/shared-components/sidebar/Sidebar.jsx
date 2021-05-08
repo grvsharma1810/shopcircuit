@@ -1,24 +1,27 @@
 import "./sidebar.css";
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import LanguageIcon from "@material-ui/icons/Language";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
-const Sidebar = ({}) => {
-    const backdropRef = useRef(null);
-    const sidebarRef = useRef(null);
+const ListItem = ({ icon, title }) => {
+    return (
+        <li
+            style={{ display: "flex", alignItems: "center" }}
+            class="list-item list-item-action p-1 flex-gap-1"
+        >
+            {icon}
+            <div class="text-heading-medium">{title}</div>
+        </li>
+    );
+};
 
-    const handleClose = (event) => {
-        event.stopPropagation();
-        sidebarRef.current.style.left = "-100%";
-        backdropRef.current.style.visibility = "hidden";
-    };
-
-    useEffect(() => {
-        // sidebarRef.current.pointerEvents = "none";
-    });
-
+const Sidebar = ({ closeSidebar, openSidebar, backdropRef, sidebarRef }) => {
     return (
         <>
             <div
-                onClick={(event) => handleClose(event)}
+                onClick={(event) => closeSidebar(event)}
                 className="backdrop"
                 ref={backdropRef}
             >
@@ -29,13 +32,18 @@ const Sidebar = ({}) => {
                     className="sidebar"
                     ref={sidebarRef}
                 >
-                    <span
-                        onClick={() => {
-                            console.log("SPAN CLICK");
-                        }}
-                    >
-                        lsjkdfhsdjf
-                    </span>
+                    <ul class="list-group">
+                        <ListItem
+                            icon={<AccountCircleIcon />}
+                            title="My Account"
+                        />
+                        <ListItem
+                            icon={<LanguageIcon />}
+                            title="Chose Language"
+                        />
+                        <ListItem icon={<ShoppingCartIcon />} title="My Cart" />
+                        <ListItem icon={<FavoriteIcon />} title="My Wishlist" />
+                    </ul>
                 </div>
             </div>
         </>

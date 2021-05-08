@@ -1,5 +1,5 @@
 import './App.css';
-
+import { useRef } from "react"
 import { Routes, Route } from 'react-router-dom';
 import Cart from './pages/cart/Cart';
 import Navbar from './pages/shared-components/navbar/Navbar';
@@ -18,9 +18,21 @@ import { useData } from './providers/DataProvider'
 import Sidebar from './pages/shared-components/sidebar/Sidebar';
 
 function App() {
-
+  const backdropRef = useRef(null);
+  const sidebarRef = useRef(null);
   const { isInitialAppDataLoading, dataState } = useData();
   console.log({ dataState });
+
+  const closeSidebar = (event) => {
+    event.stopPropagation();
+    sidebarRef.current.style.left = "-100%";
+    backdropRef.current.style.visibility = "hidden";
+  };
+
+  const openSidebar = (event) => {
+    backdropRef.current.style.visibility = "visible";
+    sidebarRef.current.style.left = "0";
+  };
 
   return (
     <>
@@ -28,7 +40,7 @@ function App() {
       {
         !isInitialAppDataLoading &&
         <div className="App">
-          <Navbar />
+          <Navbar openSidebar={openSidebar} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
@@ -42,7 +54,7 @@ function App() {
           </Routes>
         </div>
       }
-      <Sidebar />
+      <Sidebar closeSidebar={closeSidebar} sidebarRef={sidebarRef} backdropRef={backdropRef} />
     </>
   );
 }

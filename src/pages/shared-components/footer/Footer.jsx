@@ -1,4 +1,7 @@
 import "./footer.css";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import InstagramIcon from "@material-ui/icons/Instagram";
 
 const Footer = () => {
     return (
@@ -9,19 +12,19 @@ const Footer = () => {
                     class="btn-solid"
                     href="https://www.linkedin.com/in/gaurav-kr-sharma/"
                 >
-                    <i class="fa fa-linkedin"></i>
+                    <LinkedInIcon />
                 </a>
                 <a
                     class="btn-solid"
                     href="https://www.twitter.com/in/sharma_codes/"
                 >
-                    <i class="fa fa-twitter"></i>
+                    <TwitterIcon />
                 </a>
                 <a
                     class="btn-solid"
                     href="https://www.instagram.com/be_a_sharma/"
                 >
-                    <i class="fa fa-instagram"></i>
+                    <InstagramIcon />
                 </a>
             </div>
             <div>&#169; 2021 ShopCircuit.netlify.app</div>

@@ -7,6 +7,7 @@ import { useAuth } from "../../../../providers/AuthProvider";
 import { Title } from "../../../shared-components/product-card/Title";
 import { Price } from "../../../shared-components/product-card/Price";
 import { CardImage } from "../../../shared-components/product-card/CardImage";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export const WishlistCard = ({ wishlistItem }) => {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ const RemoveFromWishlistButton = ({ wishlistItem }) => {
             disabled={isDeletingWishlistItem}
         >
             {!isDeletingWishlistItem && (
-                <i className="fa fa-trash text-failure text-size-1"></i>
+                <DeleteIcon className="text-failure"/>
             )}
             {isDeletingWishlistItem && <div className="small-spinner"></div>}
         </button>

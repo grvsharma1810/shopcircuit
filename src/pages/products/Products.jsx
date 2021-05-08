@@ -5,6 +5,7 @@ import { useData } from "../../providers/DataProvider";
 import { ProductsProvider } from "./ProductsProvider";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
+import SortIcon from "@material-ui/icons/Sort";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -48,7 +49,7 @@ const Products = () => {
                 onClick={() => openSidebar()}
                 className="btn-floating-action primary sort-filter"
             >
-                <i className="fa fa-filter"></i>
+                <SortIcon />
             </button>
         </ProductsProvider>
     );
