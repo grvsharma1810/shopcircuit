@@ -5,6 +5,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LanguageIcon from "@material-ui/icons/Language";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import AppsIcon from '@material-ui/icons/Apps';
 import { useLocalisation } from "../../../providers/LocalisationProvider";
 import { languageList } from "../../../data/language-data";
 import { getLanguageLabel } from "../../../utils/getLanguageLabel";
@@ -116,7 +117,7 @@ const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
                             navigate("/products");
                             closeSidebar(event);
                         }}
-                        icon={<FavoriteIcon />}
+                        icon={<AppsIcon />}
                         title={getLanguageLabel("all_products", languageIndex)}
                     />
                 </div>

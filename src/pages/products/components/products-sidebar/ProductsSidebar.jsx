@@ -17,7 +17,7 @@ const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
-const ProductsSidebar = ({ closeSidebar }, ref) => {
+const ProductsSidebar = ({},ref) => {
     const {
         localisationState: { languageIndex },
     } = useLocalisation();
@@ -144,13 +144,7 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
             >
                 {" "}
                 {getLanguageLabel("clear_filters", languageIndex)}
-            </button>
-            <button
-                onClick={() => closeSidebar()}
-                className="btn-solid secondary products-sidebar-close"
-            >
-                X
-            </button>
+            </button>            
         </div>
     );
 };
