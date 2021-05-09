@@ -1,8 +1,11 @@
 import "./sign-up.css";
+import {getLanguageLabel} from "../../utils/getLanguageLabel"
+import {useLocalisation} from "../../providers/LocalisationProvider"
 import { useAuth } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+    const {localisationState:{ languageIndex }} = useLocalisation();
     const { signup, isLoading } = useAuth();
     const navigate = useNavigate();
 
@@ -29,74 +32,74 @@ const SignUp = () => {
                 >
                     <div className="form-row">
                         <p className="form-field">
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="name">{getLanguageLabel("name",languageIndex)}</label>
                             <input
                                 id="name"
                                 type="text"
-                                placeholder="Name"
+                                placeholder={getLanguageLabel("name",languageIndex)}
                                 name="name"
                                 required
                             />
                             <span className="error-msg">
-                                Please enter valid name
+                                {getLanguageLabel("please_enter_valid_name",languageIndex)}
                             </span>
-                            <span className="success-msg">Looks Good</span>
+                            <span className="success-msg">{getLanguageLabel("valid",languageIndex)}</span>
                         </p>
                     </div>
                     <div className="form-row">
                         <p className="form-field">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email">{getLanguageLabel("email",languageIndex)}</label>
                             <input
                                 id="email"
                                 type="email"
-                                placeholder="Email"
+                                placeholder={getLanguageLabel("email",languageIndex)}
                                 name="email"
                                 required
                             />
                             <span className="error-msg">
-                                Please enter valid email
+                                {getLanguageLabel("please_enter_valid_email",languageIndex)}
                             </span>
-                            <span className="success-msg">Looks Good</span>
+                            <span className="success-msg">{getLanguageLabel("valid",languageIndex)}</span>
                         </p>
                     </div>
                     <div className="form-row">
                         <p className="form-field">
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password">{getLanguageLabel("password",languageIndex)}</label>
                             <input
                                 id="password"
                                 type="password"
-                                placeholder="Password"
+                                placeholder={getLanguageLabel("password",languageIndex)}
                                 autoComplete="true"
                                 required
                             />
                             <span className="error-msg">
-                                Please enter valid password
+                            {getLanguageLabel("please_enter_valid_password",languageIndex)}
                             </span>
-                            <span className="success-msg">Looks Good</span>
+                            <span className="success-msg">{getLanguageLabel("valid",languageIndex)}</span>
                         </p>
                     </div>
                     <div>
                         {!isLoading && (
                             <button className="btn-solid primary">
-                                Sign Up
+                                {getLanguageLabel("sign_up",languageIndex)}
                             </button>
                         )}
                         {isLoading && (
                             <button className="btn-solid secondary">
-                                Signing Up...
+                                {getLanguageLabel("signing_up",languageIndex)}
                             </button>
                         )}
                     </div>
                 </form>
             </div>
             <div className="login-box text-center">
-                <p className="mb-1">Already have an account ?</p>
+                <p className="mb-1">{getLanguageLabel("already_have_an_account",languageIndex)} ?</p>
                 <button
                     type="button"
                     onClick={() => navigate("/login")}
                     className="btn-solid secondary w-100"
                 >
-                    Log In
+                    {getLanguageLabel("login",languageIndex)}
                 </button>
             </div>
         </>

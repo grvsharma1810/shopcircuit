@@ -6,7 +6,9 @@ import LanguageIcon from "@material-ui/icons/Language";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { useLocalisation } from "../../../providers/LocalisationProvider";
-import { SET_LANGUAGE } from "../../../reducers/localisation-reducer";
+import { languageList } from "../../../data/language-data";
+import { getLanguageLabel } from "../../../utils/getLanguageLabel";
+import { SET_LANGUAGE_INDEX } from "../../../reducers/localisation-reducer";
 
 const ListItem = ({ icon, title, children, active = false, ...rest }) => {
     const [subItemActive, setSubItemActive] = useState(active);
@@ -40,8 +42,10 @@ const SubListItem = ({ children, ...rest }) => {
 
 const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
     const navigate = useNavigate();
-    const { localisationState, localisationDispatch } = useLocalisation();
-    console.log(localisationState);
+    const {
+        localisationState: { languageIndex },
+        localisationDispatch,
+    } = useLocalisation();
 
     return (
         <>
@@ -63,35 +67,33 @@ const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
                             closeSidebar(event);
                         }}
                         icon={<AccountCircleIcon />}
-                        title="My Account"
+                        title={getLanguageLabel("my_account", languageIndex)}
                     />
                     <ListItem
                         icon={<LanguageIcon />}
                         title="Chose Language"
                         active={true}
                     >
-                        <SubListItem
-                            onClick={(event) => {
-                                localisationDispatch({
-                                    type: SET_LANGUAGE,
-                                    payload: { language: "English" },
-                                });
-                                closeSidebar(event);
-                            }}
-                        >
-                            English
-                        </SubListItem>
-                        <SubListItem
-                            onClick={(event) => {
-                                localisationDispatch({
-                                    type: SET_LANGUAGE,
-                                    payload: { language: "Hindi" },
-                                });
-                                closeSidebar(event);
-                            }}
-                        >
-                            Hindi
-                        </SubListItem>
+                        {languageList[languageIndex].map(
+                            (language, index) => {
+                                return (
+                                    <SubListItem
+                                        key={index}
+                                        onClick={(event) => {
+                                            localisationDispatch({
+                                                type: SET_LANGUAGE_INDEX,
+                                                payload: {
+                                                    languageIndex: index,
+                                                },
+                                            });
+                                            closeSidebar(event);
+                                        }}
+                                    >
+                                        {language}
+                                    </SubListItem>
+                                );
+                            }
+                        )}
                     </ListItem>
                     <ListItem
                         onClick={(event) => {
@@ -99,7 +101,7 @@ const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
                             closeSidebar(event);
                         }}
                         icon={<ShoppingCartIcon />}
-                        title="My Cart"
+                        title={getLanguageLabel("my_cart", languageIndex)}
                     />
                     <ListItem
                         onClick={(event) => {
@@ -107,7 +109,15 @@ const Sidebar = ({ closeSidebar, backdropRef, sidebarRef }) => {
                             closeSidebar(event);
                         }}
                         icon={<FavoriteIcon />}
-                        title="My Wishlist"
+                        title={getLanguageLabel("my_wishlist", languageIndex)}
+                    />
+                    <ListItem
+                        onClick={(event) => {
+                            navigate("/products");
+                            closeSidebar(event);
+                        }}
+                        icon={<FavoriteIcon />}
+                        title={getLanguageLabel("all_products", languageIndex)}
                     />
                 </div>
             </div>

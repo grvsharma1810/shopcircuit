@@ -1,6 +1,5 @@
 import React from "react";
 import "./products-sidebar.css";
-import { useProducts } from "../../ProductsProvider";
 import {
     SORT_BY_PRICE,
     INCLUDE_OUT_OF_STOCK,
@@ -9,6 +8,9 @@ import {
     LOW_TO_HIGH,
     CLEAR_FILTERS,
 } from "../../product-reducer";
+import { getLanguageLabel } from "../../../../utils/getLanguageLabel";
+import { useLocalisation } from "../../../../providers/LocalisationProvider";
+import { useProducts } from "../../ProductsProvider";
 import { useLocation } from "react-router-dom";
 
 const useQuery = () => {
@@ -16,6 +18,9 @@ const useQuery = () => {
 };
 
 const ProductsSidebar = ({ closeSidebar }, ref) => {
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
     const { productsState, productsDispatch } = useProducts();
     const query = useQuery();
     const categoryName = query.get("category");
@@ -28,12 +33,14 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
                         className="text-size-2"
                         style={{ marginBottom: "0.5rem" }}
                     >
-                        Category
+                        {getLanguageLabel("category", languageIndex)}
                     </h5>
                     <p>{categoryName}</p>
                 </div>
             )}
-            <h5 className="text-size-2 mb-1">Sort By</h5>
+            <h5 className="text-size-2 mb-1">
+                {getLanguageLabel("sort_by", languageIndex)}
+            </h5>
             <div className="form-row">
                 <p className="form-check mb-1">
                     <input
@@ -52,7 +59,10 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
                             })
                         }
                     />
-                    <label htmlFor="highToLow"> Price - High to Low</label>
+                    <label htmlFor="highToLow">
+                        {" "}
+                        {getLanguageLabel("price_high_to_low", languageIndex)}
+                    </label>
                 </p>
                 <p className="form-check">
                     <input
@@ -71,10 +81,15 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
                             })
                         }
                     />
-                    <label htmlFor="lowToHigh"> Price - Low to High</label>
+                    <label htmlFor="lowToHigh">
+                        {" "}
+                        {getLanguageLabel("price_low_to_high", languageIndex)}
+                    </label>
                 </p>
             </div>
-            <h5 className="text-size-2 mb-1 mt-1">Fliters</h5>
+            <h5 className="text-size-2 mb-1 mt-1">
+                {getLanguageLabel("filters", languageIndex)}
+            </h5>
             <div className="form-row">
                 <p className="form-check mb-1">
                     <input
@@ -90,7 +105,13 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
                             })
                         }
                     />
-                    <label htmlFor="outofstock"> Include Out Of Stock</label>
+                    <label htmlFor="outofstock">
+                        {" "}
+                        {getLanguageLabel(
+                            "include_out_of_stock",
+                            languageIndex
+                        )}
+                    </label>
                 </p>
                 <p className="form-check">
                     <input
@@ -108,7 +129,7 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
                     />
                     <label htmlFor="fastdeliveryonly">
                         {" "}
-                        Fast Delivery Only
+                        {getLanguageLabel("fast_delivery_only", languageIndex)}
                     </label>
                 </p>
             </div>
@@ -121,7 +142,8 @@ const ProductsSidebar = ({ closeSidebar }, ref) => {
                     })
                 }
             >
-                Clear Filters
+                {" "}
+                {getLanguageLabel("clear_filters", languageIndex)}
             </button>
             <button
                 onClick={() => closeSidebar()}

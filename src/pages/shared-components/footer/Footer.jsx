@@ -2,11 +2,17 @@ import "./footer.css";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import { getLanguageLabel } from "../../../utils/getLanguageLabel";
+import { useLocalisation } from "../../../providers/LocalisationProvider";
 
 const Footer = () => {
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
+
     return (
         <footer className="footer p-1 text-center">
-            <div>Contact With Us</div>
+            <div>{getLanguageLabel("connect_with_us",languageIndex)}</div>
             <div>
                 <a
                     class="btn-solid"

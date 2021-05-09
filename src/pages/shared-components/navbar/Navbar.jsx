@@ -3,13 +3,18 @@ import logo from "./logo.png";
 import { NavLink } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../providers/AuthProvider";
+import { useLocalisation } from "../../../providers/LocalisationProvider";
 import { useData } from "../../../providers/DataProvider";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MenuIcon from "@material-ui/icons/Menu";
+import { getLanguageLabel } from "../../../utils/getLanguageLabel";
 
 const Navbar = ({ openSidebar }) => {
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
     const navigate = useNavigate();
     const { loggedInUser } = useAuth();
     const { dataState } = useData();
@@ -28,10 +33,7 @@ const Navbar = ({ openSidebar }) => {
             <nav className="navbar bg-primary">
                 {!productPath.test(pathName) && (
                     <div className="brand">
-                        <button
-                            onClick={openSidebar}
-                            className="btn-solid"
-                        >
+                        <button onClick={openSidebar} className="btn-solid">
                             <MenuIcon />
                         </button>
                         <img
@@ -84,7 +86,7 @@ const Navbar = ({ openSidebar }) => {
                                 className="btn-solid"
                                 onClick={() => navigate("/login")}
                             >
-                                Login
+                                {getLanguageLabel("login", languageIndex)}
                             </button>
                         )}
                     </ul>

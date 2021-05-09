@@ -1,5 +1,5 @@
 import { languageData } from "../data/language-data"
 
-export const getLanguageLabel = (labelName, language) => {
-    return languageData[language].labels[labelName];
+export const getLanguageLabel = (labelName, languageIndex) => {
+    return languageData[languageIndex].labels[labelName];
 }

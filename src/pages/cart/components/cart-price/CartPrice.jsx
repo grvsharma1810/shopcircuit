@@ -1,5 +1,6 @@
 import { useData } from "../../../../providers/DataProvider";
-import { getDiscountedPrice } from "../../../../utils/getDiscountedPrice";
+import {getLanguageLabel} from "../../../../utils/getLanguageLabel"
+import {useLocalisation} from "../../../../providers/LocalisationProvider"
 
 const calculateCartTotal = (cart) => {
     return cart.reduce((acc, curr) => {
@@ -20,34 +21,35 @@ const calculateCartTotalDiscount = (cart) => {
 };
 
 export const CartPrice = () => {
+    const {localisationState:{ languageIndex}} = useLocalisation();
     const { dataState } = useData();
     const cart = dataState.cart;
 
     return (
         <div className="flex flex-column">
             <div className="mt-1 flex space-btw">
-                <span>Grand Total</span>
+                <span>{getLanguageLabel("grand_total",languageIndex)}</span>
                 <span>₹ {calculateCartTotal(cart)}</span>
             </div>
             <div className="mt-1 flex space-btw">
-                <span>Discount</span>
+                <span>{getLanguageLabel("discount",languageIndex)}</span>
                 <span className="text-success">
                     - ₹ {calculateCartTotalDiscount(cart)}
                 </span>
             </div>
             <div className="mt-1 flex space-btw">
-                <span>Delivery Charges</span>
-                <span className="text-success">NONE</span>
+                <span>{getLanguageLabel("delivery_charges",languageIndex)}</span>
+                <span className="text-success">{getLanguageLabel("none",languageIndex)}</span>
             </div>
             <div className="text-size-2 text-heading-bold mt-1 flex space-btw">
-                <span>Total</span>
+                <span>{getLanguageLabel("total",languageIndex)}</span>
                 <span>
                 ₹ {calculateCartTotal(cart) -
                         calculateCartTotalDiscount(cart)}
                 </span>
             </div>
             <button className="btn-solid primary mt-1">
-                Proceed To Checkout{" "}
+            {getLanguageLabel("proceed_to_checkout",languageIndex)}{" "}
                 <span className="text-size-sm">(Coming Soon)</span>
             </button>
         </div>

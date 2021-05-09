@@ -1,9 +1,15 @@
 import "./my-account.css";
 import maleAvatar from "./male-avatar.svg";
+import { getLanguageLabel } from "../../utils/getLanguageLabel";
+import { useLocalisation } from "../../providers/LocalisationProvider";
 import { useAuth } from "../../providers/AuthProvider";
 
 const MyAccount = () => {
     const { loggedInUser, signOut } = useAuth();
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
+
     return (
         <>
             <div className="box flex flex-column v-center">
@@ -23,7 +29,7 @@ const MyAccount = () => {
                     onClick={() => signOut()}
                     className="btn-solid primary mt-1"
                 >
-                    Log Out
+                    {getLanguageLabel("log_out", languageIndex)}
                 </button>
             </div>
         </>

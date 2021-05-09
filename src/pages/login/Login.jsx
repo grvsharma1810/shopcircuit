@@ -1,10 +1,13 @@
 import "./login.css";
+import { getLanguageLabel } from "../../utils/getLanguageLabel";
+import { useLocalisation } from "../../providers/LocalisationProvider";
 import { useAuth } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { login, isLoading } = useAuth();
     const navigate = useNavigate();
+    const {localisationState:{ languageIndex }} = useLocalisation();
 
     const formSubmit = async (event) => {
         event.preventDefault();
@@ -28,60 +31,59 @@ const Login = () => {
                 >
                     <div className="form-row">
                         <p className="form-field">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email">{getLanguageLabel("email",languageIndex)}</label>
                             <input
                                 id="email"
                                 type="email"
-                                placeholder="Email"
+                                placeholder={getLanguageLabel("email",languageIndex)}
                                 name="email"
                                 required
                             />
                             <span className="error-msg">
-                                Please enter valid email
+                            {getLanguageLabel("please_enter_valid_email",languageIndex)}
                             </span>
-                            <span className="success-msg">Looks Good</span>
+                            <span className="success-msg">{getLanguageLabel("valid",languageIndex)}</span>
                         </p>
                     </div>
                     <div className="form-row">
                         <p className="form-field">
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password">{getLanguageLabel("password",languageIndex)}</label>
                             <input
                                 id="password"
                                 type="password"
-                                placeholder="Password"
+                                placeholder={getLanguageLabel("password",languageIndex)}
                                 autoComplete="true"
                                 required
                             />
                             <span className="error-msg">
-                                Please enter valid password
+                            {getLanguageLabel("please_enter_valid_password",languageIndex)}
                             </span>
-                            <span className="success-msg">Looks Good</span>
+                            <span className="success-msg">{getLanguageLabel("valid",languageIndex)}</span>
                         </p>
                     </div>
                     <div>
                         {!isLoading && (
-                            <button className="btn-solid primary">Login</button>
+                            <button className="btn-solid primary">{getLanguageLabel("login",languageIndex)}</button>
                         )}
                         {isLoading && (
                             <button className="btn-solid secondary">
-                                Validating Inputs...
+                                {getLanguageLabel("validating_inputs",languageIndex)}
                             </button>
                         )}
                         <p className="mt-1" style={{ fontSize: "0.75rem" }}>
-                            By continuing, you agree to ShopCircuit's Conditions
-                            of Use and Privacy Notice.
+                        {getLanguageLabel("privacy_statement",languageIndex)}
                         </p>
                     </div>
                 </form>
             </div>
             <div className="login-box text-center">
-                <p className="mb-1">New to ShopCircuit ?</p>
+                <p className="mb-1">{getLanguageLabel("new_to_shopcircuit",languageIndex)} ?</p>
                 <button
                     type="button"
                     onClick={() => navigate("/signup")}
                     className="btn-solid secondary w-100"
                 >
-                    Create account
+                    {getLanguageLabel("create_account",languageIndex)}
                 </button>
             </div>
         </>

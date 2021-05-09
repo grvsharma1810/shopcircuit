@@ -8,9 +8,9 @@ import { getLanguageLabel } from "../../utils/getLanguageLabel";
 const Cart = () => {
     const { dataState } = useData();
     const {
-        localisationState: { language },
+        localisationState: { languageIndex },
     } = useLocalisation();
-    console.log({ language });
+    console.log({ languageIndex });
     const cart = dataState.cart ? dataState.cart : [];
 
     return (
@@ -20,7 +20,7 @@ const Cart = () => {
                     <div>
                         <h4 className="text-size-2 text-heading-medium mb-1">
                             <span>
-                                {getLanguageLabel("my_cart", language)}{" "}
+                                {getLanguageLabel("my_cart", languageIndex)}{" "}
                             </span>
                             <span>({cart.length})</span>
                         </h4>
@@ -37,7 +37,7 @@ const Cart = () => {
                     </div>
                     <div className="cart-price">
                         <h4 className="text-size-2 text-heading-medium">
-                            PRICE DETAILS
+                            {getLanguageLabel("price_details", languageIndex)}
                         </h4>
                         <CartPrice />
                     </div>
@@ -46,7 +46,7 @@ const Cart = () => {
             {cart.length === 0 && (
                 <div className="flex h-center p-1">
                     <p className="text-heading-medium text-size-3">
-                        Your Cart Is Empty. Please Add Something In Cart.
+                        {getLanguageLabel("your_cart_is_empty", languageIndex)}
                     </p>
                 </div>
             )}

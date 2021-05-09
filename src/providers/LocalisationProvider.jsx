@@ -5,7 +5,7 @@ const LocalisationContext = createContext({});
 
 export const LocalisationProvider = ({ children }) => {
     const [state, dispatch] = useReducer(localisationReducer, {
-        language: "English",
+        languageIndex: 0,   // 0 is English by default
     });
 
     return (

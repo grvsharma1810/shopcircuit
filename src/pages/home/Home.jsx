@@ -2,10 +2,15 @@ import "./home.css";
 import Carousel from "./component/carousel/Carousel";
 import Categories from "./component/categories/Categories";
 import Footer from "../shared-components/footer/Footer";
+import { getLanguageLabel } from "../../utils/getLanguageLabel";
 import { useNavigate } from "react-router-dom";
+import { useLocalisation } from "../../providers/LocalisationProvider";
 
 const Home = () => {
     const navigate = useNavigate();
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
 
     return (
         <>
@@ -13,14 +18,13 @@ const Home = () => {
             <Carousel />
             <div className="text-center">
                 <p className="text-size-3 bg-secondary p-1">
-                    Get all your music related products here at one place to
-                    create beautiful beats.
+                    {getLanguageLabel("get_all_your_music_related",languageIndex)}
                 </p>
                 <button
                     onClick={() => navigate("/products")}
                     className="btn-solid bg-red-800 large m-1"
                 >
-                    Shop Now
+                    {getLanguageLabel("shop_now",languageIndex)}
                 </button>
             </div>
             <Footer />

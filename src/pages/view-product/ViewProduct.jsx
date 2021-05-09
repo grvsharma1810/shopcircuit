@@ -1,13 +1,15 @@
 import "./view-product.css";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useLocalisation } from "../../providers/LocalisationProvider";
 import { useAxios } from "../../providers/AxiosProvider";
 import { useAuth } from "../../providers/AuthProvider";
 import { useData } from "../../providers/DataProvider";
 import { ADD_TO_CART } from "../../reducers/data-reducer";
 import { getDiscountedPrice } from "../../utils/getDiscountedPrice";
+import { getLanguageLabel } from "../../utils/getLanguageLabel";
 import Spinner from "../shared-components/spinner/Spinner";
-import StarIcon from '@material-ui/icons/Star';
+import StarIcon from "@material-ui/icons/Star";
 
 const isProductInCart = (cart, product) => {
     console.log(cart, product);
@@ -15,6 +17,9 @@ const isProductInCart = (cart, product) => {
 };
 
 const ViewProduct = () => {
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
     const { productId } = useParams();
     const { loggedInUser } = useAuth();
     const { dataState, dataDispatch } = useData();
@@ -72,14 +77,17 @@ const ViewProduct = () => {
                         >
                             <span className="rating bg-green-600 mr-1">
                                 <span>4.7 </span>
-                                <StarIcon/>
+                                <StarIcon />
                             </span>
                             {product.fastDelivery && (
                                 <span
                                     className="badge-pill bg-green-100"
                                     style={{ display: "inline-block" }}
                                 >
-                                    Fast Delivery
+                                    {getLanguageLabel(
+                                        "fast_delivery",
+                                        languageIndex
+                                    )}
                                 </span>
                             )}
                         </div>
@@ -103,7 +111,8 @@ const ViewProduct = () => {
                                     </span>
 
                                     <span className="text-success text-heading-bold">
-                                        {product.discount}% OFF
+                                        {product.discount}% &nbsp;
+                                        {getLanguageLabel("off", languageIndex)}
                                     </span>
                                 </>
                             )}
@@ -121,7 +130,10 @@ const ViewProduct = () => {
                                     className="btn-solid secondary w-100"
                                     disabled
                                 >
-                                    OUT OF STOCK
+                                    {getLanguageLabel(
+                                        "out_of_stock",
+                                        languageIndex
+                                    )}
                                 </button>
                             )}
                         </>
@@ -144,7 +156,10 @@ const ViewProduct = () => {
                                                     handleAddToCart(product)
                                                 }
                                             >
-                                                Add To Cart
+                                                {getLanguageLabel(
+                                                    "add_to_cart",
+                                                    languageIndex
+                                                )}
                                             </button>
                                         )}
                                     </>
@@ -152,7 +167,12 @@ const ViewProduct = () => {
                             {isProductInCart(cart, product) && (
                                 <Link to="/cart">
                                     <button className="btn-solid bg-green-600 w-100">
-                                        <span>Go To Cart </span>
+                                        <span>
+                                            {getLanguageLabel(
+                                                "go_to_cart",
+                                                languageIndex
+                                            )}
+                                        </span>
                                     </button>
                                 </Link>
                             )}

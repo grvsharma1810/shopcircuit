@@ -1,4 +1,6 @@
 import ProductCard from "../../../shared-components/product-card/ProductCard";
+import { getLanguageLabel } from "../../../../utils/getLanguageLabel";
+import { useLocalisation } from "../../../../providers/LocalisationProvider";
 import { useProducts } from "../../ProductsProvider";
 import {
     SORT_BY_PRICE,
@@ -44,7 +46,10 @@ const getFilteredProducts = (
 };
 
 const ProductListing = ({ products }) => {
-    const { productsState, productsDispatch } = useProducts();    
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
+    const { productsState, productsDispatch } = useProducts();
     const sortedProducts = getProductsSortedByPrice(
         products,
         productsState[SORT_BY_PRICE]
@@ -59,11 +64,16 @@ const ProductListing = ({ products }) => {
     return (
         <div>
             <p className="form-field mb-1">
-                <label htmlFor="search">Search For Products</label>
+                <label htmlFor="search">
+                    {getLanguageLabel("search_for_products", languageIndex)}
+                </label>
                 <input
                     id="search"
                     type="text"
-                    placeholder="Search Products"
+                    placeholder={getLanguageLabel(
+                        "search_for_products",
+                        languageIndex
+                    )}
                     name="searchInput"
                     onChange={(event) =>
                         productsDispatch({
@@ -74,8 +84,8 @@ const ProductListing = ({ products }) => {
                 />
             </p>
             <p>
-                Showing {filteredProducts.length} products out of{" "}
-                {products.length}
+                {getLanguageLabel("products_found", languageIndex)}{" "}
+                {filteredProducts.length}                
             </p>
             <div className="flex flex-row">
                 {filteredProducts.map((product) => {

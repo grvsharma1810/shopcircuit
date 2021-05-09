@@ -1,6 +1,12 @@
 import { getDiscountedPrice } from "../../../utils/getDiscountedPrice";
+import { getLanguageLabel } from "../../../utils/getLanguageLabel";
+import { useLocalisation } from "../../../providers/LocalisationProvider";
 
 export const Price = ({ price, discount }) => {
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
+
     return (
         <div>
             <span className="text-heading-bold mr-sm">
@@ -19,7 +25,7 @@ export const Price = ({ price, discount }) => {
                     </span>
 
                     <span className="text-success text-heading-bold">
-                        {discount}% OFF
+                        {discount}% {getLanguageLabel("off", languageIndex)}
                     </span>
                 </>
             )}

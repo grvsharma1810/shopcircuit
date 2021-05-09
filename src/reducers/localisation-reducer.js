@@ -1,11 +1,11 @@
-export const SET_LANGUAGE = 'setLanguage';
+export const SET_LANGUAGE_INDEX = 'setLanguageIndex';
 
 export const localisationReducer = (state, { type, payload }) => {
     switch (type) {
-        case SET_LANGUAGE:
+        case SET_LANGUAGE_INDEX:
             return {
                 ...state,
-                language: payload.language
+                languageIndex: payload.languageIndex
             }
     }
 }
