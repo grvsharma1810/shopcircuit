@@ -8,9 +8,9 @@ export const createWishlistItem = async (wishlistId, requestBody) => {
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            return [];
+            return null;
         }
         alert("Something Went Wrong");
-        return [];
+        return null;
     }
 }

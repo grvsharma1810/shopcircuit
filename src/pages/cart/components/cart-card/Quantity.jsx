@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { updateCartItem } from "../../../../services/updateCartItem";
 import { useData } from "../../../../providers/DataProvider";
-import { useAuth } from "../../../../providers/AuthProvider";
 import {
 	INCREASE_QUANTITY_IN_CART,
 	DECREASE_QUANTITY_IN_CART,
@@ -9,7 +8,6 @@ import {
 
 export const Quantity = ({ quantity, cartItem }) => {	
 	const { dataDispatch } = useData();
-	const { loggedInUser } = useAuth();
 
 	const [isIncreasingCartItemQuantity, setIncreasingCartItemQuantity] =
 		useState(false);

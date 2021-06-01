@@ -8,9 +8,9 @@ export const deleteWishlistItem = async (wishlistId, wishlistItemId) => {
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            return [];
+            return null;
         }
         alert("Something Went Wrong");
-        return [];
+        return null;
     }
 }

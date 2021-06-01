@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useData } from "../../../../providers/DataProvider";
-import { useAuth } from "../../../../providers/AuthProvider";
 import { REMOVE_FROM_CART } from "../../../../reducers/data-reducer";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { deleteCartItem } from "../../../../services/deleteCartItem";
@@ -8,7 +7,6 @@ import { deleteCartItem } from "../../../../services/deleteCartItem";
 export const RemoveFromCartButton = ({ cartItem }) => {
     const [isDeletingCartItem, setisDeletingCartItem] = useState(false);
     const { dataDispatch } = useData();
-    const { loggedInUser } = useAuth();    
 
     const handleRemoveFromCart = async () => {
         setisDeletingCartItem(true);

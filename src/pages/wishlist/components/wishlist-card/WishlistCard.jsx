@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { REMOVE_FROM_WISHLIST } from "../../../../reducers/data-reducer";
 import { useData } from "../../../../providers/DataProvider";
-import { useAuth } from "../../../../providers/AuthProvider";
 import { Title } from "../../../shared-components/product-card/Title";
 import { Price } from "../../../shared-components/product-card/Price";
 import { CardImage } from "../../../shared-components/product-card/CardImage";
@@ -31,7 +30,6 @@ export const WishlistCard = ({ wishlistItem }) => {
 
 const RemoveFromWishlistButton = ({ wishlistItem }) => {
     const { dataDispatch } = useData();
-    const { loggedInUser } = useAuth();    
     const [isDeletingWishlistItem, setisDeletingWishlistItem] = useState(false);
 
     const handleRemoveFromWishlist = async () => {
