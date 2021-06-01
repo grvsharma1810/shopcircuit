@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { REMOVE_FROM_WISHLIST } from "../../../../reducers/data-reducer";
 import { useData } from "../../../../providers/DataProvider";
-import { useAxios } from "../../../../providers/AxiosProvider";
 import { useAuth } from "../../../../providers/AuthProvider";
 import { Title } from "../../../shared-components/product-card/Title";
 import { Price } from "../../../shared-components/product-card/Price";
 import { CardImage } from "../../../shared-components/product-card/CardImage";
 import DeleteIcon from '@material-ui/icons/Delete';
+import { deleteWishlistItem } from "../../../../services/deleteWishlistItem";
 
 export const WishlistCard = ({ wishlistItem }) => {
     const navigate = useNavigate();
@@ -31,19 +31,16 @@ export const WishlistCard = ({ wishlistItem }) => {
 
 const RemoveFromWishlistButton = ({ wishlistItem }) => {
     const { dataDispatch } = useData();
-    const { loggedInUser } = useAuth();
-    const { deleteData } = useAxios();
+    const { loggedInUser } = useAuth();    
     const [isDeletingWishlistItem, setisDeletingWishlistItem] = useState(false);
 
     const handleRemoveFromWishlist = async () => {
         setisDeletingWishlistItem(true);
-        await deleteData(
-            `/users/${loggedInUser._id}/wishlist/${wishlistItem._id}`
-        );
+        await deleteWishlistItem(wishlistItem.wishlistId,wishlistItem._id);        
         setisDeletingWishlistItem(false);
         dataDispatch({
             type: REMOVE_FROM_WISHLIST,
-            payload: { product: wishlistItem },
+            payload: { wishlistItem },
         });
     };
 

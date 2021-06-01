@@ -32,37 +32,37 @@ export const dataReducer = (state, { type, payload }) => {
         case ADD_TO_CART:
             return {
                 ...state,
-                cart: state.cart.concat(payload.product)
+                cart: { ...state.cart, cartItems: state.cart.cartItems.concat(payload.cartItem) }
             }
 
         case ADD_TO_WISHLIST:
             return {
                 ...state,
-                wishlist: state.wishlist.concat(payload.product)
+                wishlist: { ...state.wishlist, wishlistItems: state.wishlist.wishlistItems.concat(payload.wishlistItem) }
             }
 
         case REMOVE_FROM_WISHLIST:
             return {
                 ...state,
-                wishlist: state.wishlist.filter(item => item._id !== payload.product._id)
+                wishlist: { ...state.wishlist, wishlistItems: state.wishlist.wishlistItems.filter(item => item._id !== payload.wishlistItem._id) }
             }
 
         case REMOVE_FROM_CART:
             return {
                 ...state,
-                cart: state.cart.filter(item => item._id !== payload.product._id)
+                cart: { ...state.cart, cartItems: state.cart.cartItems.filter(item => item._id !== payload.cartItem._id) }
             }
 
         case INCREASE_QUANTITY_IN_CART:
             return {
                 ...state,
-                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, quantity: item.quantity + 1 } : item)
+                cart: { ...state.cart, cartItems: state.cart.cartItems.map(item => item._id === payload.cartItem._id ? { ...item, quantity: item.quantity + 1 } : item) }
             }
 
         case DECREASE_QUANTITY_IN_CART:
             return {
                 ...state,
-                cart: state.cart.map(item => item._id === payload.product._id ? { ...item, quantity: item.quantity - 1 } : item)
+                cart: { ...state.cart, cartItems: state.cart.cartItems.map(item => item._id === payload.cartItem._id ? { ...item, quantity: item.quantity - 1 } : item) }
             }
 
         default:

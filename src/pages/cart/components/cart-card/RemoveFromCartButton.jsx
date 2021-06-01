@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { useAxios } from "../../../../providers/AxiosProvider";
 import { useData } from "../../../../providers/DataProvider";
 import { useAuth } from "../../../../providers/AuthProvider";
 import { REMOVE_FROM_CART } from "../../../../reducers/data-reducer";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { deleteCartItem } from "../../../../services/deleteCartItem";
 
 export const RemoveFromCartButton = ({ cartItem }) => {
     const [isDeletingCartItem, setisDeletingCartItem] = useState(false);
     const { dataDispatch } = useData();
-    const { loggedInUser } = useAuth();
-    const { deleteData } = useAxios();
+    const { loggedInUser } = useAuth();    
 
     const handleRemoveFromCart = async () => {
         setisDeletingCartItem(true);
-        await deleteData(`/users/${loggedInUser._id}/cart/${cartItem._id}`);
+        await deleteCartItem(cartItem.cartId,cartItem._id)        
         setisDeletingCartItem(false);
         dataDispatch({
             type: REMOVE_FROM_CART,
-            payload: { product: cartItem },
+            payload: { cartItem },
         });
     };
 

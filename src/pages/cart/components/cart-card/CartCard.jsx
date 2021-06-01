@@ -7,23 +7,20 @@ import { Quantity } from "./Quantity";
 import { RemoveFromCartButton } from "./RemoveFromCartButton";
 
 export const CartCard = ({ cartItem }) => {
-    const navigate = useNavigate();
-    const product = cartItem.product;
-    const quantity = cartItem.quantity;
-    const { name, image, price, fastDelivery, discount, inStock } = product;
+	const navigate = useNavigate();
+	const product = cartItem.product;
+	const quantity = cartItem.quantity;
+	const { name, image, price, fastDelivery, discount, inStock } = product;
 
-    return (
-        <div className="h-card">
-            <CardImage image={image} inStock={inStock} _id={product._id} />
-            <RemoveFromCartButton cartItem={cartItem} />
-            <div
-                onClick={() => navigate(`/products/${product._id}`)}
-                className="card-body bg-white"
-            >
-                <Title name={name} fastDelivery={fastDelivery} />
-                <Price price={price} discount={discount} />
-                <Quantity quantity={quantity} cartItem={cartItem} />
-            </div>
-        </div>
-    );
+	return (
+		<div className="h-card">
+			<CardImage image={image} inStock={inStock} _id={product._id} />
+			<RemoveFromCartButton cartItem={cartItem} />
+			<div className="card-body bg-white">
+				<Title name={name} fastDelivery={fastDelivery} />
+				<Price price={price} discount={discount} />
+				<Quantity quantity={quantity} cartItem={cartItem} />
+			</div>
+		</div>
+	);
 };
