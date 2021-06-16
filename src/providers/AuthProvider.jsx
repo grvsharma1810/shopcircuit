@@ -34,10 +34,10 @@ export const AuthProvider = ({ children }) => {
 			const localStorageData = JSON.parse(localStorage.getItem("user"));
 			if (localStorageData) {
 				setIsLoading(true);
-				setLoggedInUser(localStorageData.user);
+				setLoggedInUser(localStorageData);
 				setupAuthHeaderForServiceCalls(localStorageData.token);
 				setupAuthExceptionHandler(signOut, navigate);
-				await getAndSetUserData(localStorageData.user);
+				await getAndSetUserData(localStorageData);
 				setIsLoading(false);
 			}
 		})();
