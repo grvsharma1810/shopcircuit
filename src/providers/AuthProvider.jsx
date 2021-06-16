@@ -31,13 +31,13 @@ export const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		(async function () {
-			const user = JSON.parse(localStorage.getItem("user"));
-			if (user) {
+			const localStorageData = JSON.parse(localStorage.getItem("user"));
+			if (localStorageData) {
 				setIsLoading(true);
-				setLoggedInUser(user);
-				setupAuthHeaderForServiceCalls(user.token);
+				setLoggedInUser(localStorageData.user);
+				setupAuthHeaderForServiceCalls(localStorageData.token);
 				setupAuthExceptionHandler(signOut, navigate);
-				await getAndSetUserData(user);
+				await getAndSetUserData(localStorageData.user);
 				setIsLoading(false);
 			}
 		})();
@@ -53,11 +53,10 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	async function login(email, password) {
-		console.log({ email, password });
 		setIsLoading(true);
 		const { user, token } = await loginWithCredentials(email, password);
-		console.log(user, token);
 		setupAuthHeaderForServiceCalls(token);
+		setupAuthExceptionHandler(signOut, navigate);
 		await getAndSetUserData(user);
 		setLoggedInUser(user);
 		localStorage.setItem(

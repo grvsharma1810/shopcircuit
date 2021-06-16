@@ -6,7 +6,6 @@ export const setupAuthExceptionHandler = (signOutUser, navigate) => {
         (response) => response,
         (error) => {
             if (error?.response?.status === UNAUTHORIZED) {
-                console.log("here");
                 signOutUser();
                 navigate("login");
             }
