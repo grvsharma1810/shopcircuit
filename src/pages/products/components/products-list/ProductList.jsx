@@ -10,13 +10,14 @@ import {
     LOW_TO_HIGH,
     SEARCH_INPUT,
 } from "../../product-reducer";
+import { getDiscountedPrice } from "../../../../utils/getDiscountedPrice";
 
 const getProductsSortedByPrice = (productsList, type) => {
     if (type && type === HIGH_TO_LOW) {
-        return productsList.sort((a, b) => b.price - a.price);
+        return productsList.sort((a, b) => getDiscountedPrice(b.price,b.discount) - getDiscountedPrice(a.price,a.discount));
     }
     if (type && type === LOW_TO_HIGH) {
-        return productsList.sort((a, b) => a.price - b.price);
+        return productsList.sort((a, b) => getDiscountedPrice(a.price,a.discount) - getDiscountedPrice(b.price,b.discount));
     }
     return productsList;
 };

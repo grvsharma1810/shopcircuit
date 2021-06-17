@@ -121,13 +121,11 @@ const ViewProduct = () => {
 								</>
 							)}
 						</div>
-						<div className="mb-1">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Provident doloremque quo a non, maxime itaque?
-							Expedita enim mollitia consequatur excepturi. Ipsa
-							ut illo doloribus aspernatur laborum. Ad cumque
-							totam nulla.
-						</div>
+						<ul className="mb-1 ml-1">
+							{product.highlights.map((highlight) => {
+								return <li>{highlight}</li>;
+							})}
+						</ul>
 						<>
 							{!product.inStock && (
 								<button
