@@ -17,7 +17,7 @@ const isProductInCart = (cart, product) => {
 	return cart.findIndex((item) => item.product._id === product._id) !== -1;
 };
 
-const ViewProduct = () => {
+const ViewProduct = () => {	
 	const {
 		localisationState: { languageIndex },
 	} = useLocalisation();

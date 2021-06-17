@@ -9,9 +9,10 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MenuIcon from "@material-ui/icons/Menu";
+import history from 'history/browser';
 import { getLanguageLabel } from "../../../utils/getLanguageLabel";
 
-const Navbar = ({ openSidebar }) => {
+const Navbar = ({ openSidebar }) => {		
 	const {
 		localisationState: { languageIndex },
 	} = useLocalisation();
@@ -22,6 +23,7 @@ const Navbar = ({ openSidebar }) => {
 	const pathName = location.pathname;
 	let productPath = /\/products\/[A-Za-z0-9]*/;
 	console.log(dataState);
+	
 
 	const linkStyle = {
 		textDecoration: "none",
@@ -54,7 +56,7 @@ const Navbar = ({ openSidebar }) => {
 				)}
 				{productPath.test(pathName) && (
 					<div
-						onClick={() => navigate("/products")}
+						onClick={() => history.back()}
 						className="brand"
 					>
 						<ArrowBackIcon />
