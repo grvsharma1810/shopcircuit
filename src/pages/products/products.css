@@ -1,0 +1,27 @@
+.products {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.sort-filter {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+@media only screen and (min-width : 576px) {
+    .products {
+        margin-left: 20%;
+        width: 80%;
+    }
+
+    .sidebar {
+        display: block;
+        width: 20%;
+    }
+
+    .sort-filter {
+        display: none;
+    }
+}
