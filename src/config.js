@@ -1,1 +1,1 @@
-export const API_URL = "https://shop-circuit-backend.herokuapp.com";
+export const API_URL = "https://shop-circuit-backend-production.up.railway.app/";
