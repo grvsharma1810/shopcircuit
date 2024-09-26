@@ -1,0 +1,100 @@
+import ProductCard from "../../../shared-components/product-card/ProductCard";
+import { getLanguageLabel } from "../../../../utils/getLanguageLabel";
+import { useLocalisation } from "../../../../providers/LocalisationProvider";
+import { useProducts } from "../../ProductsProvider";
+import {
+    SORT_BY_PRICE,
+    ONLY_FAST_DELIVERY,
+    INCLUDE_OUT_OF_STOCK,
+    HIGH_TO_LOW,
+    LOW_TO_HIGH,
+    SEARCH_INPUT,
+} from "../../product-reducer";
+import { getDiscountedPrice } from "../../../../utils/getDiscountedPrice";
+
+const getProductsSortedByPrice = (productsList, type) => {
+    if (type && type === HIGH_TO_LOW) {
+        return productsList.sort((a, b) => getDiscountedPrice(b.price,b.discount) - getDiscountedPrice(a.price,a.discount));
+    }
+    if (type && type === LOW_TO_HIGH) {
+        return productsList.sort((a, b) => getDiscountedPrice(a.price,a.discount) - getDiscountedPrice(b.price,b.discount));
+    }
+    return productsList;
+};
+
+const getFilteredProducts = (
+    productsList,
+    showFastDeliveryOnly,
+    includeOutOfStock,
+    searchInput
+) => {
+    if (showFastDeliveryOnly) {
+        productsList = productsList.filter(
+            (product) => product.fastDelivery === true
+        );
+    }
+    if (!includeOutOfStock) {
+        productsList = productsList.filter(
+            (product) => product.inStock === true
+        );
+    }
+    if (searchInput !== "") {
+        productsList = productsList.filter((product) =>
+            product.name.toLowerCase().includes(searchInput.toLowerCase())
+        );
+    }
+    return productsList;
+};
+
+const ProductListing = ({ products }) => {
+    const {
+        localisationState: { languageIndex },
+    } = useLocalisation();
+    const { productsState, productsDispatch } = useProducts();
+    const sortedProducts = getProductsSortedByPrice(
+        products,
+        productsState[SORT_BY_PRICE]
+    );
+    const filteredProducts = getFilteredProducts(
+        sortedProducts,
+        productsState[ONLY_FAST_DELIVERY],
+        productsState[INCLUDE_OUT_OF_STOCK],
+        productsState[SEARCH_INPUT]
+    );
+
+    return (
+        <div>
+            <p className="form-field mb-1">
+                <label htmlFor="search">
+                    {getLanguageLabel("search_for_products", languageIndex)}
+                </label>
+                <input
+                    id="search"
+                    type="text"
+                    placeholder={getLanguageLabel(
+                        "search_for_products",
+                        languageIndex
+                    )}
+                    name="searchInput"
+                    onChange={(event) =>
+                        productsDispatch({
+                            type: SEARCH_INPUT,
+                            payload: { value: event.target.value },
+                        })
+                    }
+                />
+            </p>
+            <p>
+                {getLanguageLabel("products_found", languageIndex)}{" "}
+                {filteredProducts.length}                
+            </p>
+            <div className="flex flex-row">
+                {filteredProducts.map((product) => {
+                    return <ProductCard product={product} key={product._id} />;
+                })}
+            </div>
+        </div>
+    );
+};
+
+export default ProductListing;

@@ -1,0 +1,23 @@
+.cart-container {
+    padding: 1rem;
+}
+
+.cart-price {
+    margin-top: 1rem;
+}
+
+@media only screen and (min-width : 768px) {
+    .cart-container {
+        display: grid;
+        grid-template-columns: 70% 30%;
+    }
+
+    .cart-price {
+        margin-top: 0;
+    }
+
+    .cart {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

@@ -1,0 +1,18 @@
+.product-view {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.rating {
+    padding: 0.3rem;    
+    display: inline-block;
+    border-radius: 10px;
+}
+
+@media only screen and (min-width : 576px) {
+    .product-view {
+        grid-template-columns: 5fr 6fr;
+    }
+}
